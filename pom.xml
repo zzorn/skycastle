@@ -1,0 +1,294 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Basics -->
+  <groupId>org.skycastle</groupId>
+  <artifactId>skycastle</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+
+  <!-- Project Information -->
+  <name>Skycastle</name>
+  <description>Multiplayer game project.</description>
+  <url>http://www.skycastle.org</url>
+  <inceptionYear>2009</inceptionYear>
+
+  <!-- Some main library version properties -->
+  <properties>
+    <scala.version>2.7.7</scala.version>
+    <reddwarf.version>0.10.1</reddwarf.version>
+    <a3d.version>0.6</a3d.version>
+  </properties>
+
+
+  <!-- Places to retrieve libraries from -->
+  <repositories>
+    <repository>
+      <id>java.net</id>
+      <name>java.net Maven2 Repository</name>
+      <url>http://download.java.net/maven/2/</url>
+      <layout>default</layout>
+    </repository>
+    
+    <repository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </repository>
+  </repositories>
+
+  <!-- Places to retrieve maven plugins from -->
+  <pluginRepositories>
+    <pluginRepository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <!-- External libraries used -->
+  <dependencies>
+
+    <!-- Testing -->
+    <dependency>
+      <groupId>org.scalatest</groupId>
+      <artifactId>scalatest</artifactId>
+      <version>1.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Scala -->
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
+
+    <!-- RedDwarf Middleware (formerly known as DarkStar or sgs) -->
+    <dependency>
+      <groupId>org.reddwarfserver.server</groupId>
+      <artifactId>sgs-server-api</artifactId>
+      <version>${reddwarf.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.reddwarfserver.server</groupId>
+      <artifactId>sgs-shared</artifactId>
+      <version>1.12</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.reddwarfserver.client</groupId>
+      <artifactId>sgs-client-api</artifactId>
+      <version>${reddwarf.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.reddwarfserver.client</groupId>
+      <artifactId>sgs-client</artifactId>
+      <version>${reddwarf.version}</version>
+    </dependency>
+
+
+    <!-- RedDwarf client dependencies -->
+    <dependency>
+      <groupId>org.apache.mina</groupId>
+      <artifactId>mina-core</artifactId>
+      <version>1.1.7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.5.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>1.5.6</version>
+    </dependency>
+
+    <!-- Java Monkey Engine -->
+    <!--
+        <dependency>
+            <groupId>jme</groupId>
+            <artifactId>jme</artifactId>
+            <version>2.0</version>
+        </dependency>
+    -->
+    <dependency>
+      <groupId>com.projectdarkstar.ext.com.jmonkeyengine</groupId>
+      <artifactId>jme</artifactId>
+      <version>2.0-S1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.projectdarkstar.ext.com.jmonkeyengine</groupId>
+      <artifactId>jme-terrain</artifactId>
+      <version>2.0-S1</version>
+    </dependency>
+
+    <!-- JME Dependencies -->
+    <dependency>
+      <groupId>com.projectdarkstar.ext.org.lwjgl</groupId>
+      <artifactId>lwjgl</artifactId>
+      <version>2.0rc2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.projectdarkstar.ext.org.lwjgl</groupId>
+      <artifactId>lwjgl_util</artifactId>
+      <version>2.0rc2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.java.dev.jinput</groupId>
+      <artifactId>jinput</artifactId>
+      <version>0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.projectdarkstar.ext.jorbis</groupId>
+      <artifactId>jorbis</artifactId>
+      <version>0.0.17</version>
+    </dependency>
+
+    <!-- Tablet support -->
+    <dependency>
+      <groupId>jpen</groupId>
+      <artifactId>jpen</artifactId>
+      <version>2-081201</version>
+    </dependency>
+
+    <!-- Opening a webpage in a browser from Java -->
+    <dependency>
+      <groupId>browserlauncher2</groupId>
+      <artifactId>browserlauncher2</artifactId>
+      <version>1.3</version>
+    </dependency>
+
+    <!-- A custom layout manager -->
+    <dependency>
+      <groupId>com.miglayout</groupId>
+      <artifactId>miglayout</artifactId>
+      <version>3.6</version>
+    </dependency>
+
+    <!-- Runtime Java compiler -->
+<!--
+    <dependency>
+      <groupId>janino</groupId>
+      <artifactId>janino</artifactId>
+      <version>2.5.15</version>
+    </dependency>
+-->
+
+
+    <!-- Ardor3D engine modules -->
+    <dependency>
+      <groupId>com.ardor3d</groupId>
+      <artifactId>ardor3d-effects</artifactId>
+      <version>${a3d.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ardor3d</groupId>
+      <artifactId>ardor3d-core</artifactId>
+      <version>${a3d.version}</version>
+    </dependency>
+
+    <!-- Windowing toolkit wrappers -->
+    <dependency>
+      <groupId>com.ardor3d</groupId>
+      <artifactId>ardor3d-awt</artifactId>
+      <version>${a3d.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ardor3d</groupId>
+      <artifactId>ardor3d-swt</artifactId>
+      <version>${a3d.version}</version>
+    </dependency>
+
+    <!-- Open GL Implementation wrappers -->
+    <dependency>
+      <groupId>com.ardor3d</groupId>
+      <artifactId>ardor3d-jogl</artifactId>
+      <version>${a3d.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ardor3d</groupId>
+      <artifactId>ardor3d-lwjgl</artifactId>
+      <version>${a3d.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <!-- Build configuration -->
+  <build>
+
+    <sourceDirectory>src/main/scala</sourceDirectory>
+
+    <testSourceDirectory>src/test/scala</testSourceDirectory>
+
+    <finalName>skycastle</finalName>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+
+
+      <!-- Scala compile -->
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <scalaVersion>${scala.version}</scalaVersion>
+        </configuration>
+      </plugin>
+
+      <!-- Creating an executable jar -->
+      <!--
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>src/build/assemble/executable.xml</descriptor>
+          </descriptors>
+          <archive>
+            <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+          </archive>
+        </configuration>
+      </plugin>
+      -->
+
+    </plugins>
+  </build>
+
+  <!-- Report configuration -->
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <configuration>
+          <scalaVersion>${scala.version}</scalaVersion>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
+</project>
+
