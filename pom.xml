@@ -139,7 +139,7 @@
             <artifactId>jme</artifactId>
             <version>2.0</version>
         </dependency>
-    -->
+
     <dependency>
       <groupId>com.projectdarkstar.ext.com.jmonkeyengine</groupId>
       <artifactId>jme</artifactId>
@@ -150,8 +150,10 @@
       <artifactId>jme-terrain</artifactId>
       <version>2.0-S1</version>
     </dependency>
+    -->
 
     <!-- JME Dependencies -->
+    <!--
     <dependency>
       <groupId>com.projectdarkstar.ext.org.lwjgl</groupId>
       <artifactId>lwjgl</artifactId>
@@ -174,13 +176,16 @@
       <artifactId>jorbis</artifactId>
       <version>0.0.17</version>
     </dependency>
+    -->
 
     <!-- Tablet support -->
+    <!--
     <dependency>
       <groupId>jpen</groupId>
       <artifactId>jpen</artifactId>
       <version>2-081201</version>
     </dependency>
+    -->
 
     <!-- Opening a webpage in a browser from Java -->
     <dependency>
