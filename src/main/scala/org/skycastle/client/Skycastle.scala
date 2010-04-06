@@ -2,8 +2,6 @@ package org.skycastle.client
 
 /**
  * Main entry point for Skycastle client.
- * 
- * @author Hans Haggstrom
  */
 object Skycastle {
 
