@@ -222,6 +222,11 @@
       <artifactId>ardor3d-core</artifactId>
       <version>${a3d.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.ardor3d</groupId>
+      <artifactId>ardor3d-examples</artifactId>
+      <version>${a3d.version}</version>
+    </dependency>
 
     <!-- Windowing toolkit wrappers -->
     <dependency>
