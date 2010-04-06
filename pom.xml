@@ -35,6 +35,29 @@
       <name>Scala-Tools Maven2 Repository</name>
       <url>http://scala-tools.org/repo-releases</url>
     </repository>
+
+    <repository>
+      <id>ardor3d-thirdparty</id>
+      <name>Ardor3D thirdparty repository</name>
+      <url>http://ardor3d.com:8081/nexus/content/repositories/thirdparty</url>
+      <layout>default</layout>
+    </repository>
+
+    <repository>
+      <id>ardor3d</id>
+      <name>Ardor3D repository</name>
+      <url>http://ardor3d.com:8081/nexus/content/repositories/releases</url>
+      <layout>default</layout>
+    </repository>
+
+<!--    
+    <repository>
+      <id>google-maven-repository</id>
+      <name>Google Maven Repository</name>
+      <url>http://google-maven-repository.googlecode.com/svn/repository/</url>
+      <layout>default</layout>
+    </repository>
+-->
   </repositories>
 
   <!-- Places to retrieve maven plugins from -->
