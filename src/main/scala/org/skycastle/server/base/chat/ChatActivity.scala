@@ -2,7 +2,7 @@ package org.skycastle.server.base
 
 import _root_.org.skycastle.server.activity.{ActivitySessionId, ActivitySession}
 import _root_.org.skycastle.server.util.{Ref, Parameters}
-import _root_.org.skycastle.server.{ActivityProxy, Activity, Event, Agent}
+import _root_.org.skycastle.server.{ActivityProxy, Activity, Agent}
 
 /**
  * Basic chat activity.
