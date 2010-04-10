@@ -13,7 +13,7 @@ import util.{Parameters, IdSequence, Ref}
  * Provides a local proxy for the Agent when it joins, that gives the Agent new possible Actions and Inputs.
  */
 // TODO: allow the joining user to pass in parameters (e.g. preferred nickname in a chat)
-trait Activity extends Entity with ManagedObject with Serializable {
+trait Activity extends Entity {
 
   private var sessionIdSequence = new IdSequence()
 

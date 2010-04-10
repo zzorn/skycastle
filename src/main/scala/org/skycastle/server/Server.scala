@@ -8,7 +8,8 @@ trait Server {
 
   def getAgent(name: String): Agent
 
-  // TODO: Replace with a reference to an Activity instance?
+  // TODO: Replace with a reference to a default Activity instance?
+  // TODO: Support activities that don't store references to their members, for things like general server interaction
   def join(agent: Agent): ActivityProxy
 }
 

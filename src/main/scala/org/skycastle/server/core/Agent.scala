@@ -11,7 +11,7 @@ import util.{Parameters, IdSequence}
  *
  * Used to represent both player avatars and non-player characters, sometimes also bots, machines, or similar.
  */
-trait Agent extends Entity with MessageHandler with ManagedObject with Serializable {
+trait Agent extends Entity with MessageHandler {
 
   private var activities: Map[ActivitySessionId, ActivityProxy] = Map()
   private var activityIdSequence = new IdSequence()
