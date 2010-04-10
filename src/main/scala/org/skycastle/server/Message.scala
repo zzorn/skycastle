@@ -1,6 +1,8 @@
 package org.skycastle.server
 
 import _root_.java.io.Serializable
+import activity.ActivitySessionId
+import util.Parameters
 
 /**
  * A message from the client to a specific activity that the player is joined in on the server side,
@@ -11,7 +13,8 @@ import _root_.java.io.Serializable
  *
  * Id is the action to call, or perception received.
  */
-final case class Message(sender: String, target: String, id: Symbol, content: Serializable) {
+// TODO: Make content a map with named values
+final case class Message(activitySession: ActivitySessionId, action: Symbol, parameters: Parameters) {
   
 }
 
