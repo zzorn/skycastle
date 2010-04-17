@@ -15,14 +15,15 @@ object Parameters {
   val KEY_VALUE_SEPARATOR = '='
   val ENTRY_SEPARATOR = '\n'
 
-  /**
+  /*
+  / **
    * Creates a Parameters object from a string containing key = value entries separated by the equals sign,
    * and where the entries are separated by newlines.
-   */
+   * /
   def fromKeyValueString( keyValueList : String ) : Parameters = {
     new Parameters( StringUtils.stringToMap( keyValueList, ""+KEY_VALUE_SEPARATOR, ""+ENTRY_SEPARATOR ) )
   }
-
+  */
 
 }
 
