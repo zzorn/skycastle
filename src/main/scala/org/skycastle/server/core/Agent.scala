@@ -55,12 +55,6 @@ trait Agent extends Entity with MessageHandler {
     }
   }
 
-  /**
-   * Send a message to the controller of this agent (player or ai).
-   */
-  def sendMessage(message: Message) {
-    // TODO
-  }
 
 }
 
