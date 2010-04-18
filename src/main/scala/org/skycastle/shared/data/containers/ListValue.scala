@@ -5,5 +5,6 @@ package org.skycastle.shared.data
  */
 class ListValue extends Value {
   def values: List[Value]
+  def entry(index: Int): Value
 }
 

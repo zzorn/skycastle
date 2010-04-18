@@ -3,7 +3,7 @@ package org.skycastle.shared.data
 /**
  * Boolean type value.
  */
-case class BooleanValue extends Value {
+case class Bool extends Value {
   def value: Boolean
 }
 
