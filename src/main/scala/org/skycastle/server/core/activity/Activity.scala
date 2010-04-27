@@ -2,8 +2,9 @@ package org.skycastle.server
 
 import _root_.com.sun.sgs.app.{AppContext, ManagedObject}
 import _root_.java.io.Serializable
+import _root_.org.skycastle.util.Parameters
 import activity.{ActivitySessionId, ActivityJoinException, ActivitySession}
-import util.{Parameters, IdSequence, Ref}
+import util.{ IdSequence, Ref}
 
 /**
  * Something that Agents can join.

@@ -1,9 +1,10 @@
 package org.skycastle.server
 
 import _root_.java.io.Serializable
+import _root_.org.skycastle.util.Parameters
 import activity.ActivitySessionId
 import core.MessageHandler
-import util.{Parameters, Ref}
+import util.{Ref}
 
 /**
  * Keeps track of Activity info that is local to a specific Agent.

@@ -2,9 +2,10 @@ package org.skycastle.server
 
 import _root_.com.sun.sgs.app.ManagedObject
 import _root_.java.io.Serializable
+import _root_.org.skycastle.util.Parameters
 import activity.ActivitySessionId
 import core.MessageHandler
-import util.{Parameters, IdSequence}
+import util.IdSequence
 
 /**
  * Something that can participate in Activities.
