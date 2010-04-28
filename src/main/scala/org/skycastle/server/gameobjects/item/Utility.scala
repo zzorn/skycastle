@@ -1,4 +1,4 @@
-package org.skycastle.server.game
+package org.skycastle.server.gameobjects
 
 /**
  * Some type of use or function that an item can have.

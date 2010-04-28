@@ -1,0 +1,12 @@
+package org.skycastle.server.game.components
+
+import _root_.org.skycastle.server.game.Aspect
+
+/**
+ * Consists of matter of some sort and has a shape.
+ * May also have coatings (e.g. paintjob, clothes, etc).
+ */
+trait Physical extends Aspect {
+  
+}
+

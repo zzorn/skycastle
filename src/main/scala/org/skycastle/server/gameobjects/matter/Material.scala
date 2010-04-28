@@ -1,4 +1,4 @@
-package org.skycastle.server.game
+package org.skycastle.server.gameobjects
 
 /**
  * Items are constructed from various materials.

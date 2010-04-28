@@ -1,4 +1,4 @@
-package org.skycastle.server.game
+package org.skycastle.server.gameobjects
 
 /**
  * A container is something that can contain items.

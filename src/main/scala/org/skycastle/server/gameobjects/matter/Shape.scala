@@ -1,4 +1,4 @@
-package org.skycastle.server.game
+package org.skycastle.server.gameobjects
 
 /**
  * Represents a physical parametrized shape that items can have.
