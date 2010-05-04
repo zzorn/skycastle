@@ -1,11 +1,11 @@
 package org.skycastle.server.game.components
 
-import _root_.org.skycastle.server.game.Aspect
+import _root_.org.skycastle.server.game.Facet
 
 /**
  * Can collide with other objects.
  */
-trait Colliding extends Aspect {
+trait Colliding extends Facet {
   
 }
 

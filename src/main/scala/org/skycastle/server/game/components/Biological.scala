@@ -1,6 +1,6 @@
 package org.skycastle.server.game.components
 
-import _root_.org.skycastle.server.game.Aspect
+import _root_.org.skycastle.server.game.Facet
 
 /**
  * Used for entities that have some kind of life and attributes.
@@ -9,7 +9,7 @@ import _root_.org.skycastle.server.game.Aspect
  * Nutritions in the food affect the attributes.
  */
 // TODO: Maybe extract a common aspect for things that have attributes (actors), and different aspects that can update them (biological, zombie, robot, etc)
-trait Biological extends Aspect {
+trait Biological extends Facet {
   
 }
 

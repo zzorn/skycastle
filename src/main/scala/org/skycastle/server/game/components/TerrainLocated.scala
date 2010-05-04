@@ -1,6 +1,6 @@
 package org.skycastle.server.game.components
 
-import _root_.org.skycastle.server.game.Aspect
+import _root_.org.skycastle.server.game.Facet
 import _root_.org.skycastle.shared.math.Vector3
 
 /**
@@ -10,7 +10,7 @@ import _root_.org.skycastle.shared.math.Vector3
  *
  * Also handles movement.
  */
-trait TerrainLocated extends Aspect {
+trait TerrainLocated extends Facet {
 
   Vector3 pos;
 
