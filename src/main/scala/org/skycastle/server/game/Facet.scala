@@ -1,5 +1,8 @@
 package org.skycastle.server.game
 
+import _root_.org.skycastle.server.util.Ref
+import _root_.org.skycastle.shared.util.Checker
+
 
 /**
  * A part / component of an entity, concentrating on simulating some part of it.
@@ -10,11 +13,39 @@ package org.skycastle.server.game
  */
 trait Facet {
 
-  def actions: List[Action]
+  // TODO: Implement a listenable list with verifiers and and listeners, in that case we could just have three public vals here instead of all this stuff.
+  private var _properties: List[Property] = Nil
+  private var _actions: List[Action] = Nil
+  private var _feeds: List[Feed] = Nil
 
-  def feeds: List[Feed]
+  def properties: List[Property] = _properties
+  def actions: List[Action] = _actions
+  def feeds: List[Feed] = _feeds
 
-  def properties: List[Property]
+  protected def addProperty(property: Property) = Checker.addIfNotNullAndNotContained(_properties, property, "The property")
+  protected def addAction(action: Action) = Checker.addIfNotNullAndNotContained(_actions, action, "The action")
+  protected def addFeed(feed: Feed) = Checker.addIfNotNullAndNotContained(_feeds, feed, "The feed")
+
+  protected def removeProperty(property: Property) = _properties -= property
+  protected def removeAction(action: Action) = _actions -= action
+  protected def removeFeed(feed: Feed) = _feeds -= feed
+
+  private var _entity: Ref[Entity] = null
+
+  def entity = _entity
+
+  def setEntity(entity: Entity) {
+    val oldEntityRef = _entity
+    _entity = if(entity==null) null else Ref(entity)
+
+    if (oldEntityRef != null) onRemovedFromEntity(oldEntityRef)
+    if (entity!= null) onAddedToEntity(entity)
+  }
+
   
+  protected def onAddedToEntity(entity: Entity) {}
+  protected def onRemovedFromEntity(entityRef: Ref[Entity]) {}
+
+
 }
 
