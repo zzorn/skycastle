@@ -7,6 +7,9 @@ import _root_.org.skycastle.server.game.Facet
  * May also have coatings (e.g. paintjob, clothes, etc).
  */
 trait Physical extends Facet {
-  
+
+  var shape: Shape
+  var material: Material
+
 }
 

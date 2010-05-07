@@ -3,9 +3,9 @@ package org.skycastle.server.game.components
 import _root_.org.skycastle.server.game.Facet
 
 /**
- * Can collide with other objects.
+ * Properties of some material.
  */
-trait Colliding extends Facet {
+class Material {
   
 }
 
