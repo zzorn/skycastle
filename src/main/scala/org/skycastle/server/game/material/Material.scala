@@ -5,7 +5,7 @@ import _root_.org.skycastle.server.game.Facet
 /**
  * Properties of some material.
  */
-class Material {
-  
+case class Material(density: Float) {
+
 }
 

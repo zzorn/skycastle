@@ -5,7 +5,7 @@ import _root_.org.skycastle.server.game.components.Shape
 /**
  * 
  */
-class Sheet(widh: Double, height: Double, thickness: Double) extends Shape {
+class Sheet(widh: Float, height: Float, thickness: Float) extends Shape {
   
 }
 

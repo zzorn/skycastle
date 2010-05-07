@@ -3,7 +3,7 @@ package org.skycastle.server.game.components
 /**
  * 
  */
-class Beam(width: Double, height: Double, length: Double) extends Shape{
+class Beam(width: Float, height: Float, length: Float) extends Shape{
   
 }
 

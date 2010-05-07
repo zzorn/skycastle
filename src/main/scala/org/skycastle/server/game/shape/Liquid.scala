@@ -6,6 +6,6 @@ import _root_.org.skycastle.server.game.components.Shape
  * 
  */
 
-class Liquid(volume: Double) extends Shape {
+class Liquid(volume: Float) extends Shape {
   
 }

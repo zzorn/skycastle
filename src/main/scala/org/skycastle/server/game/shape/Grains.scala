@@ -6,6 +6,6 @@ import _root_.org.skycastle.server.game.components.Shape
  * 
  */
 
-class Grains(grainDiameter: Double, number: Double) extends Shape{
+class Grains(grainDiameter: Float, number: Float) extends Shape{
   
 }

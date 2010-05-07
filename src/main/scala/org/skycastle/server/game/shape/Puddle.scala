@@ -5,6 +5,6 @@ import _root_.org.skycastle.server.game.components.Shape
 /**
  * 
  */
-class Puddle(volume: Double) extends Shape {
+class Puddle(volume: Float) extends Shape {
   
 }

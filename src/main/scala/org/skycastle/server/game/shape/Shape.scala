@@ -7,8 +7,8 @@ import _root_.org.skycastle.shared.math.Vector3
  * Describes a parametrized shape.
  */
 trait Shape {
-  def volume: Double
-  def longestSide: Double
+  def volume: Float
+  def longestSide: Float
   def bounds: Vector3
 }
 
