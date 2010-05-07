@@ -1,5 +1,7 @@
 package org.skycastle.server.game
 
+import _root_.com.sun.sgs.app.{ManagedObject, AppContext}
+import _root_.java.io.Serializable
 import _root_.org.skycastle.server.util.Ref
 import _root_.org.skycastle.shared.util.Checker
 
@@ -11,7 +13,7 @@ import _root_.org.skycastle.shared.util.Checker
  * controller controlling an entity.  Aspects also can have actions that can be initiated by the
  * controller controlling the entity?
  */
-trait Facet {
+trait Facet extends ManagedObject with Serializable {
 
   // TODO: Implement a listenable list with verifiers and and listeners, in that case we could just have three public vals here instead of all this stuff.
   private var _properties: List[Property] = Nil
@@ -46,6 +48,14 @@ trait Facet {
   protected def onAddedToEntity(entity: Entity) {}
   protected def onRemovedFromEntity(entityRef: Ref[Entity]) {}
 
+
+
+    /**
+     * Notifies the system that this facet has changes to its values, and should be stored.
+     */
+    def markForUpdate() {
+      AppContext.getDataManager.markForUpdate(this)
+    }
 
 }
 
