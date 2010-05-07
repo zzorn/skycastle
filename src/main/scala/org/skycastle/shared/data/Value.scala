@@ -32,7 +32,7 @@ trait Value {
   def get(path: Path): Option[Value] = null // TODO
   def set(path: Path, value: Value) = null // TODO
   def add(path: Path, value: Value) = null // TODO
-  def remove(path: Path): Boolean = null // TODO
+  def remove(path: Path): Boolean = false // TODO
 
   // TODO: Methods for managing listeners
 

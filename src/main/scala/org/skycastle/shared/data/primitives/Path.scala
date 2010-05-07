@@ -7,7 +7,8 @@ object EmptyPath extends Path(Nil)
 /**
  * Used as a reference to specific values, by being a list of value indexes in the collections they are located.
  */
-case class Path(path: List[Index]) extends Value {
+case class Path(path: Seq[Index]) extends Value {
+
   def head = path.head
   def tail = Path(path.tail)
   def hasTail = !path.isEmpty && !path.tail.isEmpty
