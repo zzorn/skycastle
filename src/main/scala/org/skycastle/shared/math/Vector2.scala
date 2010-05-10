@@ -1,5 +1,7 @@
 package org.skycastle.shared.math
 
+import java.io.Serializable
+
 
 /**
  * Vector2 class adapted from sgine library.
@@ -46,7 +48,7 @@ object Vector2 {
 /**
  * A vector with three double values.
  */
-class Vector2 protected() {
+class Vector2 protected()  extends Serializable {
 	protected var _x: Double = 0.0
 	protected var _y: Double = 0.0
 
@@ -103,10 +105,10 @@ class Vector2 protected() {
 	 */
 	def normalized : Vector2 = {
 		if (isZero) {
-			Vector3.Zero
+			Vector2.Zero
 		} else {
 			val len = 1.0 / length
-			Vector3(x * len, y * len)
+			Vector2(x * len, y * len)
 		}
 	}
 
@@ -120,7 +122,7 @@ class Vector2 protected() {
 	 * <p/>
 	 * The dot product of vectors a and b is defined as a.x*b.x + a.y*b.y
 	 */
-	def * ( other : Vector3 ) : Double = x * other.x + y * other.y
+	def * ( other : Vector2 ) : Double = x * other.x + y * other.y
 
 	/**
 	 * Returns a two element list with the x, and y coordinates of the Vector2 in that order.

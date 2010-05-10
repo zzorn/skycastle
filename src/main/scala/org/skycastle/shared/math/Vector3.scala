@@ -1,11 +1,16 @@
 package org.skycastle.shared.math
 
+import java.io.Serializable
+
 /**
  * Vector3 class borrowed from sgine library.
  */
 
 object Vector3 {
-	def apply(x: Double, y: Double, z: Double) = {
+  
+	def apply(): Vector3 = Zero
+
+	def apply(x: Double, y: Double, z: Double): Vector3 = {
 		val v = new Vector3()
 		v.x = x
 		v.y = y
@@ -14,7 +19,7 @@ object Vector3 {
 		v
 	}
 
-	def apply(tuple3 : (Double,Double,Double) ) : Vector3 = Vector3(tuple3._1, tuple3._2, tuple3._3)
+	def apply(tuple3 : (Double,Double,Double) ): Vector3 = Vector3(tuple3._1, tuple3._2, tuple3._3)
 
 	/**
 	 * A vector with coordinates (0,0,0)
@@ -54,7 +59,7 @@ object Vector3 {
  * <p/>
  * Calculation operations will return a result Vector3 instead of modifying this one.
  */
-class Vector3 protected() {
+class Vector3 protected()  extends Serializable{
 	protected var _x: Double = 0.0
 	protected var _y: Double = 0.0
 	protected var _z: Double = 0.0

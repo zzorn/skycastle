@@ -6,6 +6,14 @@ package org.skycastle.shared.data
  */
 trait Time {
 
+  def frame: Double
+  def frameRealime: Long
+
+  def totalGameTime: Double
+
+  def totalRealTime: Long
+
+
   /**
    * In milliseconds since epoch.
    */

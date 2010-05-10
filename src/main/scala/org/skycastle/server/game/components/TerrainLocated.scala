@@ -2,6 +2,7 @@ package org.skycastle.server.game.components
 
 import _root_.org.skycastle.server.game.Facet
 import _root_.org.skycastle.shared.math.Vector3
+import org.skycastle.shared.data.Time
 
 /**
  * An object that is located in a 3D world with a terrain.
@@ -12,11 +13,10 @@ import _root_.org.skycastle.shared.math.Vector3
  */
 trait TerrainLocated extends Facet {
 
-  Vector3 pos;
+  val pos: Vector3
+  val velocity: Vector3
 
-  Vector3 velocity;
-
-  def update() { // Todo: time class to pass to update methods
+  def update(time: Time) {
 
   }
 

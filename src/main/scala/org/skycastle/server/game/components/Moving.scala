@@ -1,6 +1,5 @@
 package org.skycastle.server.game.components
 
-import _root_.com.ardor3d.math.Vector3
 import _root_.org.skycastle.server.game.Facet
 import _root_.org.skycastle.shared.math.Vector3
 
