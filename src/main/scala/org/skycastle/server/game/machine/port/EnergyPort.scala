@@ -5,7 +5,7 @@ import port.EnergyTransferStandard
 /**
  * 
  */
-case class EnergyPort(energyTransferStandard: EnergyTransferStandard) extends Port {
+case class EnergyPort(standard: EnergyTransferStandard) extends Port {
   
 }
 

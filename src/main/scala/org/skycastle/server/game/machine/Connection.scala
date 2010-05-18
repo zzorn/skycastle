@@ -3,7 +3,5 @@ package org.skycastle.server.game.machine
 /**
  * 
  */
-class Connection {
-  
-}
+case class Connection()
 
