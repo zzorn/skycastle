@@ -1,7 +1,7 @@
 package org.skycastle.server
 
 /**
- * 
+ * Client side interface to an account.
  */
 trait Account {
 
