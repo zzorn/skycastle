@@ -1,10 +1,17 @@
 package org.skycastle.shared.model
 
+import _root_.java.io.Serializable
+
 /**
  * 
  */
 // TODO: Make this represent a map instead, more efficient as every leaf values doesn't have to be a wrapped primitive.
-trait Data {
+trait Data extends Serializable {
+
+  /**
+   * Returns itself if immutable, otherwise an immutable copy.
+   */
+  def immutable: ImmutableData
 
   def apply(member: Symbol*): Data
 
