@@ -1,9 +1,9 @@
 package org.skycastle.shared.entity
 
-import _root_.com.sun.sgs.app.{Task, ManagedObject}
-import _root_.javax.xml.crypto.Data
-import _root_.org.skycastle.shared.persistence.{SkycastleContext, PersistenceManager}
-import _root_.org.skycastle.shared.tasks.{Callback, TaskManager}
+import _root_.com.sun.sgs.app.{ManagedObject}
+import _root_.org.skycastle.shared.model.Data
+import _root_.org.skycastle.shared.persistence.{SkycastleContext, PlatformServices}
+import _root_.org.skycastle.shared.tasks.{Callback}
 import _root_.org.skycastle.shared.Time
 
 /**
@@ -11,18 +11,20 @@ import _root_.org.skycastle.shared.Time
  */
 trait Persistent extends ManagedObject {
 
-  def persistenceManager: PersistenceManager = SkycastleContext.persistenceManager
-  def taskManager: TaskManager = SkycastleContext.taskManager
+  def ref = platformServices.createReference(this)
+  def markAsModified() = platformServices.markForUpdate(this)
+  def delete() = platformServices.delete(this)
+  def store() = platformServices.store(this)
 
-  def delete() = persistenceManager.delete(this)
-  def store() = persistenceManager.store(this)
+  def scheduleCallback(time: Time, parameters: Data) = platformServices.scheduleCallback(time, new Callback(this, parameters))
 
   /**
    * Method that gets called when a callback event occurs.
    */
   def callback(parameters: Data) {}
 
-  def scheduleCallback(time: Time, parameters: Data) = taskManager.scheduleCallback(time, new Callback(this, parameters))
+  protected def platformServices: PlatformServices = SkycastleContext.platformServices
+
 
 
 }

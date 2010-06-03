@@ -1,7 +1,7 @@
 package org.skycastle.shared.persistence.memory
 
 import _root_.org.skycastle.shared.entity.Persistent
-import _root_.org.skycastle.shared.persistence.{InMemoryPersistenceManager, Ref}
+import _root_.org.skycastle.shared.persistence.{InMemoryPlatformServices, Ref}
 
 /**
  * 
