@@ -1,8 +1,7 @@
-package org.skycastle.shared.persistence.reddwarf
+package org.skycastle.shared.platform.persistence.reddwarf
 
 import _root_.com.sun.sgs.app.ManagedReference
-import _root_.org.skycastle.shared.entity.Persistent
-import _root_.org.skycastle.shared.persistence.Ref
+import _root_.org.skycastle.shared.platform.persistence.{Ref, Persistent}
 
 /**
  * 

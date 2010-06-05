@@ -1,14 +1,9 @@
-package org.skycastle.shared.persistence
-
-import _root_.com.sun.sgs.app.Task
-import _root_.org.skycastle.shared.entity.Persistent
-import _root_.org.skycastle.shared.Time
+package org.skycastle.shared.platform.persistence
 
 /**
  * 
  */
-
-trait PlatformServices {
+trait PersistenceService {
   def createReference[T <: Persistent](obj: T): Ref[T]
   def markForUpdate(obj: Persistent)
 
@@ -20,7 +15,6 @@ trait PlatformServices {
   def bind(name: String, obj: Persistent)
   def removeBinding(name: String)
 
-  def scheduleCallback(time: Time, callback: Task)
 
 }
 

@@ -1,4 +1,4 @@
-package org.skycastle.shared.model
+package org.skycastle.shared.data
 
 /**
  * A version of Data that can not be changed, only read.

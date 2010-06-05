@@ -1,14 +1,11 @@
-package org.skycastle.shared.model
+package org.skycastle.shared.entity
 
-import _root_.org.skycastle.shared.entity.{Persistent, Facet}
-import _root_.org.skycastle.shared.persistence.Ref
+import _root_.org.skycastle.shared.platform.persistence.{Ref, Persistent}
 
 /**
- * 
+ * A persistent object consisting of different parts (facets).
  */
 trait Entity extends Persistent {
-
-  type ReferenceType = Entity
 
   private var _facets: List[Ref[Facet]] = Nil
 
@@ -19,11 +16,14 @@ trait Entity extends Persistent {
 
   def removeFacet(facet: Facet) {
     val f = facet.ref
-    _facets = _facets.remove( e => e == f)
+    _facets = _facets.filterNot(e => e == f)
     facet.entity = null
   }
 
   def facets: List[Ref[Facet]] = _facets
+
+  protected override type DerivedType = Entity
+  protected override def asDerivedType: DerivedType = this
 
 
 }

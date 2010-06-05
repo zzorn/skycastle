@@ -1,4 +1,4 @@
-package org.skycastle.shared
+package org.skycastle.shared.platform.time
 
 import _root_.java.io.Serializable
 

@@ -1,10 +1,11 @@
-package org.skycastle.shared.model
+package org.skycastle.shared.data
 
 import _root_.java.io.Serializable
 
 /**
  * 
  */
+// TODO: Should be loadable from configuration files too
 // TODO: Make this represent a map instead, more efficient as every leaf values doesn't have to be a wrapped primitive.
 trait Data extends Serializable {
 

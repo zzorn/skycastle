@@ -1,7 +1,6 @@
-package org.skycastle.shared.persistence
+package org.skycastle.shared.platform.persistence
 
 import _root_.java.io.Serializable
-import _root_.org.skycastle.shared.entity.Persistent
 
 /**
  * 
