@@ -1,17 +1,20 @@
 package org.skycastle.shared.entity
 
 import _root_.com.sun.sgs.app.{ManagedObject}
+import _root_.java.io.Serializable
 import _root_.org.skycastle.shared.model.Data
-import _root_.org.skycastle.shared.persistence.{SkycastleContext, PlatformServices}
+import _root_.org.skycastle.shared.persistence.{Ref, SkycastleContext, PlatformServices}
 import _root_.org.skycastle.shared.tasks.{Callback}
 import _root_.org.skycastle.shared.Time
 
 /**
  * Storable object.
  */
-trait Persistent extends ManagedObject {
+trait Persistent extends ManagedObject with Serializable {
 
-  def ref = platformServices.createReference(this)
+  type ReferenceType <: Persistent
+
+  def ref: Ref[ReferenceType] = platformServices.createReference[ReferenceType](this)
   def markAsModified() = platformServices.markForUpdate(this)
   def delete() = platformServices.delete(this)
   def store() = platformServices.store(this)
