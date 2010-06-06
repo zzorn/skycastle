@@ -34,8 +34,7 @@ fun() {
 
     world:
     {
-
-        Room = fun(hasPlayerStart: false, hasGoal: false, size: 10, height: 3) {
+        room: fun(hasPlayerStart: false, hasGoal: false, size: 10, height: 3) {
             outline: [[-size,0,-size], [size,0,-size], [size,0,size], [-size,0,size]]
             height: height
             items:
@@ -48,9 +47,9 @@ fun() {
 
         rooms:
         [
-            Room(true, false, size: 4)
-            Room(false, true, size: 8)
-        ] + repeat(5, fun(index) @Room(false, false, size: random(index, 3, 20)))
+            room(true, false, size: 4)
+            room(false, true, size: 8)
+        ] + repeat(5, fun(index) room(false, false, size: random(3, 20, seed: $randomSeed + index))) # $randomSeed is a system variable defined for all maps.
     }
 
     # Game world initialization
