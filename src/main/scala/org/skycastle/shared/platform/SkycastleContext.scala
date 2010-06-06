@@ -8,6 +8,8 @@ import persistence.PersistenceService
 
 /**
  * A singleton for accessing various services.
+ *
+ * Set up with local services by default.
  */
 object SkycastleContext {
   var platformServices: PersistenceService = InMemoryPlatformService

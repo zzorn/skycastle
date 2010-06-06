@@ -3,7 +3,7 @@ package org.skycastle.shared.platform.time
 import scala.math._
 
 /**
- * Provides current game time and real time.
+ * Provides current game time.
  */
 trait TimeService {
   def currentGameTime: Time

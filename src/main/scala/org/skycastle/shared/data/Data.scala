@@ -3,50 +3,39 @@ package org.skycastle.shared.data
 import _root_.java.io.Serializable
 
 /**
- * 
+ * A data object, that has named values.
  */
 // TODO: Should be loadable from configuration files too
-// TODO: Make this represent a map instead, more efficient as every leaf values doesn't have to be a wrapped primitive.
-trait Data extends Serializable {
+class Data extends AbstractValue {
+
+  def this(data: Map[Symbol, Value]) {
+    this()
+    value = data
+  }
+
+  type T = Map[Symbol, Value]
+  type Self = this.type
+  def self = this
+
+  def defaultValue: T = Map()
+
+  override def asMap = value
+  override def isMap = true
+
+  def get(name: Symbol, default: Value): Value = value.getOrElse(name, default)
+  def set(name: Symbol, member: Value) = value = value.+( name -> member )
 
   /**
-   * Returns itself if immutable, otherwise an immutable copy.
+   * Returns a value from a nested path
    */
-  def immutable: ImmutableData
-
-  def apply(member: Symbol*): Data
-
-  def add(index: Symbol, member: Data)
-  def add(member: Data): Unit = add(nextFreeIndex, member)
-  def remove(member: Data): Unit  = remove(indexOf(member))
-  def remove(index: Symbol)
-
-  def indexOf(data: Data): Symbol
-  def nextFreeIndex: Symbol
-  def hasValue: Boolean
-  def hasMember(index: Symbol): Boolean
-
-  def value: Object
-  def value(default: Object): Object = if (hasValue) value else default
-
-  def := (value: Object)
-
-  def addListener(listener: (Data)=>Unit )
-  def removeListener(listener: (Data)=>Unit )
-
-  def asBoolean(): Boolean
-  def asInt(): Int
-  def asLong(): Long
-  def asFloat(): Float
-  def asDouble(): Double
-  def asString(): String
-
-  def asBoolean(default: Boolean): Boolean
-  def asInt(default: Int): Int
-  def asLong(default: Long): Long
-  def asFloat(default: Float): Float
-  def asDouble(default: Double): Double
-  def asString(default: String): String
+  def apply(path: Symbol*): Option[Value] = {
+    var v: Option[Value] = Some(this)
+    path.foreach( p=> {
+      if (v != None && v.get.isInstanceOf[Data]) v = v.get.asInstanceOf[Data].value.get(p)
+      else v = None
+    })
+    return v
+  }
 
 }
 
