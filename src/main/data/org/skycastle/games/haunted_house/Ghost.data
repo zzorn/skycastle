@@ -1,0 +1,31 @@
+
+# All data files are treated as static objects with the name of the file that contains it
+
+fun()
+{
+    attributes:
+    {
+        type: "Ghost"
+    }
+
+    appearance:
+    {
+        shape: Sphere(radius: 2, color: [0.1, 0.3, 0.5])
+    }
+
+    physical:
+    {
+        mass: 2 kg
+    }
+
+    walkingMovement:
+    {
+        walking: 1 m/s
+    }
+
+    behaviour:
+    [
+        Avoid(who: {type:"Ghost"}, distance: 1m)
+        Intercept(who: {type:"Human"}, detectionRadius: 5m)
+    ]
+}

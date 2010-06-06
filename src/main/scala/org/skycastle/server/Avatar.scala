@@ -1,6 +1,6 @@
 package org.skycastle.server
 
-import _root_.org.skycastle.shared.data.Data
+import _root_.org.skycastle.core.data.Data
 
 /**
  * 

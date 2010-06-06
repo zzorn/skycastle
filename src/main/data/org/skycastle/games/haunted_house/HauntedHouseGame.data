@@ -1,0 +1,77 @@
+
+fun() {
+
+    name: "Haunted House"
+    desc:
+    """
+    A simple example game that takes place completely inside an old manor house.
+    Escape the ghosts and find the exit!
+    """
+
+    gameSetup:
+    {
+        name: "Haunted house game"
+        desc: "Find the exit, avoid the ghosts!  Do you dare to enter?"
+        numberOfPlayers: {min: 1, max: 10, recommended: 3}
+        playersCanJoinDuringGame: false
+        parameters:
+        {
+            houseSize: {default: 4, min: 1, max: 10, desc: "The size of the haunted house"}
+            numberOfGhosts: {default: 4, min: 1, max: 10, desc: "The number of ghosts in the house"}
+        }
+    }
+
+    playerSetup:
+    {
+        desc: "Configure your brave avatar!"
+        parameters:
+        {
+            name: {default: "Jackson"}
+            color: {default: {r:0.4, g:0.2, b:0.3}, editor: "ColorPicker", desc: "Your avatar color"}
+        }
+        playerEntity: Player
+    }
+
+    world:
+    {
+
+        Room = fun(hasPlayerStart: false, hasGoal: false, size: 10, height: 3) {
+            outline: [[-size,0,-size], [size,0,-size], [size,0,size], [-size,0,size]]
+            height: height
+            items:
+            [
+                if (hasPlayerStart, {Item: {pos: [0, 0, 0]}, PlayerSpawn: {}})
+                if (hasGoal, {Item: {pos: [-size, 0, 0]}, Goal: {}})
+                {Item: {pos: [-size, -size, 0]}, MobSpawn: { type: Ghost }}
+            ]
+        }
+
+        rooms:
+        [
+            Room(true, false, size: 4)
+            Room(false, true, size: 8)
+        ] + repeat(5, fun(index) @Room(false, false, size: random(index, 3, 20)))
+    }
+
+    # Game world initialization
+     # Create rooms & furniture / decoration
+     # Add ghosts
+     # Create player avatar
+
+    # Setup game logic
+     # Goal checker
+     # Failure checker
+     # Score / achievements / results calculator
+
+    # UI descriptions
+     # HUD
+     # Camera
+
+    # Configure larger loop
+     # Main menu
+     # Game options
+     # Save / Load (?)
+     # Quit
+     # End game stats screen
+
+}
