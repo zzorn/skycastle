@@ -17,17 +17,22 @@ class DataParser extends StdTokenParsers  {
   val lexical = new DataLexer
 
   // Parsing data structure
-  def value: Parser[Value] = bool | num | text | measure | data | arr | call | fun | link
+  def value: Parser[Value] = bool | measure | num | text | data | arr | call | fun | link
 
   def data: Parser[Data] = "{" ~ repsep(attribute, opt( ",")) ~ "}"
   def arr: Parser[Arr] = "[" ~ repsep(value, ",") ~ "]"
   def bool: Parser[Bool] = trueValue | falseValue
   def call: Parser[Call] = link ~ "(" ~ repsep(  parameter, ",") ~ ")"
-  def fun: Parser[Fun] = "fun" ~ "(" ~ repsep(  parameterDeclaration, ",") ~ ")" ~ value ^^ { case c1 ~ c2 ~ params ~ value ~ =>  new Fun }
-  def measure: Parser[Measure]
-  def num: Parser[Num]
+  def fun: Parser[Fun] = "fun" ~ "(" ~ repsep(  parameterDeclaration, ",") ~ ")" ~ value ^^ { case c1 ~ c2 ~ params ~ body => new Fun(params, body) }
+  def num: Parser[Num] = numericLit ^^ { s => new Num(s.toDouble) } // TODO: Cast to long/int if integer
+  def measure: Parser[Measure] = numericLit ~ rep1(scaledUnit) opt( "/" ~ rep1(scaledUnit) )
   def text: Parser[Text]
   def link: Parser[Link]
+
+  def scaledUnit: Parser[String] = opt(scale) ~ unit ~ opt(exp)
+  def scale: Parser[String] = "n" | "u" | "m" | "c" | "d" | "k" | "M" | "G" | "T"
+  def unit: Parser[String] = "m" | "g" | "s" | "N" | "V" | "A"
+  def exp: Parser[Int] = numericLit
 
   private def parameterDeclaration: Parser[Tuple3[Symbol, Option[Value]]] = ident ~ opt( ":" ~> value) ^^ { case name ~ value => Tuple2(name, value) }
   private def parameter: Parser[Tuple2[Option[Symbol], Value]] = opt(ident <~ ":") ~ value ^^ { case name ~ value => Tuple2(name, value)}

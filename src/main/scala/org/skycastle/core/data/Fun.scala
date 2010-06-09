@@ -7,6 +7,12 @@ import function.DataFunction
  */
 class Fun extends AbstractValue {
 
+  def this(parameters: List[Tuple2[Symbol, Option[Value]]], body: Value) {
+    this();
+
+    // TODO
+  }
+
   var defaultParameters: Data = new Data()
   var metadata: Data = null
 
