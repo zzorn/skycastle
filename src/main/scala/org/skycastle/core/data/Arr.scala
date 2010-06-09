@@ -5,10 +5,9 @@ package org.skycastle.core.data
  */
 class Arr extends AbstractValue {
 
-  def this(first: Value, rest: Value*) {
+  def this(values: List[Value]) {
     this()
-    add(first)
-    addAll(rest.toList)
+    addAll(values)
   }
 
   type T = List[Value]
