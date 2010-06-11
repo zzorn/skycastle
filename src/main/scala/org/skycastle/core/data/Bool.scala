@@ -1,22 +1,8 @@
 package org.skycastle.core.data
 
-/**
- * 
- */
+abstract case class Bool(value: Boolean) extends Value 
 
-class Bool extends AbstractValue {
-  
-  def this(bool: Boolean) {
-    this()
-    value = bool
-  }
+case object True extends Bool(true)
+case object False extends Bool(false)
 
-  type Self = this.type
-  type T = Boolean
-  def self = this
 
-  def defaultValue = false
-
-  override def isBoolean = true
-  override def asBoolean = value
-}

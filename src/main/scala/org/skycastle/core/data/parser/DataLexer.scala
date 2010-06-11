@@ -18,6 +18,9 @@ import scala.collection.immutable.PagedSeq
 class DataLexer extends StdLexical with ImplicitConversions  {
   override def token: Parser[Token] =
     ( identifierChar ~ rep( identifierChar | digit )    ^^ { case first ~ rest => processIdent(first :: rest mkString "") }
+/* TODO: Add later
+    | measure
+*/
     | number ~ letter ^^ { case n ~ l => ErrorToken("Invalid number format : " + n + l) }
     | number ^^ NumericLit
     | '\'' ~ rep( chrExcept('\'', '\n', EofCh) ) ~ '\'' ^^ { case '\'' ~ chars ~ '\'' => StringLit(chars mkString "") }
@@ -30,6 +33,11 @@ class DataLexer extends StdLexical with ImplicitConversions  {
     )
 
   def identifierChar = letter | '_'
+
+/*
+  def measure = number ~ letter ~ rep(letter | number) ~ opt( measureDivisor )
+  def measureDivisor: Parser[Token] = "/" ~ letter ~ rep(letter | number)
+*/
 
   def number = intPart ~ opt(fracPart) ~ opt(expPart) ^^ { case i ~ f ~ e => i + optString(".", f) + optString("", e) }
   def intPart = rep1(digit)        ^^ { _ mkString ""}

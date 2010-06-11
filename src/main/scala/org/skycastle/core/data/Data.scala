@@ -1,33 +1,16 @@
 package org.skycastle.core.data
 
-import _root_.java.io.Serializable
-
 /**
- * A data object, that has named values.
+ * A data object that has named values.
  */
-// TODO: Should be loadable from configuration files too
-class Data extends AbstractValue {
-
-  def this(data: Map[Symbol, Value]) {
-    this()
-    value = data
-  }
-
-  type T = Map[Symbol, Value]
-  type Self = this.type
-  def self = this
-
-  def defaultValue: T = Map()
-
-  override def asMap = value
-  override def isMap = true
+case class Data(value: Map[Symbol, Value]) extends Value {
 
   def get(name: Symbol, default: Value): Value = value.getOrElse(name, default)
-  def set(name: Symbol, member: Value) = value = value.+( name -> member )
 
   /**
    * Returns a value from a nested path
    */
+/*
   def apply(path: Symbol*): Option[Value] = {
     var v: Option[Value] = Some(this)
     path.foreach( p=> {
@@ -36,6 +19,7 @@ class Data extends AbstractValue {
     })
     return v
   }
+*/
 
 }
 

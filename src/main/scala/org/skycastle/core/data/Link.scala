@@ -3,6 +3,6 @@ package org.skycastle.core.data
 /**
  * A reference to some value.
  */
-class Link {
-  
+case class Link(path: List[Symbol] ) extends Value {
 }
+

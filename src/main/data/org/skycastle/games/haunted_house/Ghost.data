@@ -15,7 +15,7 @@ fun()
 
     physical:
     {
-        mass: 2 kg
+        mass: 2kg
     }
 
     walkingMovement:
