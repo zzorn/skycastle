@@ -58,10 +58,9 @@ class DataLexer extends StdLexical with ImplicitConversions  {
 
   delimiters ++= Set( "(", ")", "[", "]", "{", "}", ",", ".", ":", ";", "@", "=", "?", "|", "&", "%",
                       "+", "-", "*", "/", "^",
-                      "<", ">", "!=", "==", "<=", ">=",
-                      "fun" )
+                      "<", ">", "!=", "==", "<=", ">=" )
 
-  reserved ++= Set( "true", "false", "not", "or", "and", "xor", "nand", "nor", "import" )
+  reserved ++= Set( "function", "true", "false", "not", "or", "and", "xor", "nand", "nor", "import" )
 
 
   // Overriding the default whitespace parser, as it failed with multiline comments.

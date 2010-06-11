@@ -3,9 +3,10 @@ package org.skycastle.core.data
 /**
  * A data object that has named values.
  */
-case class Data(value: Map[Symbol, Value]) extends Value {
+case class Data(values: Map[Symbol, Value]) extends Value {
 
-  def get(name: Symbol, default: Value): Value = value.getOrElse(name, default)
+  def get[T <: Value](name: Symbol): T = values(name).asInstanceOf[T]
+  def get[T <: Value](name: Symbol, default: T): T = values.getOrElse(name, default).asInstanceOf[T]
 
   /**
    * Returns a value from a nested path
@@ -20,6 +21,8 @@ case class Data(value: Map[Symbol, Value]) extends Value {
     return v
   }
 */
+
+  override def toString: String = values.map(e =>{ e._1.name + ": " + e._2}).mkString("{", ", ", "}")
 
 }
 

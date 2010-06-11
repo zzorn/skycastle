@@ -7,9 +7,9 @@ import _root_.org.skycastle.core.data.Data
 /**
  * Serializable object used for callbacks.
  */
-class Callback(entity: Taskable, inputParameters: Data) extends Task with Serializable {
-  private val parameters: Data = inputParameters.immutable
+class Callback(entity: Taskable, parameters: Data) extends Task with Serializable {
 
   def run = entity.callback(parameters)
+
 }
 

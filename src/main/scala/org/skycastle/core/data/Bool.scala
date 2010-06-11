@@ -1,6 +1,9 @@
 package org.skycastle.core.data
 
-abstract case class Bool(value: Boolean) extends Value 
+abstract class Bool(_value: Boolean) extends Value {
+  def value = _value
+  override def toString: String = if (_value) "true" else "false"
+}
 
 case object True extends Bool(true)
 case object False extends Bool(false)

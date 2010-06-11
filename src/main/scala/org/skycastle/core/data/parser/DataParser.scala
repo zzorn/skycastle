@@ -6,7 +6,7 @@ import util.parsing.combinator.ImplicitConversions
 
 
 /**
- * A second try at a simpler language parser and compiler.
+ * A simple data format language parser.
  *
  * @author Hans Haggstrom
  */
@@ -23,18 +23,17 @@ object DataParser extends StdTokenParsers  {
   val lexical = new DataLexer
 
   // Parsing data structure
-  def value: Parser[Value] = bool | /* ref, measure | */ num | text | data | arr | call | fun | failure( "Value expected" )
+  def value: Parser[Value] = bool | /* ref, measure | */ num | fun | text | data | arr | call | link | failure( "Value expected" )
 
-  // TODO: Add id for longs?
+  // TODO: Add id type for longs?
 
   def data: Parser[Value] = "{" ~ repsep(attribute, opt( ",")) ~ "}" ^^ {case lb ~ entries ~ rb => Data(Map() ++ entries)}
   def arr: Parser[Value] = "[" ~ repsep(value, ",") ~ "]" ^^ {case lb ~ entries ~ rb => Arr(entries)}
   def bool: Parser[Value] = trueValue | falseValue
-  def call: Parser[Value] = link ~ "(" ~ repsep(  parameter, ",") ~ ")" ^^ {case l ~ lp ~ params ~ rp => Call(l, params)}
-  def fun: Parser[Value] = "fun" ~ "(" ~ repsep(  parameterDeclaration, ",") ~ ")" ~ value ^^ { case c1 ~ c2 ~ params ~ c3 ~ body => Fun(params, body) }
-  def num: Parser[Value] = numericLit ^^ { s => Num(s.toDouble) } // TODO: Cast to long/int if integer
+  def call: Parser[Value] = (link | /* call |*/ arr | data | fun) ~ "(" ~ repsep(  parameter, ",") ~ ")" ^^ {case callee ~ lp ~ params ~ rp => Call(callee, params)}
+  def fun: Parser[Value] = "function" ~ "(" ~ repsep(  parameterDeclaration, ",") ~ ")" ~ value ^^ { case c1 ~ c2 ~ params ~ c3 ~ body => Fun(params, body) }
+  def num: Parser[Value] = numericLit ^^ { s => Num(s.toDouble) }
   def text: Parser[Value] = stringLit ^^ {case s => Text(s)}
-
   def link: Parser[Link] = rep1sep(identifier, ".") ^^ {case path => Link(path)}
 
 /*

@@ -7,7 +7,8 @@ import java.io.Serializable
  */
 trait Value extends Serializable {
 
-//  def replaceParameterReferences(parameters: Data): Value = self
-//  def invokeFunctions(): Value = self
+  def replaceParameterReferences(parameters: Data): Value = this
+
+  def invokeFunctions(): Value = this
 
 }
