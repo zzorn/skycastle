@@ -20,12 +20,12 @@ fun()
 
     walkingMovement:
     {
-        walking: 1 m/s
+        walking: 1m/s
     }
 
     behaviour:
     [
-        Avoid(who: {type:"Ghost"}, distance: 1m)
-        Intercept(who: {type:"Human"}, detectionRadius: 5m)
+        Avoid({type:"Ghost"}, distance: 1m)
+        Intercept({type:"Human"}, detectionRadius: 5m)
     ]
 }

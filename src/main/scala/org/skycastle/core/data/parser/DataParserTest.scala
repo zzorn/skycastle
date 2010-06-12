@@ -18,6 +18,10 @@ object DataParserTest  {
      {
         first: function(a:1, b) [a, math.plus(a,b)]
         second: first(1,b:true)
+        a: 1
+        mass: 5kg
+        acc: 10.12e2m/s2
+        b: 2
      }
 
     """) match {

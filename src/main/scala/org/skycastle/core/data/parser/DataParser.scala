@@ -3,6 +3,7 @@ package org.skycastle.core.data.parser
 import _root_.org.skycastle.core.data._
 import scala.util.parsing.combinator.syntactical.StdTokenParsers
 import util.parsing.combinator.ImplicitConversions
+import util.parsing.input.Reader
 
 
 /**
@@ -23,7 +24,7 @@ object DataParser extends StdTokenParsers  {
   val lexical = new DataLexer
 
   // Parsing data structure
-  def value: Parser[Value] = bool | /* ref, measure | */ num | fun | text | data | arr | call | link | failure( "Value expected" )
+  def value: Parser[Value] = bool | measure | num | fun | text | data | arr | call | link | failure( "Value expected" )
 
   // TODO: Add id type for longs?
 
@@ -35,10 +36,14 @@ object DataParser extends StdTokenParsers  {
   def num: Parser[Value] = numericLit ^^ { s => Num(s.toDouble) }
   def text: Parser[Value] = stringLit ^^ {case s => Text(s)}
   def link: Parser[Link] = rep1sep(identifier, ".") ^^ {case path => Link(path)}
-
-/*
-  def measure: Parser[Measure] = measure ^^ {case m  => new Measure(m)}
-*/
+  def measure: Parser[Measure] = new Parser[Measure](){
+    def apply(in: Reader[Elem]) = {
+      in.first match {
+        case m: lexical.MeasurementLit => Success(m.measure, in.rest)
+        case _ => Failure("not a measure", in)
+      }
+    }
+  }
 
   def identifier: Parser[Symbol] = ident ^^ {case id => Symbol(id)}
 

@@ -9,7 +9,13 @@ case class Measurable(unit: Symbol, exponent: Int) {
  * Can be converted to a number.
  */
 // TODO: Support getting the measure and checking the type at the same time.
-case class Measure(value: Double, units: List[Measurable]) extends Value {
-  
-  override def toString: String = value.toString + " " + units.mkString("") 
+case class Measure(value: Double, units: String, divisor: Option[String]) extends Value {
+
+  def getAs(unit: String): Double = {
+    if (unit equals unitString) return value
+    else throw new IllegalStateException("Expected the unit to be '" + unit + "', but it was '"+unitString+"'")
+  }
+
+  def unitString: String = units + (if (divisor.isDefined) "/"+divisor.get else "")
+  override def toString: String = value.toString + " " + unitString
 }

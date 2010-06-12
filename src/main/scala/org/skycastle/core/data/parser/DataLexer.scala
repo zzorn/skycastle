@@ -1,5 +1,6 @@
 package org.skycastle.core.data.parser
 
+import _root_.org.skycastle.core.data.{Measurable, Measure}
 import _root_.scala.util.matching.Regex
 import util.parsing.combinator.ImplicitConversions
 import util.parsing.combinator.lexical.StdLexical
@@ -16,12 +17,18 @@ import scala.collection.immutable.PagedSeq
  * @author Hans Haggstrom
  */
 class DataLexer extends StdLexical with ImplicitConversions  {
+
+  case class MeasurementLit(measure: Measure) extends Token {
+    override def toString = measure.toString
+
+    def chars = toString
+  }
+
   override def token: Parser[Token] =
     ( identifierChar ~ rep( identifierChar | digit )    ^^ { case first ~ rest => processIdent(first :: rest mkString "") }
-/* TODO: Add later
-    | measure
-*/
-    | number ~ letter ^^ { case n ~ l => ErrorToken("Invalid number format : " + n + l) }
+// Measures are numbers followed by strings
+    // case n ~ l => ErrorToken("Invalid number format : " + n + l)
+    | measurement
     | number ^^ NumericLit
     | '\'' ~ rep( chrExcept('\'', '\n', EofCh) ) ~ '\'' ^^ { case '\'' ~ chars ~ '\'' => StringLit(chars mkString "") }
     | '\"' ~ rep( chrExcept('\"', '\n', EofCh) ) ~ '\"' ^^ { case '\"' ~ chars ~ '\"' => StringLit(chars mkString "") }
@@ -32,12 +39,13 @@ class DataLexer extends StdLexical with ImplicitConversions  {
     | failure("illegal character")
     )
 
+  def measurement = number ~ unitPart ~ opt('/' ~> unitPart) ^^ {case n ~ u ~ d => MeasurementLit(Measure(n.toDouble, u, d))}
+  
   def identifierChar = letter | '_'
 
-/*
-  def measure = number ~ letter ~ rep(letter | number) ~ opt( measureDivisor )
-  def measureDivisor: Parser[Token] = "/" ~ letter ~ rep(letter | number)
-*/
+  def unitPart = letter ~ rep(letter | digit) ^^ { case l ~ r => "" + l + r.mkString}
+
+  def integer: Parser[Int] = intPart ^^ { case s: String => s.toInt}
 
   def number = intPart ~ opt(fracPart) ~ opt(expPart) ^^ { case i ~ f ~ e => i + optString(".", f) + optString("", e) }
   def intPart = rep1(digit)        ^^ { _ mkString ""}
