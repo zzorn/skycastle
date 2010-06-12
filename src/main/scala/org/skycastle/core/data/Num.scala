@@ -10,6 +10,12 @@ case class Num(value: Double) extends Value {
   def clamp(minValue: Double) : Double = max(minValue, value)
   def clamp(minValue: Double, maxValue: Double) : Double = max(minValue, min(maxValue, value))
 
-  override def toString: String = value.toString
+  override def prettyPrint(out: StringBuilder, indent: Int) {
+    out.append(value)
+  }
   
+/*
+  override def toString: String = value.toString
+*/
+
 }

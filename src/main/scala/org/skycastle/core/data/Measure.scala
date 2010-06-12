@@ -1,5 +1,7 @@
 package org.skycastle.core.data
 
+import collection.mutable.StringBuilder
+
 case class Measurable(unit: Symbol, exponent: Int) {
   override def toString: String = if (exponent == 0) "" else if (exponent == 1) unit.name else unit.name + exponent
 }
@@ -16,6 +18,14 @@ case class Measure(value: Double, units: String, divisor: Option[String]) extend
     else throw new IllegalStateException("Expected the unit to be '" + unit + "', but it was '"+unitString+"'")
   }
 
+
+  override def prettyPrint(out: StringBuilder, indent: Int) {
+    out.append(value)
+    out.append(unitString)
+  }
+
   def unitString: String = units + (if (divisor.isDefined) "/"+divisor.get else "")
+/*
   override def toString: String = value.toString + unitString
+*/
 }

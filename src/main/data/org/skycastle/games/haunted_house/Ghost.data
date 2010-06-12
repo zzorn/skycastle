@@ -1,7 +1,7 @@
 
 # All data files are treated as static objects with the name of the file that contains it
 
-fun()
+function()
 {
     attributes:
     {
@@ -25,7 +25,7 @@ fun()
 
     behaviour:
     [
-        Avoid({type:"Ghost"}, distance: 1m)
+        Avoid({type:"Ghost"}, distance: 1m),
         Intercept({type:"Human"}, detectionRadius: 5m)
     ]
 }

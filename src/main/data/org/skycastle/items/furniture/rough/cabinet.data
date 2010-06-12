@@ -1,17 +1,17 @@
-
-item:
 {
-    width: 2
-    depth: 0.6
-    height: 1
+    item:
+    {
+        width: 150cm
+        depth: 0.6m
+        height: 120cm
+    }
+
+    appearance:
+    {
+      shape:
+      {
+
+      }
+    }
+
 }
-
-appearance:
-{
-  shape:
-  {
-  
-  }
-}
-
-

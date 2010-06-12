@@ -22,7 +22,18 @@ case class Data(values: Map[Symbol, Value]) extends Value {
   }
 */
 
+  override def prettyPrint(out: StringBuilder, indent: Int) {
+    dent(out, indent).append("{")
+    values.foreach(e =>{
+      dent(out, indent + 1).append(e._1.name).append(": ")
+      e._2.prettyPrint(out, indent + 1)
+    })
+    dent(out, indent).append("}")
+  }
+
+/*
   override def toString: String = values.map(e =>{ e._1.name + ": " + e._2}).mkString("{", ", ", "}")
+*/
 
 }
 

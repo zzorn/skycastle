@@ -3,8 +3,8 @@ package org.skycastle.core.data.parser
 import _root_.org.skycastle.core.data._
 import scala.util.parsing.combinator.syntactical.StdTokenParsers
 import util.parsing.combinator.ImplicitConversions
+import java.io.{File}
 import util.parsing.input.Reader
-
 
 /**
  * A simple data format language parser.
@@ -13,9 +13,18 @@ import util.parsing.input.Reader
  */
 object DataParser extends StdTokenParsers  {
 
-  def parse(s: String): ParseResult[Value] = {
-    val tokens = new lexical.Scanner(s)
-    value(tokens)
+  def parse(sourceFile: File): Value = {
+    parse( io.Source.fromFile(sourceFile).mkString, sourceFile.getPath )
+  }
+
+  def parse(source: String): Value = parse(source, "<unknown source>")
+
+  def parse(source: String, sourceName: String): Value = {
+    val tokens = new lexical.Scanner(source)
+    value(tokens) match {
+      case s: Success[Value] => s.result
+      case f: NoSuccess => throw new ParseError(f.msg + "\non line: " + f.next.pos.line + ", column " + f.next.pos.column + " of " + sourceName, null)
+    }
   }
 
 
@@ -29,7 +38,7 @@ object DataParser extends StdTokenParsers  {
   // TODO: Add id type for longs?
 
   def data: Parser[Value] = "{" ~ repsep(attribute, opt( ",")) ~ "}" ^^ {case lb ~ entries ~ rb => Data(Map() ++ entries)}
-  def arr: Parser[Value] = "[" ~ repsep(value, ",") ~ "]" ^^ {case lb ~ entries ~ rb => Arr(entries)}
+  def arr: Parser[Value] = "[" ~ repsep(value, opt(",")) ~ "]" ^^ {case lb ~ entries ~ rb => Arr(entries)}
   def bool: Parser[Value] = trueValue | falseValue
   def call: Parser[Value] = (link | /* call |*/ arr | data | fun) ~ "(" ~ repsep(  parameter, ",") ~ ")" ^^ {case callee ~ lp ~ params ~ rp => Call(callee, params)}
   def fun: Parser[Value] = "function" ~ "(" ~ repsep(  parameterDeclaration, ",") ~ ")" ~ value ^^ { case c1 ~ c2 ~ params ~ c3 ~ body => Fun(params, body) }

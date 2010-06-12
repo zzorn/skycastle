@@ -1,12 +1,10 @@
 
-fun() {
+function() {
 
     name: "Haunted House"
-    desc:
-    """
-    A simple example game that takes place completely inside an old manor house.
-    Escape the ghosts and find the exit!
-    """
+
+    // TODO: Implement multiline strings?
+    desc: " A simple example game that takes place completely inside an old manor house.  \nEscape the ghosts and find the exit!"
 
     gameSetup:
     {
@@ -34,22 +32,25 @@ fun() {
 
     world:
     {
-        room: fun(hasPlayerStart: false, hasGoal: false, size: 10, height: 3) {
-            outline: [[-size,0,-size], [size,0,-size], [size,0,size], [-size,0,size]]
-            height: height
-            items:
-            [
-                if (hasPlayerStart, {Item: {pos: [0, 0, 0]}, PlayerSpawn: {}})
-                if (hasGoal, {Item: {pos: [-size, 0, 0]}, Goal: {}})
-                {Item: {pos: [-size, -size, 0]}, MobSpawn: { type: Ghost }}
-            ]
-        }
-
-        rooms:
-        [
-            room(true, false, size: 4)
-            room(false, true, size: 8)
-        ] + repeat(5, fun(index) room(false, false, size: random(3, 20, seed: $randomSeed + index))) # $randomSeed is a system variable defined for all maps.
+#        room: function(hasPlayerStart: false, hasGoal: false, size: 10, height: 3) {
+#            // TODO: Support matemathical expressions
+#            //outline: [[-size,0,-size], [size,0,-size], [size,0,size], [-size,0,size]]
+#            height: height
+#            items:
+#            [
+#                if (hasPlayerStart, {Item: {pos: [0, 0, 0]}, PlayerSpawn: {}})
+#//                if (hasGoal, {Item: {pos: [-size, 0, 0]}, Goal: {}})
+#//                {Item: {pos: [-size, -size, 0]}, MobSpawn: { type: Ghost }}
+#            ]
+#        }
+#
+#        // TODO: Support combining of lists and maps
+#        rooms:
+#        [
+#            room(true, false, size: 4)
+#            room(false, true, size: 8)
+#        ] // + repeat(5, fun(index) room(false, false, size: random(3, 20, seed: $randomSeed + index))) # $randomSeed is a system variable defined for all maps.
+#*/
     }
 
     # Game world initialization
