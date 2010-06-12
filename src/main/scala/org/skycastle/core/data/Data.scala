@@ -1,12 +1,38 @@
 package org.skycastle.core.data
 
+import scala.math._
+
 /**
  * A data object that has named values.
  */
 case class Data(values: Map[Symbol, Value]) extends Value {
 
-  def get[T <: Value](name: Symbol): T = values(name).asInstanceOf[T]
-  def get[T <: Value](name: Symbol, default: T): T = values.getOrElse(name, default).asInstanceOf[T]
+  def getBoolean(name: Symbol): Boolean = values(name).asInstanceOf[Bool].value
+  def getBoolean(name: Symbol, default: Boolean): Boolean = if (values.contains(name)) getBoolean(name) else default
+
+  def getInt(name: Symbol): Int = values(name).asInstanceOf[Num].value.toInt
+  def getInt(name: Symbol, default: Int): Int = if (values.contains(name)) getInt(name) else default
+  def getInt(name: Symbol, default: Int, minValue: Int): Int = minValue max getInt(name, default)
+  def getInt(name: Symbol, default: Int, minValue: Int, maxValue: Int): Int = maxValue min (minValue max getInt(name, default))
+
+  def getFloat(name: Symbol): Float = values(name).asInstanceOf[Num].value.toFloat
+  def getFloat(name: Symbol, default: Float): Float = if (values.contains(name)) getFloat(name) else default
+  def getFloat(name: Symbol, default: Float, minValue: Float): Float = minValue max getFloat(name, default)
+  def getFloat(name: Symbol, default: Float, minValue: Float, maxValue: Float): Float = maxValue min (minValue max getFloat(name, default))
+
+  def getDouble(name: Symbol): Double = values(name).asInstanceOf[Num].value
+  def getDouble(name: Symbol, default: Double): Double = if (values.contains(name)) getDouble(name) else default
+  def getDouble(name: Symbol, default: Double, minValue: Double): Double = minValue max getDouble(name, default)
+  def getDouble(name: Symbol, default: Double, minValue: Double, maxValue: Double): Double = maxValue min (minValue max getDouble(name, default))
+
+  def getString(name: Symbol): String = values(name).asInstanceOf[Text].value
+  def getString(name: Symbol, default: String): String = if (values.contains(name)) getString(name) else default
+
+  def getList(name: Symbol): List[Value] = values(name).asInstanceOf[Arr].values
+  def getList(name: Symbol, default: List[Value]): List[Value] = if (values.contains(name)) getList(name) else default
+
+  def getData(name: Symbol): Data = values(name).asInstanceOf[Data]
+  def getData(name: Symbol, default: Data): Data = if (values.contains(name)) getData(name) else default
 
   /**
    * Returns a value from a nested path
@@ -30,10 +56,6 @@ case class Data(values: Map[Symbol, Value]) extends Value {
     })
     dent(out, indent).append("}")
   }
-
-/*
-  override def toString: String = values.map(e =>{ e._1.name + ": " + e._2}).mkString("{", ", ", "}")
-*/
 
 }
 

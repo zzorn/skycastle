@@ -11,7 +11,7 @@ import org.skycastle.util.options.OptionParser
 object SkycastleServer {
 
   def main(args: Array[String]) {
-    var dataPath: String = "./src/main/data"
+    var dataPath: String = "./config"
     val parser = new OptionParser("SkycastleServer") {
       opt("d", "data", "root directory for data files, defaults to " + dataPath, {v: String => dataPath = v})
     }

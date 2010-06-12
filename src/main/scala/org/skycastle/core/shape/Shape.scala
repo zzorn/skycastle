@@ -1,24 +1,19 @@
 package org.skycastle.core.shape
 
 import org.skycastle.core.data.Data
-import com.ardor3d.scenegraph.Spatial
+import java.awt.Color
 
 object Shape {
-
-  def apply(definition: Data): Shape = null
-
+  def apply() = null // TODO: Instantiate with 3D library specific Shape implementation
 }
 
 /**
- * A definition of a 3D shape.  May be parametrized.
+ * A 3D shape node.
  */
 trait Shape {
 
-  def name: String = this.getClass.getSimpleName
+  // TODO: Create an own simple vector3 class after all?
+  def addBox(x: Double = 0, y: Double = 0, z: Double = 0, material: String = null, color: Color = Color.WHITE)
 
-  def defaultParameters: Data
 
-  def create(): Spatial = create(defaultParameters)
-  def create(parameters: Data): Spatial
-  
 }

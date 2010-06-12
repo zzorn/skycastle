@@ -11,9 +11,5 @@ case class Link(path: List[Symbol] ) extends Value {
     out.append(path.map(_.name).mkString("."))
   }
 
-/*
-  override def toString: String = path.map(_.name).mkString(".")
-*/
-
 }
 

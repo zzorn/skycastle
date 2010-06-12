@@ -35,8 +35,8 @@ object DataLoader {
    * Load all data files from a directory and all subdirectories.
    */
   def loadDirectory(dir: File): Data = {
-    if (!dir.exists ) throw new IOException("Specified director '"+dir+"' not found")
-    if (!dir.isDirectory) throw new IOException("Specified director '"+dir+"' is not a directory")
+    if (!dir.exists ) throw new IOException("Specified directory '"+dir+"' not found")
+    if (!dir.isDirectory) throw new IOException("Specified directory '"+dir+"' is not a directory")
 
     var members: Map[Symbol, Value] = Map()
     members ++= dir.listFiles(dataDirFilter).map(f => Symbol(f.getName) -> loadDirectory(f))

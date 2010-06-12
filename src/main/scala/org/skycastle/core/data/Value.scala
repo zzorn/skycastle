@@ -13,7 +13,7 @@ trait Value extends Serializable {
 
   def prettyPrint(out: StringBuilder, indent: Int) 
 
-  override def toString: String = {
+  override final def toString: String = {
     val s = new StringBuilder()
     prettyPrint(s, 0)
     s.toString

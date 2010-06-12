@@ -14,8 +14,4 @@ case class Num(value: Double) extends Value {
     out.append(value)
   }
   
-/*
-  override def toString: String = value.toString
-*/
-
 }

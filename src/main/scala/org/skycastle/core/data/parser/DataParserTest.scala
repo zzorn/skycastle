@@ -1,7 +1,5 @@
 package org.skycastle.core.data.parser
 
-import _root_.org.scalatest.matchers.ShouldMatchers
-import _root_.org.scalatest.Spec
 import _root_.org.skycastle.core.data.{Value, Num}
 
 /**

@@ -40,14 +40,4 @@ case class Fun(parameters: List[Fun.Parameter], body: Value) extends Value {
     body.prettyPrint(out, indent)
   }
 
-/*
-  private def paramPrint(p: Fun.Parameter): String = {
-    p._1.name +
-    (p._2 match {
-      case None => ""
-      case Some(x) => ": " + x
-    })
-  }
-  override def toString: String = "function(" + parameters.map(paramPrint).mkString(", ") + ") " + body
-*/
 }

@@ -15,9 +15,11 @@
 
   <!-- Some main library version properties -->
   <properties>
-    <scala.version>2.8.0.RC2</scala.version>
+    <scala.version>2.8.0.RC3</scala.version>
+    <scalatest.version>1.2-for-scala-2.8.0.RC2-SNAPSHOT/</scalatest.version>
     <reddwarf.version>0.10.1</reddwarf.version>
     <a3d.version>0.6</a3d.version>
+    <sgine.version>2.8.0.RC3-1.0-SNAPSHOT</sgine.version>
   </properties>
 
 
@@ -34,6 +36,12 @@
       <id>scala-tools.org</id>
       <name>Scala-Tools Maven2 Repository</name>
       <url>http://scala-tools.org/repo-releases</url>
+    </repository>
+
+    <repository>
+      <id>scala-tools-snapshots.org</id>
+      <name>Scala-Tools Maven2 Snapshots Repository</name>
+      <url>http://scala-tools.org/repo-snapshots</url>
     </repository>
 
     <repository>
@@ -73,12 +81,14 @@
   <dependencies>
 
     <!-- Testing -->
+<!--
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest</artifactId>
-      <version>1.0</version>
+      <version>${scalatest.version}</version>
       <scope>test</scope>
     </dependency>
+-->
 
     <!-- Scala -->
     <dependency>
@@ -209,6 +219,17 @@
       <version>2.5.15</version>
     </dependency>
 -->
+
+
+    <!-- SGine 3D Engine -->
+    <dependency>
+      <groupId>org.sgine</groupId>
+      <artifactId>sgine</artifactId>
+      <version>${sgine.version}</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/lib/sgine_${sgine.version}.jar</systemPath>
+    </dependency>
+
 
 
     <!-- Ardor3D engine modules -->

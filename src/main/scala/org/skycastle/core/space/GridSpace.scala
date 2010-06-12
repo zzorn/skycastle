@@ -14,8 +14,8 @@ class GridSpace extends Space {
   private val MAX_SIZE = 1000
 
   override protected def init(parameters: Data) {
-    xSize = parameters.get('xSize, Num(100)).clamp(1, MAX_SIZE).toInt
-    ySize = parameters.get('ySize, Num(100)).clamp(1, MAX_SIZE).toInt
+    xSize = parameters.getInt('xSize, 100, 1, MAX_SIZE)
+    ySize = parameters.getInt('ySize, 100, 1, MAX_SIZE)
 
     grid = new Array[GridCell](xSize * ySize)
   }

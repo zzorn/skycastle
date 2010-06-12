@@ -11,8 +11,4 @@ case class Text(value: String) extends Value {
     out.append("\"" + value + "\"")// TODO: Escape special chars
   }
 
-/*
-  override def toString: String = "\"" + value + "\"" // TODO: Escape special chars
-*/
-
 }

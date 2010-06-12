@@ -1,0 +1,51 @@
+==== Feature backlog / task list ====
+
+=== Core ===
+
+== Physics ==
+- Walking
+- Machines that can move around
+
+== Item handling ==
+- Inventory
+- Pickup item on ground, drop item
+
+== Manipulation ==
+- Workbench / crafting station
+- Create items by connecting components
+- Tools
+
+== Graphics ==
+- Terrain
+- Shape system for defining items
+- Loadable textures
+
+=== Extended ===
+
+== Houses ==
+
+== Biology ==
+- Max carrying capacity
+- Relation between carried load and movement speed
+- Energy & energy consumed by actions
+- Nutrition
+- Eating
+- Damage and healing
+- Breathing
+- Death
+
+== Physics ==
+- Water, byouancy, density
+
+== Graphics ==
+- Skydome
+- Water
+- Procedural noise textures
+- Colorize textures
+- Characters with animation
+
+
+=== Wishlist ===
+
+
+

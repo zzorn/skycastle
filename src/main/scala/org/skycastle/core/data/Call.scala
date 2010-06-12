@@ -45,8 +45,4 @@ case class Call(function: Value, parameters: List[(Option[Symbol], Value)]) exte
     out.append(")")
   }
 
-/*
-  override def toString: String = function.toString + "(" + parameters.map(x => {x._1.toList.map(_.name + ": ").mkString + x._2}).mkString(", ") + ")"
-*/
-
 }
