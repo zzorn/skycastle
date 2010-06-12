@@ -17,5 +17,5 @@ case class Measure(value: Double, units: String, divisor: Option[String]) extend
   }
 
   def unitString: String = units + (if (divisor.isDefined) "/"+divisor.get else "")
-  override def toString: String = value.toString + " " + unitString
+  override def toString: String = value.toString + unitString
 }
