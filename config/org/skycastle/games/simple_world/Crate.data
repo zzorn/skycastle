@@ -1,0 +1,19 @@
+
+# Parametric Crate entity
+function (sideLength: 1m, pos: [0,0,0])
+{
+    # Use dollar prefix to refer to closest parameter with that name (to allow easy use of fields and parameters with same name)
+    Item: { pos: $pos }
+
+    Appearance:
+    {
+        shape:
+        [
+            # pos: [0,0,-sideLength/2],
+            Box(  size: [sideLength, sideLength, sideLength], color: [0.8, 0.7, 0.4] )
+        ]
+    }
+
+}
+
+

@@ -21,7 +21,7 @@ object DataParser extends StdTokenParsers  {
 
   def parse(source: String, sourceName: String): Value = {
     val tokens = new lexical.Scanner(source)
-    value(tokens) match {
+    dataFile(tokens) match {
       case s: Success[Value] => s.result
       case f: NoSuccess => throw new ParseError(f.msg + "\non line: " + f.next.pos.line + ", column " + f.next.pos.column + " of " + sourceName, null)
     }
@@ -32,19 +32,21 @@ object DataParser extends StdTokenParsers  {
   type Tokens = DataLexer
   val lexical = new DataLexer
 
+  def dataFile: Parser[Value] = phrase( value )
+
   // Parsing data structure
   def value: Parser[Value] = bool | measure | num | fun | text | data | arr | call | link | failure( "Value expected" )
 
   // TODO: Add id type for longs?
 
-  def data: Parser[Value] = "{" ~ repsep(attribute, opt( ",")) ~ "}" ^^ {case lb ~ entries ~ rb => Data(Map() ++ entries)}
-  def arr: Parser[Value] = "[" ~ repsep(value, opt(",")) ~ "]" ^^ {case lb ~ entries ~ rb => Arr(entries)}
+  def data: Parser[Value] = "{" ~! repsep(attribute, opt( ",")) ~ "}" ^^ {case lb ~ entries ~ rb => Data(Map() ++ entries)}
+  def arr: Parser[Value] = "[" ~! repsep(value, opt(",")) ~ "]" ^^ {case lb ~ entries ~ rb => Arr(entries)}
   def bool: Parser[Value] = trueValue | falseValue
   def call: Parser[Value] = (link | /* call |*/ arr | data | fun) ~ "(" ~ repsep(  parameter, ",") ~ ")" ^^ {case callee ~ lp ~ params ~ rp => Call(callee, params)}
-  def fun: Parser[Value] = "function" ~ "(" ~ repsep(  parameterDeclaration, ",") ~ ")" ~ value ^^ { case c1 ~ c2 ~ params ~ c3 ~ body => Fun(params, body) }
+  def fun: Parser[Value] = "function" ~! "(" ~ repsep(  parameterDeclaration, ",") ~ ")" ~ value ^^ { case c1 ~ c2 ~ params ~ c3 ~ body => Fun(params, body) }
   def num: Parser[Value] = numericLit ^^ { s => Num(s.toDouble) }
   def text: Parser[Value] = stringLit ^^ {case s => Text(s)}
-  def link: Parser[Link] = rep1sep(identifier, ".") ^^ {case path => Link(path)}
+  def link: Parser[Link] = opt("$") ~ rep1sep(identifier, ".") ^^ {case param ~ path => Link(param.isDefined, path)}
   def measure: Parser[Measure] = new Parser[Measure](){
     def apply(in: Reader[Elem]) = {
       in.first match {

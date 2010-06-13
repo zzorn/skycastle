@@ -1,0 +1,22 @@
+
+# An entity for the world
+{
+    SimpleSpace:
+    {
+        # TODO: Better syntax for functions.. maybe  (x,y) => 0  , but that isn't L(1)..  
+        groundHeight: function(x,y) 0
+
+        # TODO: Use / allow using = instead of :, = comes kind of naturally.  Allows using : for something else.
+        items:
+        [
+            Crate(2m, pos:[10m, 5m, 0])
+            Crate(1m, pos:[2m, 5m, 0]) # TODO: Add support for expressions, so that we can use unary minus too
+            Crate(3m, pos:[5m, 3m, 0])
+            Camera(pos:[0,0,1.6m], direction:[1,0,0], up:[0,0,1], fov:50)
+        ]
+
+    }
+
+
+}
+

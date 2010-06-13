@@ -24,10 +24,10 @@ object SkycastleServer {
       // DEBUG:
       println (configuration.toString)
 
-      val ghostData: Data = configuration('org, 'skycastle, 'games, 'haunted_house, 'Ghost).get.asInstanceOf[Data]
-      val ghost: Entity = Entity.create(ghostData)
+      val simpleWorldData: Data = configuration('org, 'skycastle, 'games, 'simple_world, 'SimpleWorld).get.asInstanceOf[Data]
+      val simpleWorld: Entity = Entity.create(simpleWorldData)
 
-      println(ghost)
+      println(simpleWorld)
     }
 
   }

@@ -34,5 +34,9 @@ trait Facet extends Persistent with Taskable {
    */
   protected def onEntityChanged(oldEntity: Ref[Entity], newEntity: Ref[Entity]) {}
 
+  override def toString: String = {
+    getClass.getSimpleName + " facet " + hashCode
+  }
+
 }
 

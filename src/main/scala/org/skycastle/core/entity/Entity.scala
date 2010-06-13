@@ -10,8 +10,10 @@ object Entity {
   def create(entityDefinition: Data): Entity = {
     val entity: Entity = new Entity()
 
+    val evaluatedDefinition = entityDefinition.evaluate()
+
     // Create facets
-    entityDefinition.values foreach { entry: (Symbol, Value) =>
+    evaluatedDefinition.asInstanceOf[Data].values foreach { entry: (Symbol, Value) =>
       if (entry._2.isInstanceOf[Data]) {
         SkycastleContext.facetService.createFacet(entry._1, entry._2.asInstanceOf[Data]) match {
           case Some(facet) => entity.addFacet(facet)
@@ -53,12 +55,16 @@ class Entity extends Persistent {
    */
   override def delete() {
     // Delete facets
-    _facets.getList.foreach {f: Ref[Facet] => f().delete() }
+    _facets.list.foreach {f: Ref[Facet] => f().delete() }
 
     // Delete self
     super.delete()
   }
 
+
+  override def toString(): String = {
+    "Entity " + hashCode + "¸ facets: " + _facets.list.map(_.get()).mkString("[", ", ", "]")
+  }
 
 }
 

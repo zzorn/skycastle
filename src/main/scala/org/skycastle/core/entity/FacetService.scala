@@ -7,15 +7,15 @@ import _root_.org.skycastle.core.data.Data
  */
 trait FacetService {
 
-  def bindFacetType(facetName: Symbol, facetType: Class[Facet])
+  def bindFacetType(facetName: Symbol, facetType: Class[_ <: Facet])
   def hasFacetType(facetName: Symbol): Boolean
-  def getFacetType(facetName: Symbol): Option[Class[Facet]]
+  def getFacetType(facetName: Symbol): Option[Class[_ <: Facet]]
 
   /**
    * Creates a new facet of the specified type and with the specified parameters.
    * Stores the facet in the persistence service.
    */
-  def createFacet(facetName: Symbol, parameters: Data): Option[Facet]
+  def createFacet(facetName: Symbol, parameters: Data): Option[_ <: Facet]
 
 }
 

@@ -2,12 +2,14 @@
 # All data files are treated as static objects with the name of the file that contains it
 
 {
+    Item: { pos: [0,0,0] } 
+
     attributes:
     {
         type: "Ghost"
     }
 
-    appearance:
+    Appearance:
     {
         shape: Sphere(radius: 2, color: [0.1, 0.3, 0.5])
     }

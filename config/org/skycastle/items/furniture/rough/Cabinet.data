@@ -1,0 +1,22 @@
+
+# TODO: Make into a function so that one can create different instances, located at different places?
+
+{
+    Item:
+    {
+        pos: [0,0,0]
+    
+        width: 150cm
+        depth: 0.6m
+        height: 120cm
+    }
+
+    appearance:
+    {
+      shape:
+      {
+
+      }
+    }
+
+}

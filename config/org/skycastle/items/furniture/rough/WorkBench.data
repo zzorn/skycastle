@@ -6,14 +6,14 @@
     tableDepth: 60cm
     tableThickness: 10cm
     leg: function(x, y) Box(size:[legDiam,legDiam,tableHeight], pos:[x,y,0])
-
+    surface: function() Box(size:[tableWidth,tableDepth,tableThickness], pos:[0,0,tableHeight])
     shape:
     [
         leg(0,          0)
         leg(tableWidth, 0)
         leg(0,          tableDepth)
         leg(tableWidth, tableDepth)
-        Box(size:[tableWidth,tableDepth,tableThickness], pos:[0,0,tableHeight])        
+        surface()
     ]
 
 }

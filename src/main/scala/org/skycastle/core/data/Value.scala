@@ -1,5 +1,6 @@
 package org.skycastle.core.data
 
+import context.{EmptyDataContext, DataContext}
 import java.io.Serializable
 
 /**
@@ -11,7 +12,20 @@ trait Value extends Serializable {
 
   def invokeFunctions(): Value = this
 
-  def prettyPrint(out: StringBuilder, indent: Int) 
+  def prettyPrint(out: StringBuilder, indent: Int)
+
+
+  /**
+   * Evaluates the value by invoking any function calls.
+   */
+  final def evaluate(): Value = evaluate(EmptyDataContext)
+
+  /**
+   * Evaluates the value by invoking any function calls.
+   * @param context Defines the context for the value, that is, the other visible named value from the point of this value.
+   */
+  def evaluate(context: DataContext): Value = this
+
 
   override final def toString: String = {
     val s = new StringBuilder()

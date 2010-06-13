@@ -1,5 +1,6 @@
 package org.skycastle.core.data
 
+import context.DataContext
 import scala.math._
 
 /**
@@ -50,6 +51,16 @@ case class Data(values: Map[Symbol, Value]) extends Value {
     })
     return v
   }
+
+  override def evaluate(context: DataContext): Value = {
+    // Add the current members to the context
+    // TODO: Is it ok if they are unevaluated??  What if they depend on each other??
+    val extendedContext: DataContext = context // TODO: Extend the existing context with own memebers
+
+    // Evaluate each memeber and create a Data from them
+    Data(values.map((entry:(Symbol, Value)) => entry._1 -> entry._2.evaluate(extendedContext)))
+  }
+
 
   override def prettyPrint(out: StringBuilder, indent: Int) {
     dent(out, indent).append("{")
