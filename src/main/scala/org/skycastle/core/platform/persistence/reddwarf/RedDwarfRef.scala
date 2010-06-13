@@ -7,7 +7,7 @@ import _root_.org.skycastle.core.platform.persistence.{Ref, Persistent}
  * 
  */
 class RedDwarfRef[T <: Persistent](ref: ManagedReference[T]) extends Ref[T] {
-  def get() = ref.get
-  def getForUpdate() = ref.getForUpdate
+  def get(): T = ref.get
+  def getForUpdate(): T = ref.getForUpdate
 }
 

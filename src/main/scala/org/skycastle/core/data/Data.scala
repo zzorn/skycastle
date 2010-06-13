@@ -7,6 +7,9 @@ import scala.math._
  */
 case class Data(values: Map[Symbol, Value]) extends Value {
 
+  def getValue(name: Symbol): Option[Value] = values.get(name)
+  def getValue(name: Symbol, default: Value): Value = values.get(name).getOrElse(default)
+
   def getBoolean(name: Symbol): Boolean = values(name).asInstanceOf[Bool].value
   def getBoolean(name: Symbol, default: Boolean): Boolean = if (values.contains(name)) getBoolean(name) else default
 
@@ -34,19 +37,19 @@ case class Data(values: Map[Symbol, Value]) extends Value {
   def getData(name: Symbol): Data = values(name).asInstanceOf[Data]
   def getData(name: Symbol, default: Data): Data = if (values.contains(name)) getData(name) else default
 
+  def apply(path: Symbol*): Option[Value] = getPath(path.toList)
+  
   /**
    * Returns a value from a nested path
    */
-/*
-  def apply(path: Symbol*): Option[Value] = {
+  def getPath(path: List[Symbol]): Option[Value] = {
     var v: Option[Value] = Some(this)
     path.foreach( p=> {
-      if (v != None && v.get.isInstanceOf[Data]) v = v.get.asInstanceOf[Data].value.get(p)
+      if (v.isDefined && v.get.isInstanceOf[Data]) v = v.get.asInstanceOf[Data].getValue(p)
       else v = None
     })
     return v
   }
-*/
 
   override def prettyPrint(out: StringBuilder, indent: Int) {
     dent(out, indent).append("{")

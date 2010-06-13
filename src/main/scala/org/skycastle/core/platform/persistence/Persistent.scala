@@ -9,15 +9,12 @@ import _root_.org.skycastle.core.platform.SkycastleContext
  */
 trait Persistent extends ManagedObject with Serializable {
 
-  def ref: Ref[DerivedType] = persistenceServices.createReference(asDerivedType)
+  def ref[T <: Persistent]: Ref[T] = persistenceServices.createReference(this.asInstanceOf[T])
   def markAsModified() = persistenceServices.markForUpdate(this)
   def delete() = persistenceServices.delete(this)
   def store() = persistenceServices.store(this)
 
   private def persistenceServices: PersistenceService = SkycastleContext.platformServices
-
-  protected type DerivedType <: Persistent
-  protected def asDerivedType: DerivedType
-
+  
 }
 

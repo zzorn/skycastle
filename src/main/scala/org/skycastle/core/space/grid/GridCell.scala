@@ -1,4 +1,6 @@
-package org.skycastle.core.space
+package org.skycastle.core.space.grid
+
+import _root_.org.skycastle.core.space.Item
 
 /**
  * Holds content of one cell in the grid.

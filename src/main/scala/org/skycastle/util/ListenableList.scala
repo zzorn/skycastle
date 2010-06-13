@@ -49,5 +49,6 @@ class ListenableList[T] {
     }
   }
 
-  def apply(): List[T] = list
+  def apply(): List[T] = getList
+  def getList: List[T] = list
 }

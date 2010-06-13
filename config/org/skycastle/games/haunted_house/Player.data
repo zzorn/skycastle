@@ -1,15 +1,15 @@
 
 function(playerColor: [0.8, 0.3, 0.2]) {
 
-    # to access parameters, prepend them with $ ?
+    # TODO: Support some kind of private module internal values
 
-    # Any keys starting with @ are defined for the module, not the instances it created.
+    # Any keys starting with @ are defined for the module, not the instances it created?
     # They can be used as constants in the rest of the module
     // @doc: "A player in the Haunted House game"
     
     appearance:
     {
-//        shape: {type: "box", size: 1, $color: playerColor}
+        shape: {type: "box", size: 1, color: playerColor}
     }
 
     physical:

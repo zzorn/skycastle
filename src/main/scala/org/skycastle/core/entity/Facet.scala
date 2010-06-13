@@ -4,6 +4,7 @@ import _root_.org.skycastle.core.platform.persistence.{Ref, Persistent}
 import _root_.org.skycastle.core.platform.scheduler.Taskable
 import org.skycastle.core.data.Data
 
+
 /**
  * A part of an entity, concentrating on a specific area of functionality.
  */
@@ -15,17 +16,23 @@ trait Facet extends Persistent with Taskable {
    * The entity that this facet is a part of.
    */
   def entity: Ref[Entity] = _entity
+  def entity_=(newEntity: Ref[Entity]) = {
+    val oldEntity = _entity
+    _entity = newEntity
+    onEntityChanged(oldEntity, newEntity)
+  }
 
-  def entity_=(entity: Ref[Entity]) = _entity = entity
-
-  protected override type DerivedType = Facet
-  protected override def asDerivedType: DerivedType = this
+  protected[entity] final def initialize(parameters: Data) {init(parameters)}
 
   /**
    * Called when after the Facet has been created.
    */
   protected def init(parameters: Data) {}
 
-  def isInitialized = true // TODO: Set after init has been called
+  /**
+   * Called when the entity that this facet is in has changed.
+   */
+  protected def onEntityChanged(oldEntity: Ref[Entity], newEntity: Ref[Entity]) {}
+
 }
 

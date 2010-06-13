@@ -1,7 +1,6 @@
 
 # All data files are treated as static objects with the name of the file that contains it
 
-function()
 {
     attributes:
     {

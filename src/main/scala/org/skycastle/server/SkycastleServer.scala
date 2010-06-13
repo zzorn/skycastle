@@ -1,5 +1,6 @@
 package org.skycastle.server
 
+import _root_.org.skycastle.core.entity.Entity
 import java.io.File
 import org.skycastle.core.data.loader.DataLoader
 import org.skycastle.core.data.Data
@@ -23,6 +24,10 @@ object SkycastleServer {
       // DEBUG:
       println (configuration.toString)
 
+      val ghostData: Data = configuration('org, 'skycastle, 'games, 'haunted_house, 'Ghost).get.asInstanceOf[Data]
+      val ghost: Entity = Entity.create(ghostData)
+
+      println(ghost)
     }
 
   }

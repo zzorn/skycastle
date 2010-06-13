@@ -6,8 +6,8 @@ import _root_.java.io.Serializable
  * 
  */
 trait Ref[T <: Persistent] extends Serializable {
-  def apply() = get()
-  def get()
-  def getForUpdate()
+  def apply(): T = get()
+  def get(): T
+  def getForUpdate(): T
 }
 
