@@ -1,6 +1,9 @@
 
 # An entity for the world
 {
+    
+
+
     SimpleSpace:
     {
         # TODO: Better syntax for functions.. maybe  (x,y) => 0  , but that isn't L(1)..  

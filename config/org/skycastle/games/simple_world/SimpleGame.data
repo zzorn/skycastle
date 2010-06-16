@@ -1,0 +1,55 @@
+
+{
+
+    world: SimpleWorld
+
+    client:
+    {
+
+        # Controls map from inputs to actions that should be taken.
+        # The actions can be both client side updates as well as sending messages to the server
+        Controls:
+        {
+            forward: move([1,0,0])
+            back: move( [-1,0,0])
+            right: turn( 1)
+            left: turn( -1)
+            action1: SendToServer("fire")
+        }
+
+        # Attributes is a facet for data that changes.
+        # It provides listeners, and allows server updates of values.
+        # UI, Hud, etc. components can be used to display its values.
+        Attributes:
+        {
+            hitpoints: 100
+            mana: 100
+        }
+
+        Hud:
+        [
+            Gauge(attribute:"hitpoints", pos:[0,0], size:[0.1, 0.02], color:[0.8,0.1,0], bgColor:[0,0,0,0.5])
+        ]
+
+
+        # The world facet contains the visible objects.
+        # It's updated by messages from the server (to move objects or change their (animation) state, and to add and remove objects)
+        World:
+        [
+            Skybox(color:colors.blue)
+
+            Terrain(height:function(x,y) 0, texture: "tiles"),
+
+            {
+                Shape: [Box(pos:[0,0,10], size:[1, 2, 1], color: colors.mauve)]
+            }
+        ]
+
+    }
+
+
+}
+
+
+
+
