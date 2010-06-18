@@ -1,6 +1,6 @@
 package org.skycastle.core.entity
 
-import _root_.org.skycastle.core.data.Data
+import org.skycastle.core.data.{Value, Data}
 
 /**
  * Keeps track of the facets that can be created when loading data.
@@ -15,7 +15,7 @@ trait FacetService {
    * Creates a new facet of the specified type and with the specified parameters.
    * Stores the facet in the persistence service.
    */
-  def createFacet(facetName: Symbol, parameters: Data): Option[_ <: Facet]
+  def createFacet(facetName: Symbol, parameters: Value): Option[_ <: Facet]
 
 }
 

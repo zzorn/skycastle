@@ -2,8 +2,7 @@ package org.skycastle.core.entity
 
 import _root_.org.skycastle.core.platform.persistence.{Ref, Persistent}
 import _root_.org.skycastle.core.platform.scheduler.Taskable
-import org.skycastle.core.data.Data
-
+import org.skycastle.core.data.{Value, Data}
 
 /**
  * A part of an entity, concentrating on a specific area of functionality.
@@ -29,8 +28,21 @@ trait Facet extends Persistent with Taskable {
    */
   protected def init(parameters: Data) {}
 
+
+
+  override final def delete() {
+    super.delete()
+
+    onDeleted()
+  }
+
   /**
-   * Called when the entity that this facet is in has changed.
+   * Called when the facet was deleted.
+   */
+  protected def onDeleted() {}
+
+  /**
+   *  Called when the entity that this facet is in has changed.
    */
   protected def onEntityChanged(oldEntity: Ref[Entity], newEntity: Ref[Entity]) {}
 

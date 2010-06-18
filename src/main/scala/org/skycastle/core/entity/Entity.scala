@@ -10,17 +10,18 @@ object Entity {
   def create(entityDefinition: Data): Entity = {
     val entity: Entity = new Entity()
 
-    val evaluatedDefinition = entityDefinition.evaluate()
-
     // Create facets
-    evaluatedDefinition.asInstanceOf[Data].values foreach { entry: (Symbol, Value) =>
-      if (entry._2.isInstanceOf[Data]) {
-        SkycastleContext.facetService.createFacet(entry._1, entry._2.asInstanceOf[Data]) match {
-          case Some(facet) => entity.addFacet(facet)
-          case None => println("Warning: Couldn't create facet " + entry._1.name + " for an entity.  Ignoring that facet.") // TODO: Use logging service
-        }
-      }
-    }
+    def createFacet(entry: (Symbol, Value)): Option[Facet] = SkycastleContext.facetService.createFacet(entry._1, entry._2)
+    Entity((entityDefinition.evaluate().asInstanceOf[Data].values map createFacet).flatten)
+  }
+
+  def apply(facets: Facet*): Entity = Entity(facets.toList)
+
+  def apply(facets: Iterable[Facet]): Entity = {
+    val entity: Entity = new Entity()
+
+    // Set facets
+    facets foreach {(f:Facet) => entity.addFacet(f)}
 
     // Store entity
     SkycastleContext.platformServices.store(entity)
@@ -50,17 +51,18 @@ class Entity extends Persistent {
 
   def facets: List[Ref[Facet]] = _facets()
 
+  def getFacet[T <: Facet](): Option[T] = facets.map(_.get).find(f => f.isInstanceOf[T]).asInstanceOf[Option[T]]
+
   /**
    * Removes the entity and its facets from persistent storage.
    */
-  override def delete() {
+  override final def delete() {
     // Delete facets
     _facets.list.foreach {f: Ref[Facet] => f().delete() }
 
     // Delete self
     super.delete()
   }
-
 
   override def toString(): String = {
     "Entity " + hashCode + "¸ facets: " + _facets.list.map(_.get()).mkString("[", ", ", "]")
