@@ -7,25 +7,28 @@ import org.skycastle.core.entity.{EntityQuery, Entity}
  * The work needs some input of work units, resources and catalysts / tools.
  * It can also specify environment conditions needed (e.g. dry surroundings, no vacum, etc :P)
  *
- * A work item may need several phases of different kinds of work (e.g. forging something will first need heating, then hammering, then cooling) 
+ * A work item may need several phases of different kinds of work
+ * (e.g. forging something will first need heating, then hammering, then cooling)
  */
-trait WorkItem {
+// TODO: Add parameters for what will be done when the work completes, and some kind of progress listener
+// TODO: Extract trait and implement basic implementation?
+class WorkItem(work: Map[WorkType, Double] = Map(), components: Map[EntityQuery, Int] = Map(), catalysts: Map[EntityQuery, Int] = Map()) {
 
   /**
    * The amount of work still needed for this work phase / activity / process.
    */
-  def workNeeded: Map[WorkType, Double]
+  def workNeeded: Map[WorkType, Double] = work
 
   /**
    * The resources still needed.
    * Basically an entity query defining some shape and material properties, or functionality, or machine node, etc, and the number of them.
    */
-  def componentsNeeded: Map[EntityQuery, Int]
+  def componentsNeeded: Map[EntityQuery, Int] = components
 
   /**
    * Items needed during the work that get freed up after the work completes.
    */
-  def requiredCatalysts: Map[EntityQuery, Int]
+  def requiredCatalysts: Map[EntityQuery, Int] = catalysts
 
 /* TODO: Add later if needed
   def requiredEnvironmentConditions: List[EnvironmentCondition]
