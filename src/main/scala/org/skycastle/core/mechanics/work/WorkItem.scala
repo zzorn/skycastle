@@ -1,4 +1,4 @@
-package org.skycastle.core.mechanics.process
+package org.skycastle.core.mechanics.work
 
 import org.skycastle.core.entity.{EntityQuery, Entity}
 

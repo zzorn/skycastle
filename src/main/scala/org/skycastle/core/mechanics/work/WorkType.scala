@@ -1,4 +1,4 @@
-package org.skycastle.core.mechanics.process
+package org.skycastle.core.mechanics.work
 
 /**
  * Some type of work, e.g. Hammering, Sawing, Screwing, Hacking.
@@ -16,5 +16,13 @@ package org.skycastle.core.mechanics.process
  * Tools used to produce some work type may get worn / damaged depending on the work type (and used skill etc). 
  */
 trait WorkType {
-  
+
+  /**
+   * What tolerance is needed from the resulting work,
+   * that is, how much the actual result may differ from the specified plan.
+   * 10 cm is very rough (e.g. cut a tree), 1 cm is medium (e.g. make a table),
+   * 1 mm is accurate (e.g. make locks), and 0.1 mm is very precise (e.g. make optimized engines).
+   */
+  def precision_m: Double
+
 }
