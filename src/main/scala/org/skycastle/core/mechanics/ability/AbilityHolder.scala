@@ -6,7 +6,7 @@ import org.skycastle.core.mechanics.project.AbilityTask
 /**
  * Someone or somethign that has abilities and can use them.
  */
-class AbilityHolder extends Facet {
+trait AbilityHolder extends Facet {
 
   def canDoAbility(request: AbilityRequest): Boolean
 

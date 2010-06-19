@@ -16,8 +16,8 @@ import org.skycastle.core.mechanics.ability.{AbilityRequest, AbilityUsage}
 class Project(work: Map[AbilityRequest, Int] = Map(),
               components: Map[EntityQuery, Int] = Map(),
               catalysts: Map[EntityQuery, Int] = Map(),
-              onCompleted: Unit => Unit = {},
-              onCanceled: Unit => Unit = {}) extends AbilityTask {
+              onCompleted: => Unit = {},
+              onCanceled: => Unit = {}) extends AbilityTask {
 
 
 
@@ -45,10 +45,10 @@ class Project(work: Map[AbilityRequest, Int] = Map(),
   def requiredEnvironmentConditions: List[EnvironmentCondition]
 */
 
-  def addCatalyst(entity: Entity)
-  def addComponent(entity: Entity)
-  def addWork(workType: AbilityUsage)
-  def removeProduct(): Entity
+  def addCatalyst(entity: Entity) {}
+  def addComponent(entity: Entity) {}
+  def addWork(workType: AbilityUsage) {}
+  def removeProduct(): Entity = null
 
   // TODO: The project acts like a container with the catalysts, provided components, and created
   // products and waste are visible, and each have some maximum container size.  They need to be removed/added when they
@@ -60,13 +60,13 @@ class Project(work: Map[AbilityRequest, Int] = Map(),
   /**
    * Overall progress of this work item, from 0 (nothing) to 1 (completed)
    */
-  def progress: Double
+  def progress: Double = 0
 
 
   /**
    * If work is not ready, cancels the work and frees up any free resources and catalysts.
    * If the work is ready, frees up any free resources and catalysts.
    */
-  def stop()
+  def stop()  {}
 
 }

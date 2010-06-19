@@ -20,7 +20,7 @@ trait AbilityTask {
   /**
    * The types of work needed for this work phase / activity / process.
    */
-  def workNeeded: List[AbilityRequest]
+  def workNeeded: Iterable[AbilityRequest]
 
   def addWork(workDone: AbilityUsage)
 

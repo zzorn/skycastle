@@ -9,4 +9,4 @@ case class AbilityRequest(
         abilityType: AbilityType,
         energy_J: Double, // Energy required from one ability use.
         precision_m: Double, // max allowed tolerance difference
-        effectSize_m: Double) // Approximate size of toolhead / effect feature area side
+        effectSize_m: ValueRange) // Approximate size of toolhead / effect feature area side

@@ -4,6 +4,7 @@ import _root_.org.skycastle.core.data.{Value, Data}
 import _root_.org.skycastle.core.platform.persistence.{Ref, Persistent}
 import _root_.org.skycastle.core.platform.SkycastleContext
 import org.skycastle.util.ListenableList
+import org.skycastle.core.space.Item
 
 object Entity {
 
@@ -66,6 +67,22 @@ class Entity extends Persistent {
 
   override def toString(): String = {
     "Entity " + hashCode + "¸ facets: " + _facets.list.map(_.get()).mkString("[", ", ", "]")
+  }
+
+  /**
+   * Replaces this entity with the specified new entities, at the same location.
+   */
+  def replaceWith(entities: Entity *) {
+    getFacet[Item]() match {
+      case Some(item) => {
+        // Spawn replacements:
+        entities foreach {item.space.add(_, item.position)}
+      }
+      case None => // This entity isn't in a space, so dont put the replacement in a space
+    }
+
+    // Remove self
+    delete()
   }
 
 }

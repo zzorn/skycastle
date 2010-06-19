@@ -7,12 +7,9 @@ import org.skycastle.util.ValueRange
  */
 case class Ability(
         abilityType: AbilityType,
-        force_N: ValueRange,
+        energy_J: ValueRange,
         precision_m: ValueRange,
-        effectSize_m: ValueRange,
-        range_m: ValueRange,
-        hardness: Double
-        ) {
+        effectSize_m: Double) {
 
 
 }

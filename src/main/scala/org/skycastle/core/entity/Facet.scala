@@ -50,5 +50,6 @@ trait Facet extends Persistent with Taskable {
     getClass.getSimpleName + " facet " + hashCode
   }
 
+
 }
 
