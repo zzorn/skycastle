@@ -3,7 +3,7 @@ package org.skycastle.core.mechanics.items
 import org.skycastle.core.mechanics.material.Material
 import org.skycastle.core.entity.Entity
 import org.skycastle.core.mechanics.form.Shaped
-import org.skycastle.core.mechanics.affordance.Fastener
+import org.skycastle.core.mechanics.ability.Fastener
 
 /**
  * Bolt factory.  Could be implemented as data object in text file.

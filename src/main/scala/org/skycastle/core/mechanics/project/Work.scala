@@ -1,4 +1,6 @@
-package org.skycastle.core.mechanics.work
+package org.skycastle.core.mechanics.project
+
+import org.skycastle.core.mechanics.ability.AbilityType
 
 /**
  * Some type of work, e.g. Hammering, Sawing, Screwing, Hacking.
@@ -15,7 +17,8 @@ package org.skycastle.core.mechanics.work
  *
  * Tools used to produce some work type may get worn / damaged depending on the work type (and used skill etc). 
  */
-trait WorkType {
+@Deprecated
+trait Work {
 
   /**
    * What tolerance is needed from the resulting work,
@@ -24,5 +27,18 @@ trait WorkType {
    * 1 mm is accurate (e.g. make locks), and 0.1 mm is very precise (e.g. make optimized engines).
    */
   def precision_m: Double
+
+  /**
+   * The minimum force needed from each tool usage.
+   * E.g. to cut a tree you need enough force to penetrate the bark,
+   * and to build a wall you need enough force to lift an individual stone.
+   */
+  def force_N: Double
+
+  /**
+   * The type of work needed.
+   * E.g. cutting a tree requires an edged tool.
+   */
+  def toolType: AbilityType
 
 }

@@ -1,6 +1,7 @@
-package org.skycastle.core.mechanics.work
+package org.skycastle.core.mechanics.project
 
 import org.skycastle.core.entity.{EntityQuery, Entity}
+import org.skycastle.core.mechanics.ability.{AbilityRequest, AbilityUsage}
 
 /**
  * Describes some planned work, and its progress.
@@ -12,12 +13,22 @@ import org.skycastle.core.entity.{EntityQuery, Entity}
  */
 // TODO: Add parameters for what will be done when the work completes, and some kind of progress listener
 // TODO: Extract trait and implement basic implementation?
-class WorkItem(work: Map[WorkType, Double] = Map(), components: Map[EntityQuery, Int] = Map(), catalysts: Map[EntityQuery, Int] = Map()) {
+class Project(work: Map[AbilityRequest, Int] = Map(),
+              components: Map[EntityQuery, Int] = Map(),
+              catalysts: Map[EntityQuery, Int] = Map(),
+              onCompleted: Unit => Unit = {},
+              onCanceled: Unit => Unit = {}) extends AbilityTask {
+
+
 
   /**
    * The amount of work still needed for this work phase / activity / process.
    */
-  def workNeeded: Map[WorkType, Double] = work
+  def completed = false
+
+  def target = None
+
+  def workNeeded: Iterable[AbilityRequest] = work.keys
 
   /**
    * The resources still needed.
@@ -36,14 +47,21 @@ class WorkItem(work: Map[WorkType, Double] = Map(), components: Map[EntityQuery,
 
   def addCatalyst(entity: Entity)
   def addComponent(entity: Entity)
-  def addWork(workType: WorkType, amount: Double)
+  def addWork(workType: AbilityUsage)
+  def removeProduct(): Entity
+
+  // TODO: The project acts like a container with the catalysts, provided components, and created
+  // products and waste are visible, and each have some maximum container size.  They need to be removed/added when they
+  // fill up / go empty
+  // -> a kind of one way container that only accepts or produces items 
+  
+
 
   /**
    * Overall progress of this work item, from 0 (nothing) to 1 (completed)
    */
   def progress: Double
 
-  def isCompleted: Boolean
 
   /**
    * If work is not ready, cancels the work and frees up any free resources and catalysts.
