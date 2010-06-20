@@ -21,7 +21,7 @@ object Skycastle {
 
     // Setup screen
     val screen = new Screen()
-    screen.start
+    screen.run()
 
     // Get server based on user input (for now, just create a local one)
 

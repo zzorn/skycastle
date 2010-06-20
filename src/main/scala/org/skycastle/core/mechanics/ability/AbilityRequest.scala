@@ -4,7 +4,7 @@ import org.skycastle.util.{Above, ValueRange}
 
 sealed trait AbilityResult
 case class AbilitySuccess(workDone_J: Double, extraSuccess: Double) extends AbilityResult
-abstract case class AbilityFailure extends AbilityResult
+abstract case class AbilityFailure() extends AbilityResult
 case object WrongWork extends AbilityFailure
 case class Fumble(fumbleAmount: Double) extends AbilityFailure
 

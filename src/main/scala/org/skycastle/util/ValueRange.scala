@@ -1,4 +1,5 @@
 package org.skycastle.util
+import scala.math._
 
 /**
  * A range from some value to some other.
