@@ -3,7 +3,7 @@ package org.skycastle.core.platform
 import _root_.org.skycastle.core.entity.{FacetService, FacetServiceImpl}
 import configuration.ConfigurationService
 import configuration.directory.DirectoryConfigurationService
-import persistence.memory.InMemoryPlatformService
+import persistence.memory.InMemoryPersistenceService
 import scheduler.local.LocalScheduler
 import scheduler.SchedulerService
 import time.{TimeService, RealTimeService}
@@ -16,7 +16,7 @@ import org.skycastle.core.data.Data
  * Set up with local services by default.
  */
 object SkycastleContext {
-  var platformServices: PersistenceService = InMemoryPlatformService
+  var persistenceService: PersistenceService = new InMemoryPersistenceService()
   var schedulerService: SchedulerService = new LocalScheduler()
   var timeService : TimeService = RealTimeService
   var configuration: ConfigurationService = new DirectoryConfigurationService()

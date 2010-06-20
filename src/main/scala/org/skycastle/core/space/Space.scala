@@ -11,7 +11,7 @@ trait Space extends Facet {
   def add(item: Item)
 
   def add(entity: Entity, position: Vector3) {
-    add( entity.getFacet[Item]() match {
+    add( entity.facet[Item] match {
       case Some(item) =>
         item.position = position
         item.space = this

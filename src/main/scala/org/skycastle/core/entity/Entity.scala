@@ -25,7 +25,7 @@ object Entity {
     facets foreach {(f:Facet) => entity.addFacet(f)}
 
     // Store entity
-    SkycastleContext.platformServices.store(entity)
+    SkycastleContext.persistenceService.store(entity)
 
     entity
   }
@@ -52,7 +52,7 @@ class Entity extends Persistent {
 
   def facets: List[Ref[Facet]] = _facets()
 
-  def getFacet[T <: Facet](): Option[T] = facets.map(_.get).find(f => f.isInstanceOf[T]).asInstanceOf[Option[T]]
+  def facet[T <: Facet](implicit m: Manifest[T]): Option[T] = facets.map(_.get).find(f => m.erasure.isInstance(f)).asInstanceOf[Option[T]]
 
   /**
    * Removes the entity and its facets from persistent storage.
@@ -73,7 +73,7 @@ class Entity extends Persistent {
    * Replaces this entity with the specified new entities, at the same location.
    */
   def replaceWith(entities: Entity *) {
-    getFacet[Item]() match {
+    facet[Item] match {
       case Some(item) => {
         // Spawn replacements:
         entities foreach {item.space.add(_, item.position)}

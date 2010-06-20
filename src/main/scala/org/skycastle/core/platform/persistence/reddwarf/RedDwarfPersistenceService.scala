@@ -5,9 +5,9 @@ import _root_.java.lang.String
 import _root_.org.skycastle.core.platform.persistence.{Persistent, PersistenceService}
 
 /**
- * Implementation of PlatformServices that uses the RedDwarf middleware library.
+ * Implementation of PersistenceService that uses the RedDwarf middleware library.
  */
-object RedDwarfPlatformService extends PersistenceService {
+object RedDwarfPersistenceService extends PersistenceService {
 
   def createReference[T <: Persistent](obj: T) = new RedDwarfRef(dataManager.createReference(obj))
   def markForUpdate(obj: Persistent) = dataManager.markForUpdate(obj)

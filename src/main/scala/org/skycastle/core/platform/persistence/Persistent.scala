@@ -14,7 +14,7 @@ trait Persistent extends ManagedObject with Serializable {
   def delete() = persistenceServices.delete(this)
   def store() = persistenceServices.store(this)
 
-  private def persistenceServices: PersistenceService = SkycastleContext.platformServices
+  private def persistenceServices: PersistenceService = SkycastleContext.persistenceService
   
 }
 

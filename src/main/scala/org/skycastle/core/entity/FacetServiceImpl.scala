@@ -38,7 +38,7 @@ class FacetServiceImpl extends FacetService {
       try {
         val facet = facetTypes(facetName).newInstance
         facet.initialize(parameters.asInstanceOf[Data])
-        SkycastleContext.platformServices.store(facet)
+        SkycastleContext.persistenceService.store(facet)
         return Some(facet)
       }
       catch {

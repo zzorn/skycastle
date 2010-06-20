@@ -16,7 +16,7 @@ class Hackable(createHackedParts: (Double)=>List[Entity]) extends Malleable {
 
     val parts = createHackedParts(relativePosition)
 
-    e.getFacet[Item]() match {
+    e.facet[Item] match {
       case Some(item) =>
         // Add created objects in the surrounding space at the same location
         // TODO: Add some randomness to the location later so we don't get perfectly stacked objects?
