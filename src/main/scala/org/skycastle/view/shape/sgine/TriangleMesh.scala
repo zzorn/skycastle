@@ -7,7 +7,7 @@ import org.sgine.render.primitive.{Mesh, Primitive}
 /**
  * 
  */
-class TriangleMesh extends PrimitiveComponent{
+class TriangleMesh extends PrimitiveComponent {
 
   var indexes: Seq[Int] = Nil
   var vertices: Seq[Double] = Nil

@@ -5,7 +5,8 @@ import org.sgine.core.{Resource, Color}
 import org.sgine.render._
 import org.sgine.render.{Image => RenderImage}
 import shape.sgine.{EasingColorAdjuster, Box}
-import scala.math._
+import scala.math.random
+import scala.math.Pi
 import org.sgine.work.Updatable
 import org.sgine.easing._
 
