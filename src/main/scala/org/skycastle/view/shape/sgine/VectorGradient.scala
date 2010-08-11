@@ -9,7 +9,8 @@ import collection.immutable.SortedMap
  * Interpolates between adjacent values when calculating the value at a point,
  * or uses the closest value if there is a value only on one side.
  */
-case class VectorGradient(vectors: SortedMap[Double, Vector3]) extends Function1[Double, Vector3] {
+case class
+VectorGradient(vectors: SortedMap[Double, Vector3]) extends Function1[Double, Vector3] {
 
   // TODO: Add constructor that takes normal map and creates sorted map rom it.
 

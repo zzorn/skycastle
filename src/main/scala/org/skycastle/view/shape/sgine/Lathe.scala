@@ -15,7 +15,7 @@ class Lathe extends PrimitiveComponent {
   val thickness = new AdvancedProperty[(Double)=>Double](t=>10, this)
   val outline = new AdvancedProperty[(Double)=>Double](t=>1, this)
   val twist = new AdvancedProperty[(Double)=>Double](t=>0, this)
-  val path = new AdvancedProperty[(Double)=>Vector3](t=>Vector(0,t*100,0), this)
+  val path = new AdvancedProperty[(Double)=>Vector3](t=>Vector3(0,t*100,0), this)
   val closeStart = new AdvancedProperty[Boolean](true, this)
   val closeEnd = new AdvancedProperty[Boolean](true, this)
   val segments = new AdvancedProperty[Int](12, this)
@@ -24,7 +24,7 @@ class Lathe extends PrimitiveComponent {
 
   val radius = new AdvancedProperty[Double](10, this)
   val length = new AdvancedProperty[Double](100, this)
-  val profile = new AdvancedProperty[Profile]((t,r,v)=>Vector(t,t,r), this)
+  val profile = new AdvancedProperty[Profile]((t,r,v)=>Vector3(t,t,r), this)
 
 
 

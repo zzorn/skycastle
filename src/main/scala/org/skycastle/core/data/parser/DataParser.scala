@@ -5,6 +5,7 @@ import scala.util.parsing.combinator.syntactical.StdTokenParsers
 import util.parsing.combinator.ImplicitConversions
 import java.io.{File}
 import util.parsing.input.Reader
+import tools.cmd.Meta.Opt
 
 /**
  * A simple data format language parser.
@@ -44,7 +45,7 @@ object DataParser extends StdTokenParsers  {
   def bool: Parser[Value] = trueValue | falseValue
   def call: Parser[Value] = (link | /* call |*/ arr | data | fun) ~ "(" ~ repsep(  parameter, ",") ~ ")" ^^ {case callee ~ lp ~ params ~ rp => Call(callee, params)}
   def fun: Parser[Value] = "function" ~! "(" ~ repsep(  parameterDeclaration, ",") ~ ")" ~ value ^^ { case c1 ~ c2 ~ params ~ c3 ~ body => Fun(params, body) }
-  def num: Parser[Value] = numericLit ^^ { s => Num(s.toDouble) }
+  def num: Parser[Value] = opt("-") ~ numericLit ^^ { case n ~ s => Num(s.toDouble * (if (n == None) 1 else -1)) }
   def text: Parser[Value] = stringLit ^^ {case s => Text(s)}
   def link: Parser[Link] = opt("$") ~ rep1sep(identifier, ".") ^^ {case param ~ path => Link(param.isDefined, path)}
   def measure: Parser[Measure] = new Parser[Measure](){
