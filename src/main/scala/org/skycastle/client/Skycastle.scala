@@ -1,6 +1,5 @@
 package org.skycastle.client
 
-import org.skycastle.view.Screen
 
 /**
  * Main entry point for Skycastle client.
@@ -20,8 +19,8 @@ object Skycastle {
     println( "Skycastle client starting." )
 
     // Setup screen
-    val screen = new Screen()
-    screen.run()
+//    val screen = new Screen()
+//    screen.run()
 
     // Get server based on user input (for now, just create a local one)
 

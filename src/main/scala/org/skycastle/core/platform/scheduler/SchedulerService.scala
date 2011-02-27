@@ -1,6 +1,5 @@
 package org.skycastle.core.platform.scheduler
 
-import _root_.com.sun.sgs.app.Task
 import _root_.org.skycastle.core.platform.time.Time
 
 /**
@@ -8,6 +7,6 @@ import _root_.org.skycastle.core.platform.time.Time
  */
 trait SchedulerService {
 
-  def scheduleCallback(time: Time, callback: Task)
+  def scheduleCallback(time: Time, callback: () => Unit)
 
 }

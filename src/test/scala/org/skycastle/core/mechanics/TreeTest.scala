@@ -3,19 +3,18 @@ package org.skycastle.core.mechanics
 import ability.AbilityUsage
 import ability.invasive.Cut
 import items.Tree
-import org.scalatest.matchers.ShouldMatchers
 import org.skycastle.core.entity.Entity
 import org.skycastle.core.platform.SkycastleContext
 import org.skycastle.core.platform.persistence.memory.InMemoryPersistenceService
-import org.scalatest.{FunSuite, FlatSpec}
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
+
+import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.{AbstractSuite, FlatSpec}
 
 /**
  * 
  */
-@RunWith(classOf[JUnitRunner])
-class TreeTest extends FlatSpec with ShouldMatchers {
+// TODO: Shows weird error about withFixture being undefined, change back to class when fixed
+trait TreeTest extends FlatSpec with ShouldMatchers {
 
   "A tree" should "be cuttable" in {
     val persistence = new InMemoryPersistenceService()
@@ -38,5 +37,6 @@ class TreeTest extends FlatSpec with ShouldMatchers {
     cuttingProject.completed should be (true)
     persistence.numberOfObjects should equal (2)
   }
+
 
 }

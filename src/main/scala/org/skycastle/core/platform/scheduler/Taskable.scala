@@ -9,7 +9,7 @@ import _root_.org.skycastle.core.platform.time.Time
  */
 trait Taskable {
 
-  def scheduleCallback(time: Time, parameters: Data) = schedulerService.scheduleCallback(time, new Callback(this, parameters))
+  def scheduleCallback(time: Time, parameters: Data) = schedulerService.scheduleCallback(time, {() => callback(parameters)})
 
   private def schedulerService: SchedulerService = SkycastleContext.schedulerService
 

@@ -1,8 +1,6 @@
 package org.skycastle.core.mechanics.project
 
 import org.skycastle.core.mechanics.ability.{AbilityRequest, AbilityUsage}
-import org.sgine.space.Space
-import org.sgine.math.Vector3
 import org.skycastle.core.space.{Item}
 import org.skycastle.core.platform.persistence.Ref
 
