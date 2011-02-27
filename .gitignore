@@ -1,6 +1,8 @@
 target/
+lib_managed/
+src_managed/
+project/boot/
 *~
 .idea/
 *.iml
-out/
-ardorSettings.properties
+
