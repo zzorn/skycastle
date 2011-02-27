@@ -1,55 +1,45 @@
 package org.skycastle.core.entity
 
-import _root_.org.skycastle.core.platform.persistence.{Ref, Persistent}
-import _root_.org.skycastle.core.platform.scheduler.Taskable
-import org.skycastle.core.data.{Value, Data}
+
+import org.scalaprops.Bean
+
 
 /**
- * A part of an entity, concentrating on a specific area of functionality.
+ * Some aspect of an entity, concentrating on a specific area of functionality.
  */
-trait Facet extends Persistent with Taskable {
+trait Facet extends Bean {
 
-  private var _entity: Ref[Entity] = null
+  private var _entity: Entity = null
+
+  def entity_=(e: Entity) = _entity = e
+  def entity: Entity = _entity
 
   /**
-   * The entity that this facet is a part of.
+   * Initialize the facet.
+   * Called before the facet is added to an entity.
    */
-  def entity: Ref[Entity] = _entity
-  def entity_=(newEntity: Ref[Entity]) = {
-    val oldEntity = _entity
-    _entity = newEntity
-    onEntityChanged(oldEntity, newEntity)
+  def init(instanceParameters:  Map[Symbol, Any], entityParameters:  Map[Symbol, Any], facetParameters:  Map[Symbol, Any]) {}
+
+  /**
+   * Updates the facet if needed.
+   * @param tpf the time in seconds since the last call to this method.
+   */
+  def update(tpf: Float) {}
+
+  protected def getFacet[T <: Facet](implicit m: Manifest[T]): Option[T] = {
+    if (entity == null) None
+    else entity.getFacet[T](m)
   }
 
-  protected[entity] final def initialize(parameters: Data) {init(parameters)}
-
-  /**
-   * Called when after the Facet has been created.
-   */
-  protected def init(parameters: Data) {}
-
-
-
-  override final def delete() {
-    super.delete()
-
-    onDeleted()
+  protected def facet[T <: Facet](implicit m: Manifest[T]): T = {
+    if (entity == null) throw new IllegalArgumentException("No facet of type " + m.erasure.getName + " found, because the entity is not specified")
+    else entity.facet[T](m)
   }
 
-  /**
-   * Called when the facet was deleted.
-   */
-  protected def onDeleted() {}
-
-  /**
-   *  Called when the entity that this facet is in has changed.
-   */
-  protected def onEntityChanged(oldEntity: Ref[Entity], newEntity: Ref[Entity]) {}
-
-  override def toString: String = {
-    getClass.getSimpleName + " facet " + hashCode
+  protected def withFacet[T <: Facet](op: T => Unit)(implicit m: Manifest[T]) = {
+    entity.withFacet[T](op)(m)
   }
-
 
 }
+
 

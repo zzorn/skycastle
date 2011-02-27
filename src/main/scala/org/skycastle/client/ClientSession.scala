@@ -1,6 +1,5 @@
 package org.skycastle.client
 
-import _root_.org.skycastle.core.data.{Value, Data}
 
 /**
  * Client side state for a session with a server / account / avatar (decide wich one makes sense - maybe avatar).
