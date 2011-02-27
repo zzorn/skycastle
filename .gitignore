@@ -6,4 +6,4 @@ project/plugins/project/build.properties
 *~
 .idea/
 *.iml
-
+out/
