@@ -1,6 +1,7 @@
-package org.skycastle.core.entity
+package org.skycastle.core.entity.types
 
-import org.scalaprops.BeanFactory
+import org.skycastle.core.entity.Facet
+
 
 /**
  * Stores the types of facets that are available.
