@@ -10,6 +10,6 @@ case class Shaped(/*shape: Shape*/) extends Form {
 
   def tolerance_m = 0.0
 
-  def volume_m3 = shape.volume_m3
+  def volume_m3 = 0
 
 }
