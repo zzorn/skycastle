@@ -1,6 +1,5 @@
-package org.skycastle.core.shape
+package org.skycastle.view.shape
 
-import org.skycastle.core.data.Data
 import java.awt.Color
 
 object Shape {

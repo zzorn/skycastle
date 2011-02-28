@@ -17,6 +17,8 @@ object FacetManager {
     facets += (sym -> m)
   }
 
+  def hasFacet(name: Symbol): Boolean = facets.contains(name)
+
   def createFacet(name: Symbol): Option[(Facet, Manifest[Facet])] = {
     facets.get(name) match {
       case None => None

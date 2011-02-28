@@ -10,6 +10,7 @@ trait Space extends Facet {
 
   def add(item: Item)
 
+  /*
   def add(entity: Entity, position: Vector3f) {
     add( entity.facet[Item] match {
       case Some(item) =>
@@ -22,7 +23,7 @@ trait Space extends Facet {
         item
     } )
   }
-
+*/
   def remove(item: Item)
 
 /*

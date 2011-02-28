@@ -1,13 +1,12 @@
 package org.skycastle.server
 
-import _root_.org.skycastle.core.data.Data
 
 /**
  * 
  */
 trait Avatar {
 
-
+/*
   /**
    * Do some action available to the avatar, like as moving around, controlling wielded equipment or vehicles,
    * or changing settings for controlled guild.
@@ -19,7 +18,7 @@ trait Avatar {
    * as well as outside entities like characters, items and terrain, and also 'known' things like guild properties.
    */
   def perceptions(): Data
-
+*/
 
 }
 
