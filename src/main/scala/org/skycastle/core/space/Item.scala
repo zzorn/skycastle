@@ -10,6 +10,6 @@ import com.jme3.math.Vector3f
  */
 class Item(var position: Vector3f = Vector3f.ZERO, var space: Space = null) extends Facet {
 
-  override protected def onDeleted() = if (space != null) space.remove(this)
+ // override protected def onDeleted() = if (space != null) space.remove(this)
 
 }
