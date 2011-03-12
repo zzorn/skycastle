@@ -3,6 +3,7 @@ package org.skycastle.core.entity.types
 import java.io.{BufferedInputStream, InputStreamReader, InputStream}
 import org.scalaprops.parser.{JsonBeanParser, BeanParser}
 import org.scalaprops.{PropertyBean, Bean}
+import org.skycastle.client.appearance.{BoxAppearance, ColorBean}
 
 /**
  * Loader for loading EntityTypes.
@@ -10,11 +11,16 @@ import org.scalaprops.{PropertyBean, Bean}
 object EntityTypeLoader {
 
   val entityTypeFileExtension = ".conf"
+  val parser: BeanParser = new JsonBeanParser()
+
+  // TODO: Add a register method that can just be passed the bean class
+  parser.beanFactory.registerBeanType('Color, {()=> new ColorBean()})
+  parser.beanFactory.registerBeanType('BoxAppearance, {()=> new BoxAppearance()})
+
 
   def load(inputStream: InputStream, sourceName: String): EntityType = {
     val streamReader = new InputStreamReader(new BufferedInputStream(inputStream))
 
-    val parser: BeanParser = new JsonBeanParser()
     val assetName: Symbol = prepareName(sourceName)
     val loadedData: Bean = parser.parse(streamReader, assetName.name)
 

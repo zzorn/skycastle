@@ -1,5 +1,6 @@
 package org.skycastle.client
 
+import appearance.BoxAppearance
 import com.jme3.app.SimpleApplication
 import com.jme3.scene.shape.Box
 import com.jme3.scene.Geometry
@@ -38,13 +39,10 @@ object Skycastle extends SimpleApplication {
   /** Setup 3D view */
   override def simpleInitApp = {
 
-    // Spike 3D scene..
-    val b = new Box(Vector3f.ZERO, 1, 1, 1);
-    val geom = new Geometry("Box", b);
-    val mat = new Material(assetManager, "Common/MatDefs/Misc/SolidColor.j3md");
-    mat.setColor("m_Color", ColorRGBA.Red);
-    geom.setMaterial(mat);
-    rootNode.attachChild(geom);
+    val appearance = new BoxAppearance()
+    appearance.w := 3
+    
+    rootNode.attachChild(appearance.createSpatial(assetManager));
   }
 }
 
