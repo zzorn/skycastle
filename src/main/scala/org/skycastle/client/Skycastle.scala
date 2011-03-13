@@ -1,11 +1,14 @@
 package org.skycastle.client
 
-import appearance.BoxAppearance
+import appearance.{LatheAppearance, BoxAppearance}
 import com.jme3.app.SimpleApplication
 import com.jme3.scene.shape.Box
 import com.jme3.scene.Geometry
 import com.jme3.material.Material
-import com.jme3.math.{ColorRGBA, Vector3f}
+import com.jme3.asset.plugins.FileLocator
+import org.skycastle.util.mesh.RoundSegment
+import com.jme3.math.{Quaternion, ColorRGBA, Vector3f}
+import org.skycastle.util.MathUtils._
 
 /**
  * Main entry point for Skycastle client.
@@ -39,8 +42,18 @@ object Skycastle extends SimpleApplication {
   /** Setup 3D view */
   override def simpleInitApp = {
 
-    val appearance = new BoxAppearance()
-    appearance.w := 3
+    assetManager.registerLocator("assets", classOf[FileLocator])
+    //assetManager.registerLoader(classOf[JsonConfigLoader], "conf")
+
+    val appearance = new LatheAppearance()
+    appearance.segments =
+            RoundSegment(new Vector3f(0,0,0.2f), 1f, 0.1f, 0f) ::
+            RoundSegment(new Vector3f(1,0,0), 2f, 0.25f, direction = new Quaternion(Array[Float](0, Tauf/12, 0))) ::
+            RoundSegment(new Vector3f(2,0,0), 2.2f, 0.5f) ::
+            RoundSegment(new Vector3f(3,0,0), 2f, 0.75f) ::
+            RoundSegment(new Vector3f(4,0.2f,0), 1f, 0.9f, 1f) :: Nil
+
+    //appearance.w := 3
     
     rootNode.attachChild(appearance.createSpatial(assetManager));
   }

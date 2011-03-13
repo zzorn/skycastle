@@ -3,103 +3,111 @@ package org.skycastle.util.mesh
 import com.jme3.util.BufferUtils
 import com.jme3.math.{Vector2f, Vector3f}
 import com.jme3.scene.{VertexBuffer, Mesh}
+import org.skycastle.util.MathUtils._
 
 /**
  * Utility class for building custom JME meshes in the shape of a manipulated cylinder.
  */
-class LatheBuilder(var sides: Int = 12,
-                   var solidStart: Boolean = true,
-                   var solidEnd: Boolean = true,
-                   var doubleSided: Boolean = false,
-                   var invert: Boolean = false) {
+object LatheBuilder {
 
-  var segments: List[Segment] = Nil
-
-  def addSegment(segment: Segment) = segments = segment :: segments
-
-  private val tau = math.Pi * 2 // See tauday.org
-
-  def createMesh(): Mesh = {
+  def createMesh(segments: List[Segment],
+                 sides: Int = 12,
+                 solidStart: Boolean = true,
+                 solidEnd: Boolean = true,
+                 doubleSided: Boolean = false,
+                 invert: Boolean = false): Mesh = {
     // OPTIMIZE: Use triangle strips for segments and triangle fans for the ends (mesh.setMode())
 
-    val numVertices = sides * segments.length +
+    val numVertices = (sides + 1) * segments.length +
                       (if (solidStart) 1 else 0) +
                       (if (solidEnd) 1 else 0)
-    val numIndexes = sides * segments.length * 2 * 3 +
-                      (if (solidStart) sides * 3 else 0) +
-                      (if (solidEnd) sides * 3 else 0)
+    val numIndexes = ((sides + 1) * segments.length * 2 * 3 +
+                      (if (solidStart) (sides + 1) * 3 else 0) +
+                      (if (solidEnd) (sides + 1) * 3 else 0)) *
+                     (if (doubleSided) 2 else 1)
 
     val vertices: Array[Vector3f] = new Array[Vector3f](numVertices)
     val texCoords: Array[Vector2f] = new Array[Vector2f](numVertices)
     val indexes: Array[Int] = new Array[Int](numIndexes)
 
-    // TODO: Test this, it's kind of messy
-
     var vertex = 0
     var index = 0
 
     def addTriangle(a: Int, b: Int, c: Int) {
-      indexes(index) = a
-      indexes(index + 1) = b
-      indexes(index + 2) = c
-      index += 3
+      if (invert || doubleSided) {
+        indexes(index) = a
+        indexes(index + 1) = b
+        indexes(index + 2) = c
+        index += 3
+      }
+
+      if (!invert || doubleSided) {
+        indexes(index) = c
+        indexes(index + 1) = b
+        indexes(index + 2) = a
+        index += 3
+      }
+    }
+
+    def addQuad(a: Int, b: Int, c: Int, d: Int) {
+      addTriangle(a, b, c)
+      addTriangle(c, d, a)
+    }
+
+    def addDisk(center: Int, edgeStart: Int, invert: Boolean = false) {
+      var e = edgeStart
+      while (e < edgeStart + sides) {
+        if (invert) addTriangle(center, e, e + 1)
+        else addTriangle(center, e + 1, e)
+        e += 1
+      }
+      if (invert) addTriangle(center, edgeStart + sides, edgeStart)
+      else addTriangle(center, edgeStart, edgeStart + sides)
     }
 
     if (solidStart && !segments.isEmpty) {
+      addDisk(0, 1)
+
       vertices(vertex) = segments.head.centerPos
       texCoords(vertex) = segments.head.centerTexturePos
       vertex += 1
-
-      var side = 0
-      while (side < sides - 1) {
-        addTriangle(0, vertex + side, vertex + side + 1)
-        side += 1
-      }
-      addTriangle(0, vertex + sides - 1, vertex)
     }
 
     var firstSegment = true
     segments foreach {segment: Segment =>
       var side = 0
-      while (side < sides) {
-        val theta = tau * side / sides
+      while (side <= sides) {
+        val theta = Tau * side / sides
         vertices(vertex) = segment.pos(theta)
         texCoords(vertex) = segment.texturePos(theta)
-        vertex += 1
-        side += 1
 
         if (!firstSegment) {
-          if (side < sides - 1) {
-            addTriangle(vertex - sides, vertex, vertex + 1)
-            addTriangle(vertex + 1, vertex - sides + 1, vertex - sides)
+          if (side == 0) {
+            addQuad(vertex, vertex + sides, vertex - 1, vertex - sides - 1)
           }
           else {
-            addTriangle(vertex - sides, vertex, vertex + 1 - sides)
-            addTriangle(vertex + 1 - sides, vertex - sides + 1 - sides, vertex - sides)
+            addQuad(vertex, vertex - 1, vertex - sides - 2, vertex - sides - 1)
           }
         }
+
+        vertex += 1
+        side += 1
       }
       firstSegment= false
     }
 
     if (solidEnd && !segments.isEmpty) {
-      var side = 0
-      while (side < sides - 1) {
-        addTriangle(vertex, vertex - sides + side, vertex - sides + side + 1)
-        side += 1
-      }
-      addTriangle(vertex, vertex - 1, vertex - sides - 1)
+      addDisk(vertex, vertex - sides - 1, true)
 
       vertices(vertex) = segments.last.centerPos
       texCoords(vertex) = segments.last.centerTexturePos
       vertex += 1
     }
 
-
     val mesh = new Mesh()
-    mesh.setBuffer(VertexBuffer.Type.Position, 3, BufferUtils.createFloatBuffer(vertices))
-    mesh.setBuffer(VertexBuffer.Type.TexCoord, 2, BufferUtils.createFloatBuffer(texCoords))
-    mesh.setBuffer(VertexBuffer.Type.Index, 1, BufferUtils.createIntBuffer(indexes))
+    mesh.setBuffer(VertexBuffer.Type.Position, 3, BufferUtils.createFloatBuffer(vertices : _*))
+    mesh.setBuffer(VertexBuffer.Type.TexCoord, 2, BufferUtils.createFloatBuffer(texCoords : _*))
+    mesh.setBuffer(VertexBuffer.Type.Index, 1, BufferUtils.createIntBuffer(indexes : _*))
     mesh
   }
   
