@@ -50,7 +50,7 @@ object Skycastle extends SimpleApplication {
     val innerD = 0.8f
     val outerD = 1f
     val flangeD = 1.5f
-    val flangeW = 0.2f
+    val flangeW = 0.3f
     val len = 4f
     val openEndInsink = 2f
     val wraps = 2f
@@ -67,7 +67,7 @@ object Skycastle extends SimpleApplication {
             RoundSegment(new Vector3f(len,0,0), flangeD, 26f/32, wraps) ::
             RoundSegment(new Vector3f(len,0,0), outerD, 28f/32, wraps) ::
             RoundSegment(new Vector3f(len,0,0), innerD, 29f/32, wraps) ::
-            RoundSegment(new Vector3f(len-openEndInsink,0,0), innerD, 31f/32, wraps, 32f/32) ::
+            RoundSegment(new Vector3f(len-openEndInsink,0,0), innerD, 31f/32, wraps, 31.7f/32) ::
             Nil
 
     //appearance.w := 3
