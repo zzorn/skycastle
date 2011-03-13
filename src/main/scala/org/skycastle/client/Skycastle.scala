@@ -46,12 +46,29 @@ object Skycastle extends SimpleApplication {
     //assetManager.registerLoader(classOf[JsonConfigLoader], "conf")
 
     val appearance = new LatheAppearance()
+
+    val innerD = 0.8f
+    val outerD = 1f
+    val flangeD = 1.5f
+    val flangeW = 0.2f
+    val len = 4f
+    val openEndInsink = 2f
+    val wraps = 2f
+
     appearance.segments =
-            RoundSegment(new Vector3f(0,0,0.2f), 1f, 0.1f, 0f) ::
-            RoundSegment(new Vector3f(1,0,0), 2f, 0.25f, direction = new Quaternion(Array[Float](0, Tauf/12, 0))) ::
-            RoundSegment(new Vector3f(2,0,0), 2.2f, 0.5f) ::
-            RoundSegment(new Vector3f(3,0,0), 2f, 0.75f) ::
-            RoundSegment(new Vector3f(4,0.2f,0), 1f, 0.9f, 1f) :: Nil
+            RoundSegment(new Vector3f(0,0,0), outerD, 2f/16, wraps, 0f) ::
+            RoundSegment(new Vector3f(0,0,0), flangeD, 3f/16, wraps) ::
+            RoundSegment(new Vector3f(0,0,0), flangeD, 25f/32, wraps) ::
+            RoundSegment(new Vector3f(flangeW,0,0), flangeD, 26f/32, wraps) ::
+            RoundSegment(new Vector3f(flangeW,0,0), outerD, 23f/32, wraps) ::
+            RoundSegment(new Vector3f(len-flangeW,0,0), outerD, 6f/32, wraps) ::
+            RoundSegment(new Vector3f(len-flangeW,0,0), outerD, 23f/32, wraps) ::
+            RoundSegment(new Vector3f(len-flangeW,0,0), flangeD, 25f/32, wraps) ::
+            RoundSegment(new Vector3f(len,0,0), flangeD, 26f/32, wraps) ::
+            RoundSegment(new Vector3f(len,0,0), outerD, 28f/32, wraps) ::
+            RoundSegment(new Vector3f(len,0,0), innerD, 29f/32, wraps) ::
+            RoundSegment(new Vector3f(len-openEndInsink,0,0), innerD, 31f/32, wraps, 32f/32) ::
+            Nil
 
     //appearance.w := 3
     

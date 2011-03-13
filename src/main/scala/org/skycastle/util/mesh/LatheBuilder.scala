@@ -77,7 +77,7 @@ object LatheBuilder {
     segments foreach {segment: Segment =>
       var side = 0
       while (side <= sides) {
-        val theta = Tau * side / sides
+        val theta = Tauf * side / sides
         vertices(vertex) = segment.pos(theta)
         texCoords(vertex) = segment.texturePos(theta)
 

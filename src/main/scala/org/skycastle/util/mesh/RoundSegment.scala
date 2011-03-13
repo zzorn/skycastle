@@ -6,11 +6,11 @@ import org.skycastle.util.MathUtils._
 /**
  * 
  */
-case class RoundSegment(center: Vector3f, radius: Float = 1f, textureOffset: Float = 0f, centerTextureOffset: Float = 0f, direction: Quaternion = new Quaternion(), thetaOffset: Float = 0f) extends Segment {
+case class RoundSegment(center: Vector3f, radius: Float = 1f, textureOffset: Float = 0f, textureWraps: Float = 1f, centerTextureOffset: Float = 0f, direction: Quaternion = new Quaternion(), thetaOffset: Float = 0f) extends Segment {
 
   def centerPos = center
 
-  def pos(theta: Double) = {
+  def pos(theta: Float) = {
     val v = new Vector3f(0f,
                          (math.sin(theta + thetaOffset) * radius).toFloat,
                          (math.cos(theta + thetaOffset) * radius).toFloat)
@@ -21,8 +21,8 @@ case class RoundSegment(center: Vector3f, radius: Float = 1f, textureOffset: Flo
 
   def centerTexturePos = new Vector2f(0.5f, centerTextureOffset)
 
-  def texturePos(theta: Double): Vector2f = {
-    new Vector2f(((theta + thetaOffset) / Tau).toFloat, textureOffset)
+  def texturePos(theta: Float): Vector2f = {
+    new Vector2f((theta * textureWraps + thetaOffset) / Tauf, textureOffset)
   }
 
 }

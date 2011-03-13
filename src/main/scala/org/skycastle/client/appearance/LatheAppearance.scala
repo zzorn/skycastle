@@ -6,6 +6,7 @@ import com.jme3.scene.shape.Box
 import com.jme3.scene.{Geometry, Mesh, Spatial}
 import com.jme3.material.Material
 import org.skycastle.util.mesh.{Segment, RoundSegment, LatheBuilder}
+import com.jme3.texture.Texture
 
 /**
  * 
@@ -34,7 +35,9 @@ class LatheAppearance extends Appearance {
     val mat = new Material(assetManager, material());
     // TODO: Wrap material properties in block and get all, or use custom beans for different materials..
 //    mat.setColor("m_Color", color().toColorRGBA);
-    mat.setTexture("m_ColorMap", assetManager.loadTexture(texture()));
+    val tex = assetManager.loadTexture(texture())
+    tex.setWrap(Texture.WrapMode.Repeat)
+    mat.setTexture("m_ColorMap", tex);
 
     geom.setMaterial(mat);
 

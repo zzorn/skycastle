@@ -9,8 +9,8 @@ import com.jme3.math.{Vector2f, Vector3f}
  */
 trait Segment {
 
-  def pos(theta: Double): Vector3f
-  def texturePos(theta: Double): Vector2f
+  def pos(theta: Float): Vector3f
+  def texturePos(theta: Float): Vector2f
 
   def centerPos: Vector3f
   def centerTexturePos: Vector2f
