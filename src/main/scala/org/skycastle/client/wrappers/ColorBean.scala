@@ -1,8 +1,11 @@
-package org.skycastle.client.appearance
+package org.skycastle.client.wrappers
 
 import org.scalaprops.Bean
 import com.jme3.math.ColorRGBA
 
+/**
+ * Wraps a color, allowing it to be read from configuration files.
+ */
 class ColorBean extends Bean {
 
   val r = p('r, 0f)
@@ -18,6 +21,14 @@ class ColorBean extends Bean {
     g := green
     b := blue
     a := alpha
+  }
+
+  def this(color: ColorRGBA) {
+    this()
+    r := color.r
+    g := color.g
+    b := color.b
+    a := color.a
   }
 
   def toColorRGBA: ColorRGBA = new ColorRGBA(r(), g(), b(), a())

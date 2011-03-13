@@ -104,8 +104,24 @@ object LatheBuilder {
       vertex += 1
     }
 
+
+    val normals: Array[Vector3f] = NormalCalculator.calculateNormals(vertices, indexes)
+
+    // Average seam normals
+    var vi = if (solidStart) 1 else 0
+    val vend = numVertices - (if (solidEnd) 1 else 0)
+    while (vi < vend) {
+      val n1 = normals(vi)
+      val n2 = normals(vi + sides)
+      n1.addLocal(n2)
+      n1.normalizeLocal
+      n2.set(n1)
+      vi += sides + 1
+    }
+
     val mesh = new Mesh()
     mesh.setBuffer(VertexBuffer.Type.Position, 3, BufferUtils.createFloatBuffer(vertices : _*))
+    mesh.setBuffer(VertexBuffer.Type.Normal, 3, BufferUtils.createFloatBuffer(normals : _*))
     mesh.setBuffer(VertexBuffer.Type.TexCoord, 2, BufferUtils.createFloatBuffer(texCoords : _*))
     mesh.setBuffer(VertexBuffer.Type.Index, 1, BufferUtils.createIntBuffer(indexes : _*))
     mesh

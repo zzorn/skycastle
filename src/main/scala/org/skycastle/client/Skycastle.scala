@@ -1,6 +1,6 @@
 package org.skycastle.client
 
-import appearance.{LatheAppearance, BoxAppearance}
+import appearance._
 import com.jme3.app.SimpleApplication
 import com.jme3.scene.shape.Box
 import com.jme3.scene.Geometry
@@ -9,6 +9,9 @@ import com.jme3.asset.plugins.FileLocator
 import org.skycastle.util.mesh.RoundSegment
 import com.jme3.math.{Quaternion, ColorRGBA, Vector3f}
 import org.skycastle.util.MathUtils._
+import org.skycastle.core.entity.types.EntityTypeLoader
+import wrappers.{Vec3, ColorBean}
+import com.jme3.light.DirectionalLight
 
 /**
  * Main entry point for Skycastle client.
@@ -42,36 +45,28 @@ object Skycastle extends SimpleApplication {
   /** Setup 3D view */
   override def simpleInitApp = {
 
+    // Register asset path
     assetManager.registerLocator("assets", classOf[FileLocator])
     //assetManager.registerLoader(classOf[JsonConfigLoader], "conf")
 
-    val appearance = new LatheAppearance()
+    // Register loadable beans
+    EntityTypeLoader.registerBeanType(classOf[ColorBean], 'Color)
+    EntityTypeLoader.registerBeanType(classOf[Vec3])
+    EntityTypeLoader.registerBeanType(classOf[BoxAppearance])
+    EntityTypeLoader.registerBeanType(classOf[PipeAppearance])
 
-    val innerD = 0.8f
-    val outerD = 1f
-    val flangeD = 1.5f
-    val flangeW = 0.3f
-    val len = 4f
-    val openEndInsink = 2f
-    val wraps = 2f
+    // Add light to show scene
+    val sun = new DirectionalLight();
+    sun.setDirection(new Vector3f(-0.5f, -0.7f, -0.7f).normalizeLocal);
+    rootNode.addLight(sun);
+    val moon = new DirectionalLight();
+    moon.setDirection(new Vector3f(0.5f, 0.2f, 0.7f).normalizeLocal);
+    moon.setColor(new ColorRGBA(0.7f, 0.9f, 1.0f, 1))
+    rootNode.addLight(moon);
+    // rootNode.addLight(new AmbientLight()); // TODO: Update JME and get some actual ambient light
 
-    appearance.segments =
-            RoundSegment(new Vector3f(0,0,0), outerD, 2f/16, wraps, 0f) ::
-            RoundSegment(new Vector3f(0,0,0), flangeD, 3f/16, wraps) ::
-            RoundSegment(new Vector3f(0,0,0), flangeD, 25f/32, wraps) ::
-            RoundSegment(new Vector3f(flangeW,0,0), flangeD, 26f/32, wraps) ::
-            RoundSegment(new Vector3f(flangeW,0,0), outerD, 23f/32, wraps) ::
-            RoundSegment(new Vector3f(len-flangeW,0,0), outerD, 6f/32, wraps) ::
-            RoundSegment(new Vector3f(len-flangeW,0,0), outerD, 23f/32, wraps) ::
-            RoundSegment(new Vector3f(len-flangeW,0,0), flangeD, 25f/32, wraps) ::
-            RoundSegment(new Vector3f(len,0,0), flangeD, 26f/32, wraps) ::
-            RoundSegment(new Vector3f(len,0,0), outerD, 28f/32, wraps) ::
-            RoundSegment(new Vector3f(len,0,0), innerD, 29f/32, wraps) ::
-            RoundSegment(new Vector3f(len-openEndInsink,0,0), innerD, 31f/32, wraps, 31.7f/32) ::
-            Nil
-
-    //appearance.w := 3
-    
+    // Test appearance
+    val appearance = new PipeAppearance()
     rootNode.attachChild(appearance.createSpatial(assetManager));
   }
 }

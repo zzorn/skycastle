@@ -5,27 +5,19 @@ import com.jme3.scene.shape.Box
 import com.jme3.math.{ColorRGBA, Vector3f}
 import com.jme3.scene.{Geometry, Mesh, Spatial}
 import com.jme3.material.Material
+import org.skycastle.client.wrappers.Vec3
 
 /**
  * 
  */
-class BoxAppearance extends Appearance {
+class BoxAppearance extends BasicAppearance {
 
-  val x = p('x, 0f)
-  val y = p('y, 0f)
-  val z = p('z, 0f)
-
-  val w = p('w, 1f)
-  val h = p('h, 1f)
-  val d = p('d, 1f)
-
-  val material = p('material, defaultMaterial)
-
-  val color = p('color, new ColorBean(1, 0, 0))
+  val size = p('size, new Vec3(1, 1, 1))
 
   def createSpatial(assetManager: AssetManager): Spatial = {
-    val pos = new Vector3f(x(), y(), z())
-    val mesh: Mesh = new Box(pos, w(), h(), d())
+    val p = pos().toVector3f
+    val s = size().toVector3f.multLocal(scale().toVector3f)
+    val mesh: Mesh = new Box(p, s.x, s.y, s.z)
 
     val geom = new Geometry(name(), mesh);
     

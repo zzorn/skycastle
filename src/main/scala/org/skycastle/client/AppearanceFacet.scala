@@ -1,5 +1,6 @@
-package org.skycastle.client.appearance
+package org.skycastle.client
 
+import appearance.{BoxAppearance, Appearance}
 import org.skycastle.core.entity.Facet
 import com.jme3.scene.Spatial
 import com.jme3.asset.AssetManager
