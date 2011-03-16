@@ -5,6 +5,7 @@ import org.scalaprops.parser.{JsonBeanParser, BeanParser}
 import org.skycastle.client.wrappers.{ColorBean}
 import org.skycastle.client.appearance.{BoxAppearance}
 import org.scalaprops.{BeanFactory, PropertyBean, Bean}
+import org.skycastle.util.Parameters
 
 /**
  * Loader for loading EntityTypes.
@@ -32,7 +33,7 @@ object EntityTypeLoader {
 
     // TODO: Add an immutable EmptyBean or similar object.
     val facetTypes: List[FacetType] = (loadedData.get[Bean]('facets, new PropertyBean()).toMap map extractFacetType).toList
-    val entityParameters: Map[Symbol, Any] = loadedData.toMap - 'facets
+    val entityParameters: Parameters = Parameters(loadedData.toMap - 'facets)
     new EntityType(assetName, entityParameters, facetTypes)
   }
 
@@ -46,7 +47,7 @@ object EntityTypeLoader {
     if (entry._2.isInstanceOf[Bean]) {
       val facetName: Symbol = entry._1
       val data: Bean = entry._2.asInstanceOf[Bean]
-      new FacetType(facetName, data.toMap)
+      new FacetType(facetName, Parameters(data.toMap))
     }
     else throw new IllegalArgumentException("Facets should be beans")
   }

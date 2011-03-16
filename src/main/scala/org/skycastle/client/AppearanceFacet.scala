@@ -12,7 +12,7 @@ class AppearanceFacet extends Facet {
 
   private var _spatial: Spatial = null
 
-  private var _appearance: Appearance = facetParameters.getOrElse('appearance, new BoxAppearance()).asInstanceOf[Appearance]
+  private var _appearance: Appearance = facetParameters.parameters.getOrElse('appearance, new BoxAppearance()).asInstanceOf[Appearance]
   def appearance: Appearance = _appearance
   def appearance_=(a: Appearance) {
     _appearance = a

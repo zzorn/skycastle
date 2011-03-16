@@ -1,9 +1,9 @@
 package org.skycastle.core.entity.types
 
-import org.skycastle.util.Logging
 import org.skycastle.core.entity.Entity
 import com.jme3.asset.AssetManager
 import tools.nsc.io.{Directory, File}
+import org.skycastle.util.{Parameters, Logging}
 
 /**
  * Keeps track of available entity types.
@@ -33,10 +33,10 @@ object EntityTypeManager extends Logging {
     addEntityType(entityType)
   }
 
-  def createEntity(typeName: Symbol, instanceParameters: Map[Symbol, Any]): Entity = {
+  def createEntity(typeName: Symbol, instanceParameters: Parameters): Entity = {
     val entityType = entityTypes.get(typeName).getOrElse(throw new IllegalArgumentException("EntityType named '"+typeName+"' not found"))
     val entity = entityType.createInstance(instanceParameters)
-    logDebug("Created instance of entity "+typeName.name + " with parameters: "+instanceParameters.mkString(", "))
+    logDebug("Created instance of entity "+typeName.name + " with parameters: "+instanceParameters.parameters.mkString(", "))
     entity
   }
 
