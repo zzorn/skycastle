@@ -1,7 +1,7 @@
 package org.skycastle.core.design
 
 import org.skycastle.core.entity.types.EntityTypeManager
-import org.skycastle.util.Parameters
+import org.skycastle.util.parameters.Parameters
 
 /**
  * A design for a specific type of basic component.
@@ -9,9 +9,12 @@ import org.skycastle.util.Parameters
  */
 class ComponentDesign extends Design {
 
-  val entityType = p('entityType, null)
-  val entityParameters = p[Parameters]('entityParameters, Parameters())
+  var entityType: Symbol = null
+  var entityParameters = Parameters()
 
-  def create() = EntityTypeManager.createEntity(entityType(), entityParameters())
+  def create(context: Parameters) = {
+    // TODO: Map context parameters to entity paramters?
+    EntityTypeManager.createEntity(entityType, entityParameters)
+  }
 
 }

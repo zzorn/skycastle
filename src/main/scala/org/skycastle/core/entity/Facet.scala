@@ -2,7 +2,7 @@ package org.skycastle.core.entity
 
 
 import org.scalaprops.Bean
-import org.skycastle.util.Parameters
+import org.skycastle.util.parameters.Parameters
 
 
 /**

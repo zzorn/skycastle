@@ -3,7 +3,8 @@ package org.skycastle.core.entity.types
 import org.skycastle.core.entity.Entity
 import com.jme3.asset.AssetManager
 import tools.nsc.io.{Directory, File}
-import org.skycastle.util.{Parameters, Logging}
+import org.skycastle.util.Logging
+import org.skycastle.util.parameters.Parameters
 
 /**
  * Keeps track of available entity types.

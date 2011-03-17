@@ -1,7 +1,7 @@
 package org.skycastle.core.entity.types
 
 import org.skycastle.core.entity.Entity
-import org.skycastle.util.Parameters
+import org.skycastle.util.parameters.Parameters
 
 /**
  * Information about a type of entity.

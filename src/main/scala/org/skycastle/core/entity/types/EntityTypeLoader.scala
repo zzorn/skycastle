@@ -5,7 +5,7 @@ import org.scalaprops.parser.{JsonBeanParser, BeanParser}
 import org.skycastle.client.wrappers.{ColorBean}
 import org.skycastle.client.appearance.{BoxAppearance}
 import org.scalaprops.{BeanFactory, PropertyBean, Bean}
-import org.skycastle.util.Parameters
+import org.skycastle.util.parameters.Parameters
 
 /**
  * Loader for loading EntityTypes.
