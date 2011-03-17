@@ -5,6 +5,6 @@ import org.skycastle.util.parameters.Parameters
 /**
  * 
  */
-case class VariableValueExpression(variable: Symbol) extends Expression {
+case class Variable(variable: Symbol) extends Exp {
   def calculate(context: Parameters) = context.parameters(variable)
 }

@@ -1,7 +1,7 @@
 package org.skycastle.util.parameters
 
 import com.jme3.math.ColorRGBA
-import expressions.{VariableValueExpression, Expression}
+import expressions.{Variable, Exp}
 
 /**
  * A set of immutable parameters, with some typed convenience getters.
@@ -35,9 +35,9 @@ case class Parameters(parameters: Map[Symbol, Any]) {
     parameters.getOrElse(name, default).asInstanceOf[Int]
   }
 
-  def remap(expressions: Map[Symbol, Expression]): Parameters = {
+  def remap(expressions: Map[Symbol, Exp]): Parameters = {
     Parameters(parameters.map( {(e: (Symbol, Any)) =>
-      (e._1, expressions.getOrElse(e._1, VariableValueExpression(e._1).calculate(this)))
+      (e._1, expressions.getOrElse(e._1, Variable(e._1).calculate(this)))
     }))
   }
 
