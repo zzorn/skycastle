@@ -9,12 +9,10 @@ import org.skycastle.util.parameters.Parameters
  */
 class ComponentDesign extends Design {
 
-  var entityType: Symbol = null
-  var entityParameters = Parameters()
-
-  def create(context: Parameters) = {
-    // TODO: Map context parameters to entity paramters?
-    EntityTypeManager.createEntity(entityType, entityParameters)
+  def build(parameters: Parameters) = {
+    EntityTypeManager.createEntity(
+      parameters.getSymbol('entityType, 'placeholder),
+      parameters)
   }
 
 }

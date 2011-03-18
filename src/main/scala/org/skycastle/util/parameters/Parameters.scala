@@ -1,18 +1,18 @@
 package org.skycastle.util.parameters
 
 import com.jme3.math.ColorRGBA
-import expressions.{Variable, Exp}
+import expressions.{Var, Expr}
 
 /**
  * A set of immutable parameters, with some typed convenience getters.
  */
 case class Parameters(parameters: Map[Symbol, Any]) {
 
-  def stringParam(name: Symbol, default: String): String = {
+  def getString(name: Symbol, default: String): String = {
     parameters.getOrElse(name, default).toString
   }
 
-  def colorParam(name: Symbol, default: ColorRGBA): ColorRGBA = {
+  def getColor(name: Symbol, default: ColorRGBA): ColorRGBA = {
     if (!parameters.contains(name)) default else {
       val c: Map[Symbol, Any] = parameters(name).asInstanceOf[Map[Symbol, Any]]
       new ColorRGBA(
@@ -23,22 +23,26 @@ case class Parameters(parameters: Map[Symbol, Any]) {
     }
   }
 
-  def symbolParam(name: Symbol, default: Symbol): Symbol = {
-    Symbol(stringParam(name, default.name))
+  def getSymbol(name: Symbol, default: Symbol): Symbol = {
+    Symbol(getString(name, default.name))
   }
 
-  def floatParam(name: Symbol, default: Float): Float = {
+  def getFloat(name: Symbol, default: Float): Float = {
     parameters.getOrElse(name, default).asInstanceOf[Number].floatValue
   }
 
-  def intParam(name: Symbol, default: Int): Int = {
+  def getInt(name: Symbol, default: Int): Int = {
     parameters.getOrElse(name, default).asInstanceOf[Int]
   }
 
-  def remap(expressions: Map[Symbol, Exp]): Parameters = {
+  def remap(expressions: Map[Symbol, Expr]): Parameters = {
     Parameters(parameters.map( {(e: (Symbol, Any)) =>
-      (e._1, expressions.getOrElse(e._1, Variable(e._1).calculate(this)))
+      (e._1, expressions.getOrElse(e._1, Var(e._1).calculate(this)))
     }))
+  }
+
+  def chain(secondary: Parameters): Parameters = {
+    new Parameters(secondary.parameters ++ parameters)
   }
 
 }
