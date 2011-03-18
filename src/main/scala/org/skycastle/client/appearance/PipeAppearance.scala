@@ -88,7 +88,7 @@ class PipeAppearance extends BasicAppearance {
     spec.setWrap(Texture.WrapMode.Repeat)
     mat.setTexture("m_SpecularMap", spec);
 
-    mat.setFloat("m_Shininess", 0.999f)
+    mat.setFloat("m_Shininess", 1f)
 
 
     // Geometry object

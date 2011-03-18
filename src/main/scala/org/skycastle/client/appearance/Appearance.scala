@@ -15,6 +15,8 @@ trait Appearance extends Facet {
 
   val name = p('name, this.getClass.getSimpleName + "-" + hashCode)
 
+  // TODO: Cache spatial
+
   def createSpatial(assetManager: AssetManager): Spatial
 
 }

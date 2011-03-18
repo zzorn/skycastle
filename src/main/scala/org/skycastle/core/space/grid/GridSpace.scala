@@ -1,6 +1,7 @@
 package org.skycastle.core.space.grid
 
 import _root_.org.skycastle.core.space.{Position, Space}
+import org.skycastle.core.entity.Entity
 
 /**
  * A space where objects are placed on grids.
@@ -22,7 +23,8 @@ class GridSpace extends Space {
   }
 */
 
-  def remove(item: Position) = null
-  def add(item: Position) = null
+  def remove(entity: Entity) = null
+  def add(entity: Entity) = null
+  def entities = null
 
 }

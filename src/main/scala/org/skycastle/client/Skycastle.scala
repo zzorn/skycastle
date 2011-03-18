@@ -12,9 +12,9 @@ import com.jme3.math.{Quaternion, ColorRGBA, Vector3f}
 import org.skycastle.util.MathUtils._
 import wrappers.{Vec3, ColorBean}
 import com.jme3.light.DirectionalLight
-import org.skycastle.core.design.ComponentDesign
 import org.skycastle.util.parameters.Parameters
 import org.skycastle.core.entity.types._
+import org.skycastle.core.design.{AssemblyDesign, ComponentDesign}
 
 /**
  * Main entry point for Skycastle client.
@@ -79,8 +79,12 @@ object Skycastle extends SimpleApplication {
     // rootNode.addLight(new AmbientLight()); // TODO: Update JME and get some actual ambient light
 
     val designView = new DesignView()
-    designView.design = new ComponentDesign()
-    designView.design.defaultParameters = Parameters(Map('entityType -> 'pipe))
+    val design = new AssemblyDesign()
+    design.parts =
+      new ComponentDesign(Map('entityType -> 'pipe)) ::
+      new ComponentDesign(Map('entityType -> 'pipe, 'x -> 3)) ::
+      Nil
+    designView.design = design
     designView.generateView(getAssetManager)
 
     rootNode.attachChild(designView.view);

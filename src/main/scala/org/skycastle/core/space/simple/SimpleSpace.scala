@@ -1,6 +1,7 @@
 package org.skycastle.core.space.simple
 
 import _root_.org.skycastle.core.space.{Position, Space}
+import org.skycastle.core.entity.Entity
 
 /**
  * A simple space that just contains the items in a list.
@@ -8,10 +9,12 @@ import _root_.org.skycastle.core.space.{Position, Space}
  */
 class SimpleSpace extends Space {
 
-  private var items: List[Position] = Nil
+  private var _entities: List[Entity] = Nil
 
-  def remove(item: Position) = items = items.filterNot(_ == item)
-  def add(item: Position) = items = item :: items
+  def entities = _entities
+
+  def remove(entity: Entity) = _entities = _entities.filterNot(_ == entity)
+  def add(entity: Entity) = _entities = entity :: _entities
 
 }
 

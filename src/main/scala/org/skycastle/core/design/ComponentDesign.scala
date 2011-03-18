@@ -9,6 +9,11 @@ import org.skycastle.util.parameters.Parameters
  */
 class ComponentDesign extends Design {
 
+  def this(parameters: Map[Symbol, Any]) {
+    this()
+    defaultParameters = Parameters(parameters)
+  }
+
   def build(parameters: Parameters) = {
     EntityTypeManager.createEntity(
       parameters.getSymbol('entityType, 'placeholder),

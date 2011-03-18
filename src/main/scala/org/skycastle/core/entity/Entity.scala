@@ -10,6 +10,8 @@ class Entity {
 
   private var _facets: Map[Symbol, Facet] = Map()
 
+  var entityName: String = toString
+
   /**
    * The facets defined for this entity.
    */
@@ -43,7 +45,7 @@ class Entity {
   def facet[T <: Facet](name: Symbol): T = {
     facets.get(name) match {
       case Some(facet) => facet.asInstanceOf[T]
-      case None => throw new FacetNotFoundException("No facet named '"+name.name+"' available in entity " + this)
+      case None => throw new FacetNotFoundException("No facet named '"+name.name+"' available in entity " + entityName)
     }
   }
 

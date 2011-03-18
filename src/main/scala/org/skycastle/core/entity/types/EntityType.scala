@@ -12,6 +12,7 @@ case class EntityType(name: Symbol, entityParameters: Parameters = Parameters(),
 
   def createInstance(instanceParameters: Parameters): Entity = {
     val entity = new Entity()
+    entity.entityName = name.name + "-" + entity.hashCode
     facetTypes.foreach({facetType =>
         facetType.addFacetInstanceTo(entity, instanceParameters, entityParameters)
     })

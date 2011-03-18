@@ -11,27 +11,10 @@ trait Space extends Facet {
 
   def facetName = 'space
 
-  def add(item: Position)
+  def entities: Iterable[Entity]
 
-  /*
-  def add(entity: Entity, position: Vector3f) {
-    add( entity.facet[Item] match {
-      case Some(item) =>
-        item.position = position
-        item.space = this
-        item
-      case None =>
-        val item = new Item(position, this)
-        entity.addFacet(item)
-        item
-    } )
-  }
-*/
-  def remove(item: Position)
+  def add(entity: Entity)
+  def remove(entity: Entity)
 
-/*
-  protected override type DerivedType = Space
-  protected override def asDerivedType: DerivedType = this
-*/
 
 }
