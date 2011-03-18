@@ -6,12 +6,15 @@ import com.jme3.scene.shape.Box
 import com.jme3.scene.Geometry
 import com.jme3.material.Material
 import com.jme3.asset.plugins.FileLocator
+import designer.DesignView
 import org.skycastle.util.mesh.RoundSegment
 import com.jme3.math.{Quaternion, ColorRGBA, Vector3f}
 import org.skycastle.util.MathUtils._
-import org.skycastle.core.entity.types.EntityTypeLoader
 import wrappers.{Vec3, ColorBean}
 import com.jme3.light.DirectionalLight
+import org.skycastle.core.design.ComponentDesign
+import org.skycastle.util.parameters.Parameters
+import org.skycastle.core.entity.types._
 
 /**
  * Main entry point for Skycastle client.
@@ -55,6 +58,14 @@ object Skycastle extends SimpleApplication {
     EntityTypeLoader.registerBeanType(classOf[BoxAppearance])
     EntityTypeLoader.registerBeanType(classOf[PipeAppearance])
 
+    FacetManager.registerFacetType[PipeAppearance]
+
+    // Register types of entities
+    EntityTypeManager.addEntityType(new EntityType(
+      'pipe,
+      Parameters(),
+      List(new FacetType('PipeAppearance))))
+
     // Add light to show scene
     val sun = new DirectionalLight();
     sun.setDirection(new Vector3f(-0.5f, -0.7f, -0.7f).normalizeLocal);
@@ -65,9 +76,16 @@ object Skycastle extends SimpleApplication {
     rootNode.addLight(moon);
     // rootNode.addLight(new AmbientLight()); // TODO: Update JME and get some actual ambient light
 
+    val designView = new DesignView()
+    designView.design = new ComponentDesign()
+    designView.design.defaultParameters = Parameters(Map('entityType -> 'pipe))
+    designView.generateView(getAssetManager)
+
+    rootNode.attachChild(designView.view);
+
     // Test appearance
-    val appearance = new PipeAppearance()
-    rootNode.attachChild(appearance.createSpatial(assetManager));
+//    val appearance = new PipeAppearance()
+//    rootNode.attachChild(appearance.createSpatial(assetManager));
   }
 }
 

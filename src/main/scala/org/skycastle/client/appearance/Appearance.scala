@@ -3,11 +3,12 @@ package org.skycastle.client.appearance
 import org.scalaprops.Bean
 import com.jme3.scene.Spatial
 import com.jme3.asset.AssetManager
+import org.skycastle.core.entity.Facet
 
 /**
  * 
  */
-trait Appearance extends Bean {
+trait Appearance extends Facet {
 
   val name = p('name, this.getClass.getSimpleName + "-" + hashCode)
 

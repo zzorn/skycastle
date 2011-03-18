@@ -13,7 +13,8 @@ case class Parameters(parameters: Map[Symbol, Any]) {
   }
 
   def getColor(name: Symbol, default: ColorRGBA): ColorRGBA = {
-    if (!parameters.contains(name)) default else {
+    if (!parameters.contains(name)) default
+    else {
       val c: Map[Symbol, Any] = parameters(name).asInstanceOf[Map[Symbol, Any]]
       new ColorRGBA(
         c.getOrElse('r, 0f).asInstanceOf[Number].floatValue,
@@ -24,7 +25,12 @@ case class Parameters(parameters: Map[Symbol, Any]) {
   }
 
   def getSymbol(name: Symbol, default: Symbol): Symbol = {
-    Symbol(getString(name, default.name))
+    if (!parameters.contains(name)) default
+    else {
+      val value = parameters(name)
+      if (value.isInstanceOf[Symbol]) value.asInstanceOf[Symbol]
+      else Symbol(value.toString)
+    }
   }
 
   def getFloat(name: Symbol, default: Float): Float = {

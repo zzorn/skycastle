@@ -6,7 +6,8 @@ import com.jme3.scene.Spatial
 import com.jme3.asset.AssetManager
 
 /**
- * 
+ *
+@Deprectaed
  */
 class AppearanceFacet extends Facet {
 

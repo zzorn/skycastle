@@ -2,7 +2,7 @@ package org.skycastle.core.entity
 
 
 /**
- *  A persistent object consisting of different parts (facets).
+ * A game object.
  */
 class Entity {
 
@@ -20,7 +20,12 @@ class Entity {
   }
 
   def getFacet[T <: Facet](implicit m: Manifest[T]): Option[T] = facets.get(m).asInstanceOf[Option[T]]
-  def facet[T <: Facet](implicit m: Manifest[T]): T = facets.get(m).get.asInstanceOf[T]
+  
+  def facet[T <: Facet](implicit m: Manifest[T]): T = {
+    val facetOption = facets.get(m)
+    if (facetOption.isDefined) facetOption.get.asInstanceOf[T]
+    else throw new FacetNotFoundException(m, "No facet of the type exists in entity " + this + ", can not get it.")
+  }
 
   def withFacet[T <: Facet](op: T => Unit)(implicit m: Manifest[T]) = {
     getFacet[T](m).foreach(f => op(f) )
