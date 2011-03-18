@@ -4,25 +4,27 @@ import org.skycastle.core.entity.Facet
 
 
 /**
- * Stores the types of facets that are available.
+ * Stores the kinds of facets that are available.
  */
 object FacetManager {
 
-  private var facets: Map[Symbol, Manifest[_ <: Facet]] = Map()
+  private var facetKinds: Map[Symbol, Class[_ <: Facet]] = Map()
 
-  def registerFacetType[T <: Facet](implicit m: Manifest[T]) {
-    val sym = Symbol(m.erasure.getSimpleName)
-
-    println("registering facet " + sym.name)
-    facets += (sym -> m)
+  def registerFacetKind[T <: Facet](kind: Class[T]) {
+    registerFacetKind(kind, Symbol(kind.getSimpleName))
   }
 
-  def hasFacet(name: Symbol): Boolean = facets.contains(name)
+  def registerFacetKind[T <: Facet](kind: Class[T], name: Symbol) {
+    println("registering facet " + name)
+    facetKinds += (name -> kind)
+  }
 
-  def createFacet(name: Symbol): Option[(Facet, Manifest[Facet])] = {
-    facets.get(name) match {
+  def hasFacet(name: Symbol): Boolean = facetKinds.contains(name)
+
+  def createFacet(name: Symbol): Option[Facet] = {
+    facetKinds.get(name) match {
       case None => None
-      case Some(m) => Some((m.erasure.newInstance().asInstanceOf[Facet], m.asInstanceOf[Manifest[Facet]]))
+      case Some(kind) => Some(kind.newInstance().asInstanceOf[Facet])
     }
   }
 

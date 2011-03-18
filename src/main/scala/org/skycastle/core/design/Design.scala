@@ -3,7 +3,7 @@ package org.skycastle.core.design
 import org.skycastle.util.parameters.Parameters
 import org.skycastle.util.parameters.expressions.Expr
 import com.jme3.math.Vector3f
-import org.skycastle.core.space.Item
+import org.skycastle.core.space.Position
 import org.skycastle.core.entity.{NoEntity, Entity}
 
 /**
@@ -45,10 +45,10 @@ trait Design {
 
   private final def initializeEntity(entity: Entity, context: Parameters) {
     if (entity != NoEntity) {
-      entity.addFacet(new Item(new Vector3f(
+      entity.position = new Position(new Vector3f(
         context.getFloat('x, 0f),
         context.getFloat('y, 0f),
-        context.getFloat('z, 0f))))
+        context.getFloat('z, 0f)))
     }
   }
 

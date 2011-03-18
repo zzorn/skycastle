@@ -58,7 +58,9 @@ object Skycastle extends SimpleApplication {
     EntityTypeLoader.registerBeanType(classOf[BoxAppearance])
     EntityTypeLoader.registerBeanType(classOf[PipeAppearance])
 
-    FacetManager.registerFacetType[PipeAppearance]
+    // Register kinds of facets
+    FacetManager.registerFacetKind(classOf[PipeAppearance])
+    FacetManager.registerFacetKind(classOf[BoxAppearance])
 
     // Register types of entities
     EntityTypeManager.addEntityType(new EntityType(

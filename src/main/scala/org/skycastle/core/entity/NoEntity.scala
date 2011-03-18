@@ -5,7 +5,8 @@ package org.skycastle.core.entity
  */
 object NoEntity extends Entity {
 
-  override def addFacet[ T <: Facet ](facet: T)(implicit m: Manifest[ T ]) =
+  override def setFacet(name: Symbol, newFacet: Facet): Unit = {
     throw new UnsupportedOperationException("EmptyEntity can not have facets added")
+  }
 
 }

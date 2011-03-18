@@ -24,7 +24,7 @@ class DesignView {
 
   def generateView(assetManager: AssetManager) {
     generateEntity()
-    view = completedObject.facet[Appearance].createSpatial(assetManager)
+    view = completedObject.appearance.createSpatial(assetManager)
   }
 
 

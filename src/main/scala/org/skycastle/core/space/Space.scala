@@ -8,7 +8,10 @@ import com.jme3.math.Vector3f
  */
 trait Space extends Facet {
 
-  def add(item: Item)
+
+  def facetName = 'space
+
+  def add(item: Position)
 
   /*
   def add(entity: Entity, position: Vector3f) {
@@ -24,7 +27,7 @@ trait Space extends Facet {
     } )
   }
 */
-  def remove(item: Item)
+  def remove(item: Position)
 
 /*
   protected override type DerivedType = Space

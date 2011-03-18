@@ -11,10 +11,10 @@ case class FacetType(facetName: Symbol, facetParameters: Parameters = Parameters
 
   def addFacetInstanceTo(entity: Entity, instanceParameters: Parameters, entityParameters: Parameters) {
 
-    val (facet: Facet, manifest: Manifest[_]) = FacetManager.createFacet(facetName).getOrElse(throw new IllegalStateException("Facet type " + facetName + " not found."))
+    val facet: Facet = FacetManager.createFacet(facetName).getOrElse(throw new IllegalStateException("Facet type " + facetName + " not found."))
 
     // TODO: Init first and add then, or the other way?
-    entity.addFacet(facet)(manifest)
+    entity.setFacet(facet)
     facet.init(instanceParameters, entityParameters, facetParameters)
   }
 

@@ -1,38 +1,63 @@
 package org.skycastle.core.entity
 
+import org.skycastle.client.appearance.Appearance
+import org.skycastle.core.space.{Space, Position}
 
 /**
  * A game object.
  */
 class Entity {
 
-  private var facets: Map[Manifest[_ <: Facet], Facet] = Map()
+  private var _facets: Map[Symbol, Facet] = Map()
 
-  def addFacet[T <: Facet](facet: T)(implicit m: Manifest[T]) {
-    removeFacet(facet)
-    facet.entity = this
-    facets += (m -> facet)
-  }
+  /**
+   * The facets defined for this entity.
+   */
+  def facets: Map[Symbol, Facet] = _facets
 
-  def removeFacet[T <: Facet](facet: T)(implicit m: Manifest[T]) {
-    facet.entity = null
-    facets -= m
-  }
+  /**
+   * The appearance of the entity.
+   */
+  def appearance: Appearance = facet('appearance)
+  def appearance_=(appearance: Appearance) = setFacet('appearance, appearance)
 
-  def getFacet[T <: Facet](implicit m: Manifest[T]): Option[T] = facets.get(m).asInstanceOf[Option[T]]
-  
-  def facet[T <: Facet](implicit m: Manifest[T]): T = {
-    val facetOption = facets.get(m)
-    if (facetOption.isDefined) facetOption.get.asInstanceOf[T]
-    else throw new FacetNotFoundException(m, "No facet of the type exists in entity " + this + ", can not get it.")
-  }
+  /**
+   * The position of the entity.
+   */
+  def position: Position = facet('position)
+  def position_=(position: Position) = setFacet('position, position)
 
-  def withFacet[T <: Facet](op: T => Unit)(implicit m: Manifest[T]) = {
-    getFacet[T](m).foreach(f => op(f) )
-  }
+  /**
+   * The internal space of an entity.
+   */
+  def space: Space = facet('space)
+  def space_=(space: Space) = setFacet('space, space)
 
+  /**
+   * Updates the entity components.
+   */
   def update(timeDelta: Float) {
-    facets.values foreach (facet => facet.update(timeDelta))
+    facets.values foreach (_.update(timeDelta))
+  }
+
+  def facet[T <: Facet](name: Symbol): T = {
+    facets.get(name) match {
+      case Some(facet) => facet.asInstanceOf[T]
+      case None => throw new FacetNotFoundException("No facet named '"+name.name+"' available in entity " + this)
+    }
+  }
+
+  def getFacet(name: Symbol): Option[Facet] = facets.get(name)
+
+  def setFacet(facet: Facet): Unit = setFacet(facet.facetName, facet)
+
+  def setFacet(name: Symbol, newFacet: Facet): Unit = {
+    _facets.get(name).foreach(_.entity = null)
+
+    if (newFacet != null) {
+      newFacet.entity = this
+      _facets += name -> newFacet
+    }
   }
 
 }

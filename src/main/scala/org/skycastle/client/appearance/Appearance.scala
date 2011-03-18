@@ -10,6 +10,9 @@ import org.skycastle.core.entity.Facet
  */
 trait Appearance extends Facet {
 
+
+  def facetName = 'appearance
+
   val name = p('name, this.getClass.getSimpleName + "-" + hashCode)
 
   def createSpatial(assetManager: AssetManager): Spatial
