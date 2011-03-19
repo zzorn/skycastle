@@ -1,41 +1,49 @@
 package org.skycastle.core.entity
 
 
-import org.scalaprops.Bean
 import org.skycastle.util.parameters.Parameters
 
 
 /**
  * Some aspect of an entity, concentrating on a specific area of functionality.
  */
-trait Facet extends Bean {
+// TODO: Do we want to allow changing the entity a facet is attached to?  Sounds far fetched..
+trait Facet {
 
   private var _entity: Entity = null
+  private var _initialized: Boolean = false
+  private var _parameters: Parameters = Parameters()
 
-  def facetName: Symbol
+  def facetCategory: Symbol
 
-  def entity_=(e: Entity) = _entity = e
-  def entity: Entity = _entity
+  final def entity: Entity = _entity
+  final def entity_=(entity: Entity) {
+    _entity = entity
+    onEntityChanged(_entity)
+  }
 
-  private var _instanceParameters: Parameters = Parameters()
-  private var _entityParameters: Parameters = Parameters()
-  private var _facetParameters: Parameters = Parameters()
-
-  def instanceParameters: Parameters = _instanceParameters
-  def entityParameters: Parameters = _entityParameters
-  def facetParameters: Parameters = _facetParameters
+  final def parameters: Parameters = _parameters
 
   /**
    * Initialize the facet.
    * Called before the facet is added to an entity.
    */
-  def init(instanceParameters:  Parameters,
-           entityParameters:  Parameters,
-           facetParameters:  Parameters) {
-    _instanceParameters = instanceParameters
-    _entityParameters = entityParameters
-    _facetParameters = facetParameters
+  final def init(parameters:  Parameters) {
+    if (_initialized) throw new IllegalStateException("Init called twice - init can only be called once!")
+    _initialized = true
+    _parameters = parameters
+    onInit()
   }
+
+  /**
+   * Called when the facet is initialized, before it is added to an entity.
+   */
+  protected def onInit() {}
+
+  /**
+   * Called when the facet is added to (or removed from) an entity
+   */
+  protected def onEntityChanged(entity: Entity) {}
 
   /**
    * Updates the facet if needed.

@@ -9,7 +9,7 @@ import com.jme3.math.Vector3f
 trait Space extends Facet {
 
 
-  def facetName = 'space
+  def facetCategory = 'space
 
   def entities: Iterable[Entity]
 

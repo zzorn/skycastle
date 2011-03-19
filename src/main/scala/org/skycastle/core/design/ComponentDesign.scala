@@ -1,7 +1,7 @@
 package org.skycastle.core.design
 
-import org.skycastle.core.entity.types.EntityTypeManager
 import org.skycastle.util.parameters.Parameters
+import org.skycastle.core.entity.types.{EntityParameters, ArchetypeManager}
 
 /**
  * A design for a specific type of basic component.
@@ -15,9 +15,10 @@ class ComponentDesign extends Design {
   }
 
   def build(parameters: Parameters) = {
-    EntityTypeManager.createEntity(
-      parameters.getSymbol('entityType, 'placeholder),
-      parameters)
+    // Expand parameters to entity parameters, by treating dot separated prefixes as the facet categories..
+    val entityParameters = new EntityParameters(parameters)
+    val archetypeName = parameters.getSymbol('archetype, 'placeholder)
+    ArchetypeManager.createEntity(archetypeName, entityParameters)
   }
 
 }

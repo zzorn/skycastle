@@ -8,6 +8,10 @@ import expressions.{Var, Expr}
  */
 case class Parameters(parameters: Map[Symbol, Any]) {
 
+  def get[T](name: Symbol, default: T): T = {
+    parameters.getOrElse(name, default).asInstanceOf[T]
+  }
+
   def getString(name: Symbol, default: String): String = {
     parameters.getOrElse(name, default).toString
   }
@@ -51,6 +55,7 @@ case class Parameters(parameters: Map[Symbol, Any]) {
     new Parameters(secondary.parameters ++ parameters)
   }
 
+  override def toString = parameters.iterator.mkString("{", ", ", "}")
 }
 
 object Parameters  {

@@ -8,7 +8,7 @@ import com.jme3.math.Vector3f
  */
 class Position(var position: Vector3f = Vector3f.ZERO, var space: Space = null) extends Facet {
 
-  def facetName = 'position
+  def facetCategory = 'position
 
   // TODO: Remove from space if the entity is deleted
  // override protected def onDeleted() = if (space != null) space.remove(this)

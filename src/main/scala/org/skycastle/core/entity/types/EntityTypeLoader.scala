@@ -23,7 +23,7 @@ object EntityTypeLoader {
     parser.beanFactory.registerBeanType(name, {() => kind.newInstance})
   }
 
-  def load(inputStream: InputStream, sourceName: String): EntityType = {
+  def load(inputStream: InputStream, sourceName: String): Archetype = {
     val streamReader = new InputStreamReader(new BufferedInputStream(inputStream))
 
     val assetName: Symbol = prepareName(sourceName)
@@ -31,10 +31,14 @@ object EntityTypeLoader {
 
     streamReader.close
 
+    // TODO: New loader that loads JSON into EntityParameters.
+    /*
     // TODO: Add an immutable EmptyBean or similar object.
     val facetTypes: List[FacetType] = (loadedData.get[Bean]('facets, new PropertyBean()).toMap map extractFacetType).toList
     val entityParameters: Parameters = Parameters(loadedData.toMap - 'facets)
-    new EntityType(assetName, entityParameters, facetTypes)
+    new Archetype(assetName, entityParameters, facetTypes)
+    */
+    new Archetype('fixme, new EntityParameters())
   }
 
   private def prepareName(sourceName: String): Symbol = {
@@ -42,7 +46,7 @@ object EntityTypeLoader {
                      .replace("/", ".")
                      .replace("\\", "."))
   }
-
+/*
   private def extractFacetType(entry: (Symbol, AnyRef)): FacetType = {
     if (entry._2.isInstanceOf[Bean]) {
       val facetName: Symbol = entry._1
@@ -51,5 +55,5 @@ object EntityTypeLoader {
     }
     else throw new IllegalArgumentException("Facets should be beans")
   }
-
+*/
 }

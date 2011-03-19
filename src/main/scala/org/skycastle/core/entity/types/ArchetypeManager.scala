@@ -9,12 +9,12 @@ import org.skycastle.util.parameters.Parameters
 /**
  * Keeps track of available entity types.
  */
-object EntityTypeManager extends Logging {
+object ArchetypeManager extends Logging {
 
-  private var entityTypes: Map[Symbol, EntityType] = Map()
+  private var archetypes: Map[Symbol, Archetype] = Map()
 
-  def addEntityType(entityType: EntityType) {
-    entityTypes += (entityType.name -> entityType)
+  def addEntityType(entityType: Archetype) {
+    archetypes += (entityType.name -> entityType)
   }
 
   /**
@@ -34,10 +34,11 @@ object EntityTypeManager extends Logging {
     addEntityType(entityType)
   }
 
-  def createEntity(typeName: Symbol, instanceParameters: Parameters): Entity = {
-    val entityType = entityTypes.get(typeName).getOrElse(throw new IllegalArgumentException("EntityType named '"+typeName+"' not found"))
-    val entity = entityType.createInstance(instanceParameters)
-    logDebug("Created instance of entity "+typeName.name + " with parameters: "+instanceParameters.parameters.mkString(", "))
+  def createEntity(archetypeName: Symbol): Entity = createEntity(archetypeName, null)
+
+  def createEntity(archetypeName: Symbol, entityParameters: EntityParameters): Entity = {
+    val archetype = archetypes.get(archetypeName).getOrElse(throw new IllegalArgumentException("Archetype named '"+archetypeName.name+"' not found"))
+    val entity = archetype.createEntity(entityParameters)
     entity
   }
 

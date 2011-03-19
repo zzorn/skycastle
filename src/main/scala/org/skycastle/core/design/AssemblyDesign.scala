@@ -1,8 +1,7 @@
 package org.skycastle.core.design
 
-import org.skycastle.core.space.{Position, AssemblySpace}
+import org.skycastle.core.space.{AssemblySpace}
 import org.skycastle.util.parameters.Parameters
-import com.jme3.math.Vector3f
 import org.skycastle.core.entity.{NoEntity, Entity}
 import org.skycastle.client.appearance.AssemblyAppearance
 

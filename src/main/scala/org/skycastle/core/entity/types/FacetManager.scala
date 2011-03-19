@@ -5,6 +5,7 @@ import org.skycastle.core.entity.Facet
 
 /**
  * Stores the kinds of facets that are available.
+ * @Deprecated
  */
 object FacetManager {
 

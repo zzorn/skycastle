@@ -8,6 +8,23 @@ import org.skycastle.core.space.{Space, Position}
  */
 class Entity {
 
+  /*
+  Likely set of components:
+  * Appearance
+  * Position
+  * Internal space
+  * Hitpoints, breakable, damageable (reacting to damage)
+  * Power system:  Biological system; metabolism, eating, energy, or robot: actions, energy source
+  * Actor system: Hands, manipulators etc?
+  * skill/action system: Using energy to do skills
+  * Owned by
+  * Controlled by?
+  * Owning
+  * Control interface
+  * etc
+   */
+
+
   private var _facets: Map[Symbol, Facet] = Map()
 
   var entityName: String = toString
@@ -49,9 +66,11 @@ class Entity {
     }
   }
 
+  def hasFacet(name: Symbol): Boolean = facets.contains(name)
+
   def getFacet(name: Symbol): Option[Facet] = facets.get(name)
 
-  def setFacet(facet: Facet): Unit = setFacet(facet.facetName, facet)
+  def setFacet(facet: Facet): Unit = setFacet(facet.facetCategory, facet)
 
   def setFacet(name: Symbol, newFacet: Facet): Unit = {
     _facets.get(name).foreach(_.entity = null)

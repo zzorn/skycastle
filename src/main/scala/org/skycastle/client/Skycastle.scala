@@ -2,19 +2,16 @@ package org.skycastle.client
 
 import appearance._
 import com.jme3.app.SimpleApplication
-import com.jme3.scene.shape.Box
-import com.jme3.scene.Geometry
-import com.jme3.material.Material
 import com.jme3.asset.plugins.FileLocator
 import designer.DesignView
-import org.skycastle.util.mesh.RoundSegment
-import com.jme3.math.{Quaternion, ColorRGBA, Vector3f}
+import com.jme3.math.{ColorRGBA, Vector3f}
 import org.skycastle.util.MathUtils._
 import wrappers.{Vec3, ColorBean}
 import com.jme3.light.DirectionalLight
 import org.skycastle.util.parameters.Parameters
 import org.skycastle.core.entity.types._
 import org.skycastle.core.design.{AssemblyDesign, ComponentDesign}
+import org.skycastle.util.MathUtils
 
 /**
  * Main entry point for Skycastle client.
@@ -55,18 +52,21 @@ object Skycastle extends SimpleApplication {
     // Register loadable beans
     EntityTypeLoader.registerBeanType(classOf[ColorBean], 'Color)
     EntityTypeLoader.registerBeanType(classOf[Vec3])
-    EntityTypeLoader.registerBeanType(classOf[BoxAppearance])
-    EntityTypeLoader.registerBeanType(classOf[PipeAppearance])
+//    EntityTypeLoader.registerBeanType(classOf[BoxAppearance])
+//    EntityTypeLoader.registerBeanType(classOf[PipeAppearance])
 
     // Register kinds of facets
-    FacetManager.registerFacetKind(classOf[PipeAppearance])
-    FacetManager.registerFacetKind(classOf[BoxAppearance])
+//    FacetManager.registerFacetKind(classOf[AppearanceFacet])
+
+    Registry.registerType('appearance, classOf[BoxAppearance])
+    Registry.registerType('appearance, classOf[PipeAppearance])
+    Registry.registerType('appearance, classOf[AssemblyAppearance])
 
     // Register types of entities
-    EntityTypeManager.addEntityType(new EntityType(
-      'pipe,
-      Parameters(),
-      List(new FacetType('PipeAppearance))))
+    val pipeParams = new EntityParameters()
+    pipeParams.set('appearance, 'type, 'PipeAppearance)
+    pipeParams.set('appearance, 'yOffset, 3)
+    ArchetypeManager.addEntityType(new Archetype('pipe, pipeParams))
 
     // Add light to show scene
     val sun = new DirectionalLight();
@@ -81,8 +81,8 @@ object Skycastle extends SimpleApplication {
     val designView = new DesignView()
     val design = new AssemblyDesign()
     design.parts =
-      new ComponentDesign(Map('entityType -> 'pipe)) ::
-      new ComponentDesign(Map('entityType -> 'pipe, 'x -> 3)) ::
+      new ComponentDesign(Map('archetype -> 'pipe)) ::
+      new ComponentDesign(Map('archetype -> 'pipe, Symbol("appearance.yRotate") -> MathUtils.Tauf / 4)) ::
       Nil
     designView.design = design
     designView.generateView(getAssetManager)

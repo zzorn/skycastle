@@ -9,37 +9,29 @@ import com.jme3.material.Material
 import org.skycastle.util.mesh.{Segment, RoundSegment, LatheBuilder}
 import com.jme3.texture.Texture
 import com.jme3.bounding.BoundingBox
+import org.skycastle.util.parameters.Parameters
 
 /**
  * 
  */
 class PipeAppearance extends BasicAppearance {
 
-  material := "Common/MatDefs/Light/Lighting.j3md"
-  textureMap := "textures/pipes/brass_pipe.diffuse.jpg"
-  normalMap := "textures/pipes/brass_pipe.normal.jpg"
-  specularMap := "textures/pipes/brass_pipe.specular.jpg"
+  val material = "Common/MatDefs/Light/Lighting.j3md"
+  val textureMap = "textures/pipes/brass_pipe.diffuse.jpg"
+  val normalMap = "textures/pipes/brass_pipe.normal.jpg"
+  val specularMap = "textures/pipes/brass_pipe.specular.jpg"
 
-  case class PipeType(insideRadius: Float = 0.8f,
-                      outsideRadius: Float = 1f,
-                      flangeHeight: Float = 0.5f,
-                      flangeWidth: Float = 0.3f,
-                      textureWraps: Float = 2f,
-                      gridSize: Float = 10f,
-                      sides: Int = 16)
+  def doCreateSpatial(assetManager: AssetManager): Spatial = {
 
-  var pipeType: PipeType = PipeType()
-
-  var pipeShape: Symbol = 'straight
-
-  def createSpatial(assetManager: AssetManager): Spatial = {
-
-    val ir = pipeType.insideRadius
-    val or = pipeType.outsideRadius
-    val fr = pipeType.outsideRadius + pipeType.flangeHeight
-    val fw = pipeType.flangeWidth
-    val gz = pipeType.gridSize
-    val wraps = pipeType.textureWraps
+    val pipeShape = parameters.getSymbol('pipeShape, 'straight)
+    val ir = parameters.getFloat('insideRadius, 0.8f)
+    val or = parameters.getFloat('outsideRadius, 1f)
+    val fh = parameters.getFloat('flangeHeight, 0.5f)
+    val fw = parameters.getFloat('flangeWidth, 0.3f)
+    val gz = parameters.getFloat('gridSize, 10f)
+    val sides = parameters.getInt('sides, 16)
+    val wraps = parameters.getFloat('textureWraps, 2f)
+    val fr = or + fh
     val tg = 1f/32f // Texture grids
 
     // Create mesh
@@ -70,21 +62,21 @@ class PipeAppearance extends BasicAppearance {
         Nil
       case _ => throw new IllegalStateException("Unknown pipe shape "+pipeShape)
     }
-    val mesh: Mesh = LatheBuilder.createMesh(segments, pipeType.sides)
+    val mesh: Mesh = LatheBuilder.createMesh(segments, sides)
 
     // Material
-    val mat = new Material(assetManager, material());
+    val mat = new Material(assetManager, material);
     // TODO: Wrap material properties in block and get all, or use custom beans for different materials..
 
-    val tex = assetManager.loadTexture(textureMap())
+    val tex = assetManager.loadTexture(textureMap)
     tex.setWrap(Texture.WrapMode.Repeat)
     mat.setTexture("m_DiffuseMap", tex);
 
-    val nor = assetManager.loadTexture(normalMap())
+    val nor = assetManager.loadTexture(normalMap)
     nor.setWrap(Texture.WrapMode.Repeat)
     mat.setTexture("m_NormalMap", nor);
 
-    val spec = assetManager.loadTexture(specularMap())
+    val spec = assetManager.loadTexture(specularMap)
     spec.setWrap(Texture.WrapMode.Repeat)
     mat.setTexture("m_SpecularMap", spec);
 
@@ -92,12 +84,8 @@ class PipeAppearance extends BasicAppearance {
 
 
     // Geometry object
-    val geom = new Geometry(name(), mesh);
+    val geom = new Geometry(name, mesh);
     geom.setMaterial(mat);
-    // TODO: Rotation etc could be extracted, as well as material properties?
-    geom.setLocalTranslation(pos().toVector3f)
-    geom.setLocalScale(scale().toVector3f)
-    geom.setModelBound(new BoundingBox())
 
     geom
   }
