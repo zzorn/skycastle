@@ -1,55 +1,33 @@
 package org.skycastle.core.design
 
-import org.skycastle.util.parameters.Parameters
-import org.skycastle.util.parameters.expressions.Expr
-import com.jme3.math.Vector3f
-import org.skycastle.core.space.Position
-import org.skycastle.core.entity.{NoEntity, Entity}
+import com.jme3.scene.Spatial
 
 /**
- * Represents a design for some in-game construction.
+ * Contains a design for some structure.
+ * The design is made up of Parts.
+ * Provides a full set of editing operations, including undo.
  */
-trait Design {
+class Design {
 
-  var defaultParameters: Parameters = Parameters()
+  // TODO: Returns error info if it could not be placed, indicating why not (overlapping components, no support, or invalid connection types).
+  def addPart(part: Part, location: GridPos, orientation: Any) {}
 
-  var expressions: Map[Symbol, Expr] = Map()
+  def selectPart(part: Part) {}
+  def unSelectPart(part: Part) {}
+  def togglePartSelection(part: Part) {}
+  def selectAll() {}
+  def selectNone() {}
 
-  def calculateParameters(context: Parameters): Parameters = context.chain(defaultParameters).remap(expressions)
+  def groupSelectedParts() {}
+  def unGroupSelectedGroups() {}
 
-  // Exponent for the grid scale.  Grid cell size for the component is calculated as 1m * 2^exponent.
-  def gridExponent = 0
-  final def gridCellSize: Float = math.pow(2, gridExponent).toFloat
+  // TODO: Select all in volume
 
-  // Size in grid cells (outer size along x, y, z axis in grid cells)
-  def gridBounds: (Int, Int, Int) = (1,1,1)
-  final def bounds: (Float, Float, Float) = {
-    val grids = gridBounds
-    val gridSize = gridCellSize
-    ( gridSize * grids._1,
-      gridSize * grids._2,
-      gridSize * grids._3)
-  }
+  def deletePart(part: Part) {}
+  
+  def undo() {}
+  def redo() {}
 
-  /**
-   * Create the construct that this design represents.
-   */
-  final def create(context: Parameters):  Entity = {
-    val parameters = calculateParameters(context)
-    val entity = build(parameters)
-    initializeEntity(entity, parameters)
-    entity
-  }
-
-  protected def build(parameters: Parameters):  Entity
-
-  private final def initializeEntity(entity: Entity, context: Parameters) {
-    if (entity != NoEntity) {
-      entity.position = new Position(new Vector3f(
-        context.getFloat('x, 0f),
-        context.getFloat('y, 0f),
-        context.getFloat('z, 0f)))
-    }
-  }
+  def getView(): Spatial = {null}
 
 }

@@ -35,13 +35,13 @@ class DesignGrid {
   def createSpatial(assetManager: AssetManager): Spatial = {
     val node = new Node("DesignGrid")
     for (x <- 0.until(width); z <- 0.until(depth)) {
-      node.attachChild(makeCell(assetManager, x, z, true))
-      node.attachChild(makeCell(assetManager, x, z, false))
+      node.attachChild(makeCell(assetManager, x, 0, z, true))
+      node.attachChild(makeCell(assetManager, x, 0, z, false))
     }
     node
   }
 
-  private def makeCell(assetManager: AssetManager, x: Int, z: Int, upperSide: Boolean): Spatial = {
+  private def makeCell(assetManager: AssetManager, x: Int, y: Int, z: Int, upperSide: Boolean): Spatial = {
 //    val mesh: Mesh = new Quad(gridSize, gridSize)
     val mesh: Mesh = new Quad(gridSize, gridSize)
 
@@ -55,17 +55,20 @@ class DesignGrid {
 
     if (upperSide) {
       geom.rotate(-MathUtils.Tauf/4, 0, 0)
-      geom.move(x*gridSize, 0, (z+1)*gridSize)
+      geom.move(x*gridSize, y*gridSize, (z+1)*gridSize)
     }
     else {
       geom.rotate(MathUtils.Tauf/4, 0, 0)
-      geom.move(x*gridSize, 0, z*gridSize)
+      geom.move(x*gridSize, y*gridSize, z*gridSize)
     }
 
     geom.setModelBound(new BoundingBox())
 
     geom.setQueueBucket(Bucket.Transparent)
-    
+    geom.setUserData("gridCoordinate.x", x)
+    geom.setUserData("gridCoordinate.y", y)
+    geom.setUserData("gridCoordinate.z", z)
+
     geom
   }
 

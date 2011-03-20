@@ -1,4 +1,4 @@
-package org.skycastle.core.design
+package org.skycastle.core.proceduraldesign
 
 import org.skycastle.core.space.{AssemblySpace}
 import org.skycastle.util.parameters.Parameters
@@ -8,9 +8,9 @@ import org.skycastle.client.appearance.AssemblyAppearance
 /**
  * An arrangement of entities grouped together.
  */
-class AssemblyDesign extends Design {
+class AssemblyDesign extends ProceduralDesign {
 
-  var parts: List[Design] = Nil
+  var parts: List[ProceduralDesign] = Nil
 
   def build(parameters: Parameters) = {
 

@@ -1,4 +1,4 @@
-package org.skycastle.core.design
+package org.skycastle.core.proceduraldesign
 
 import org.skycastle.util.parameters.Parameters
 import org.skycastle.core.entity.types.{EntityParameters, ArchetypeManager}
@@ -7,7 +7,7 @@ import org.skycastle.core.entity.types.{EntityParameters, ArchetypeManager}
  * A design for a specific type of basic component.
  * May be parametrized.
  */
-class ComponentDesign extends Design {
+class ComponentDesign extends ProceduralDesign {
 
   def this(parameters: Map[Symbol, Any]) {
     this()

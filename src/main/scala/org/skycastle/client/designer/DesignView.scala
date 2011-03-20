@@ -1,7 +1,7 @@
 package org.skycastle.client.designer
 
 import org.skycastle.core.entity.{NoEntity, Entity}
-import org.skycastle.core.design.{EmptyDesign, Design}
+import org.skycastle.core.proceduraldesign.{EmptyDesign, ProceduralDesign}
 import org.skycastle.util.parameters.Parameters
 import com.jme3.scene.{Node, Spatial}
 import org.skycastle.client.appearance.Appearance
@@ -14,7 +14,7 @@ class DesignView {
 
   var completedObject: Entity = null
 
-  var design: Design = null
+  var design: ProceduralDesign = null
 
   var view: Node = new Node()
 
