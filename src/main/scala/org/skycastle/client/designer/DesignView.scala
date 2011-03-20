@@ -16,7 +16,7 @@ class DesignView {
 
   var design: Design = null
 
-  var view: Spatial = new Node()
+  var view: Node = new Node()
 
   def generateEntity() {
     completedObject = design.create(Parameters())
@@ -24,7 +24,13 @@ class DesignView {
 
   def generateView(assetManager: AssetManager) {
     generateEntity()
-    view = completedObject.appearance.createSpatial(assetManager)
+
+    val dg = new DesignGrid()
+
+    view = new Node()
+    view.attachChild(completedObject.appearance.createSpatial(assetManager))
+    view.attachChild(dg.createSpatial(assetManager))
+    view.move(0, -2, 5)
   }
 
 

@@ -65,7 +65,7 @@ object Skycastle extends SimpleApplication {
     // Register types of entities
     val pipeParams = new EntityParameters()
     pipeParams.set('appearance, 'type, 'PipeAppearance)
-    pipeParams.set('appearance, 'yOffset, 3)
+    pipeParams.set('appearance, 'yOffset, 0)
     ArchetypeManager.addEntityType(new Archetype('pipe, pipeParams))
 
     // Add light to show scene
@@ -81,8 +81,19 @@ object Skycastle extends SimpleApplication {
     val designView = new DesignView()
     val design = new AssemblyDesign()
     design.parts =
-      new ComponentDesign(Map('archetype -> 'pipe)) ::
-      new ComponentDesign(Map('archetype -> 'pipe, Symbol("appearance.yRotate") -> MathUtils.Tauf / 4)) ::
+      new ComponentDesign(Map('archetype -> 'pipe,
+                              Symbol("appearance.x") -> 1.5f,
+                              Symbol("appearance.y") -> 0.5f,
+                              Symbol("appearance.z") -> 0.5f)) ::
+      new ComponentDesign(Map('archetype -> 'pipe,
+                              Symbol("appearance.x") -> 2.5f,
+                              Symbol("appearance.y") -> 0.5f,
+                              Symbol("appearance.z") -> 0.5f)) ::
+      new ComponentDesign(Map('archetype -> 'pipe,
+                              Symbol("appearance.yRotate") -> MathUtils.Tauf / 4,
+                              Symbol("appearance.x") -> 0.5f,
+                              Symbol("appearance.y") -> 0.5f,
+                              Symbol("appearance.z") -> 0.5f)) ::
       Nil
     designView.design = design
     designView.generateView(getAssetManager)

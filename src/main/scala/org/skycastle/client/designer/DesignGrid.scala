@@ -5,12 +5,18 @@ import com.jme3.scene.shape.{Quad, Box}
 import com.jme3.math.ColorRGBA
 import com.jme3.material.Material
 import com.jme3.scene.{Geometry, Mesh, Node, Spatial}
+import org.skycastle.util.MathUtils
+import com.jme3.bounding.BoundingBox
+import com.jme3.material.RenderState.BlendMode
+import com.jme3.renderer.queue.RenderQueue.Bucket
 
 /**
  * 
  */
-
 class DesignGrid {
+
+  val aboveColor = new ColorRGBA(0, 0.65f, 1, 0.75f)
+  val underColor = new ColorRGBA(0, 0, 1, 0.75f)
 
   var gridExponent: Int = 0
   var width = 4
@@ -28,21 +34,38 @@ class DesignGrid {
 
   def createSpatial(assetManager: AssetManager): Spatial = {
     val node = new Node("DesignGrid")
-    for (x <- 0.until(width); y <- 0.until(depth)) {
-      node.attachChild(makeCell(assetManager, x, y))
+    for (x <- 0.until(width); z <- 0.until(depth)) {
+      node.attachChild(makeCell(assetManager, x, z, true))
+      node.attachChild(makeCell(assetManager, x, z, false))
     }
     node
   }
 
-  private def makeCell(assetManager: AssetManager, x: Int, y: Int): Spatial = {
+  private def makeCell(assetManager: AssetManager, x: Int, z: Int, upperSide: Boolean): Spatial = {
+//    val mesh: Mesh = new Quad(gridSize, gridSize)
     val mesh: Mesh = new Quad(gridSize, gridSize)
 
-    val mat = new Material(assetManager, "Common/MatDefs/Misc/SolidColor.j3md");
-    mat.setColor("m_Color", ColorRGBA.Red);
+    val mat = new Material(assetManager, "shaders/SimpleMultiplyColored.j3md");
+    mat.setColor("m_Col", if (upperSide) aboveColor else underColor);
+    mat.setTexture("m_ColorMap", assetManager.loadTexture("textures/grid_cell.png"))
+    mat.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
 
     val geom = new Geometry("GridCell", mesh);
     geom.setMaterial(mat);
 
+    if (upperSide) {
+      geom.rotate(-MathUtils.Tauf/4, 0, 0)
+      geom.move(x*gridSize, 0, (z+1)*gridSize)
+    }
+    else {
+      geom.rotate(MathUtils.Tauf/4, 0, 0)
+      geom.move(x*gridSize, 0, z*gridSize)
+    }
+
+    geom.setModelBound(new BoundingBox())
+
+    geom.setQueueBucket(Bucket.Transparent)
+    
     geom
   }
 

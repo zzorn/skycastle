@@ -24,11 +24,11 @@ class PipeAppearance extends BasicAppearance {
   def doCreateSpatial(assetManager: AssetManager): Spatial = {
 
     val pipeShape = parameters.getSymbol('pipeShape, 'straight)
-    val ir = parameters.getFloat('insideRadius, 0.8f)
-    val or = parameters.getFloat('outsideRadius, 1f)
-    val fh = parameters.getFloat('flangeHeight, 0.5f)
-    val fw = parameters.getFloat('flangeWidth, 0.3f)
-    val gz = parameters.getFloat('gridSize, 10f)
+    val ir = parameters.getFloat('insideRadius, 0.08f)
+    val or = parameters.getFloat('outsideRadius, 0.1f)
+    val fh = parameters.getFloat('flangeHeight, 0.05f)
+    val fw = parameters.getFloat('flangeWidth, 0.03f)
+    val gz = parameters.getFloat('gridSize, 1f)
     val sides = parameters.getInt('sides, 16)
     val wraps = parameters.getFloat('textureWraps, 2f)
     val fr = or + fh
@@ -37,28 +37,29 @@ class PipeAppearance extends BasicAppearance {
     // Create mesh
     val segments: List[Segment] = pipeShape match {
       case 'straight =>
-        val y = gz / 2
-        val z = gz / 2
+        val y = 0
+        val z = 0
+        val x = -gz / 2
         val len = gz
-        RoundSegment(len/3,y,z,  ir, 31*tg, wraps, 31.9f*tg) ::
-        RoundSegment(0,y,z,      ir, 29*tg, wraps) ::
-        RoundSegment(0,y,z,      ir, 29*tg, wraps) ::
-        RoundSegment(0,y,z,      fr, 26*tg, wraps) ::
-        RoundSegment(0,y,z,      fr, 26*tg, wraps) ::
-        RoundSegment(fw,y,z,     fr, 25*tg, wraps) ::
-        RoundSegment(fw,y,z,     fr, 25*tg, wraps) ::
-        RoundSegment(fw,y,z,     or, 23*tg, wraps) ::
-        RoundSegment(fw,y,z,     or, 23*tg, wraps) ::
-        RoundSegment(fw,y,z,     or,  6*tg, wraps) ::
-        RoundSegment(len-fw,y,z, or, 23*tg, wraps) ::
-        RoundSegment(len-fw,y,z, or, 23*tg, wraps) ::
-        RoundSegment(len-fw,y,z, fr, 25*tg, wraps) ::
-        RoundSegment(len-fw,y,z, fr, 25*tg, wraps) ::
-        RoundSegment(len,y,z,    fr, 26*tg, wraps) ::
-        RoundSegment(len,y,z,    fr, 26*tg, wraps) ::
-        RoundSegment(len,y,z,    ir, 29*tg, wraps) ::
-        RoundSegment(len,y,z,    ir, 29*tg, wraps) ::
-        RoundSegment(len/3,y,z,  ir, 31*tg, wraps, 31.9f*tg) ::
+        RoundSegment(x+len/3,y,z,  ir, 31*tg, wraps, 31.9f*tg) ::
+        RoundSegment(x,y,z,      ir, 29*tg, wraps) ::
+        RoundSegment(x,y,z,      ir, 29*tg, wraps) ::
+        RoundSegment(x,y,z,      fr, 26*tg, wraps) ::
+        RoundSegment(x,y,z,      fr, 26*tg, wraps) ::
+        RoundSegment(x+fw,y,z,     fr, 25*tg, wraps) ::
+        RoundSegment(x+fw,y,z,     fr, 25*tg, wraps) ::
+        RoundSegment(x+fw,y,z,     or, 23*tg, wraps) ::
+        RoundSegment(x+fw,y,z,     or, 23*tg, wraps) ::
+        RoundSegment(x+fw,y,z,     or,  6*tg, wraps) ::
+        RoundSegment(x+len-fw,y,z, or, 23*tg, wraps) ::
+        RoundSegment(x+len-fw,y,z, or, 23*tg, wraps) ::
+        RoundSegment(x+len-fw,y,z, fr, 25*tg, wraps) ::
+        RoundSegment(x+len-fw,y,z, fr, 25*tg, wraps) ::
+        RoundSegment(x+len,y,z,    fr, 26*tg, wraps) ::
+        RoundSegment(x+len,y,z,    fr, 26*tg, wraps) ::
+        RoundSegment(x+len,y,z,    ir, 29*tg, wraps) ::
+        RoundSegment(x+len,y,z,    ir, 29*tg, wraps) ::
+        RoundSegment(x+len/3,y,z,  ir, 31*tg, wraps, 31.9f*tg) ::
         Nil
       case _ => throw new IllegalStateException("Unknown pipe shape "+pipeShape)
     }

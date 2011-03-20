@@ -17,9 +17,9 @@ trait BasicAppearance extends Appearance {
 
     // Apply generic adjustments based on parameters
     spatial.move(
-      parameters.getFloat('xOffset, 0f),
-      parameters.getFloat('yOffset, 0f),
-      parameters.getFloat('zOffset, 0f))
+      parameters.getFloat('x, 0f),
+      parameters.getFloat('y, 0f),
+      parameters.getFloat('z, 0f))
     spatial.scale(
       parameters.getFloat('xScale, 1f),
       parameters.getFloat('yScale, 1f),
