@@ -1,4 +1,4 @@
-package org.skycastle.core.design.grid
+package org.skycastle.util
 
 object Vec3i {
   val ZEROES = Vec3i(0,0,0)
@@ -6,6 +6,17 @@ object Vec3i {
   val XUNIT = Vec3i(1,0,0)
   val YUNIT = Vec3i(0,1,0)
   val ZUNIT = Vec3i(0,0,1)
+
+  val ONE_PERMUTATIONS = Vec3i(0,0,0) ::
+                         Vec3i(0,0,1) ::
+                         Vec3i(0,1,0) ::
+                         Vec3i(0,1,1) ::
+                         Vec3i(1,0,0) ::
+                         Vec3i(1,0,1) ::
+                         Vec3i(1,1,0) ::
+                         Vec3i(1,1,1) ::
+                         Nil
+
 }
 
 /**

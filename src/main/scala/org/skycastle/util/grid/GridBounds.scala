@@ -1,9 +1,8 @@
-package org.skycastle.core.design
+package org.skycastle.util.grid
 
-import grid.{Vec3i, GridSize}
 import com.jme3.math.Vector3f
 import math._
-import com.jme3.bounding.BoundingBox
+import org.skycastle.util.Vec3i
 
 
 /**

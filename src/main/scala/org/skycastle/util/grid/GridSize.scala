@@ -1,4 +1,4 @@
-package org.skycastle.core.design.grid
+package org.skycastle.util.grid
 
 /**
  * 
