@@ -13,16 +13,16 @@ case class GridBounds(gridSize: GridSize, a: Vec3i, b: Vec3i) {
 
   def min: Vector3f = {
     val s = gridSize.gridSizeMeters
-    new Vector3f(s * (a.x min b.x),
-                 s * (a.y min b.y),
-                 s * (a.z min b.z))
+    new Vector3f(s * (a.x min b.x).toFloat,
+                 s * (a.y min b.y).toFloat,
+                 s * (a.z min b.z).toFloat)
   }
 
   def max: Vector3f = {
     val s = gridSize.gridSizeMeters
-    new Vector3f(s * (a.x max b.x),
-                 s * (a.y max b.y),
-                 s * (a.z max b.z))
+    new Vector3f(s * (a.x max b.x).toFloat,
+                 s * (a.y max b.y).toFloat,
+                 s * (a.z max b.z).toFloat)
   }
 
   def overlaps(gridPos: GridPos): Boolean = {

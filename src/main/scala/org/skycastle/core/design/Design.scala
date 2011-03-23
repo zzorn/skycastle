@@ -11,7 +11,7 @@ import java.util.HashMap
  */
 class Design {
 
-  private val gridStorage = new GridStorage()
+  private val gridStorage = new GridStorage(GridSize(0))
 
   // TODO: Returns error info if it could not be placed, indicating why not (overlapping components, no support, or invalid connection types).
   def addPart(part: Part, location: GridPos, orientation: Any) {}
@@ -52,7 +52,7 @@ class GridStorage(rootCellSize: GridSize) {
   def getIntersecting(gridPos: GridPos): List[Part] = {
     // TODO: go one step at a time, searching for matches
     val gridHashList = gridPos.gridHashList(rootCellSize)
-    
+    Nil
   }
 
 }
