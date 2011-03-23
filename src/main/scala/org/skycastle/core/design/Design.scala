@@ -1,8 +1,8 @@
 package org.skycastle.core.design
 
 import com.jme3.scene.Spatial
-import grid.GridSize
 import java.util.HashMap
+import org.skycastle.util.grid.{GridSize, GridPos}
 
 /**
  * Contains a design for some structure.
@@ -40,20 +40,42 @@ class Design {
  * Geohash like storage for parts.
  */
 class GridStorage(rootCellSize: GridSize) {
-  private val gridHash: HashMap[List[GridPos], Part] = new HashMap()
+  private val storage: HashMap[List[GridPos], Part] = new HashMap()
+
+  def getIntersecting(gridPos: GridPos): List[Part] = {
+    // TODO: go one step at a time, searching for matches
+
+    // Get same size
+    val gridHash = gridPos.gridHash(rootCellSize)
+    storage.get(gridHash)
+  }
 
   def addPartToCell(cell: GridPos, part: Part) {
     // Add gridpos -> part association
-    gridHash.put(cell.gridHashList(rootCellSize), part)
+    storage.put(cell.gridHash(rootCellSize), part)
   }
 
   // TODO: Remove part (from keys)
 
-  def getIntersecting(gridPos: GridPos): List[Part] = {
-    // TODO: go one step at a time, searching for matches
-    val gridHashList = gridPos.gridHashList(rootCellSize)
-    Nil
+
+}
+
+
+// TODO: Octree
+
+class OctTreeCell(pos: GridPos) {
+
+  private var _part: Part = null
+  private var _children: Map[GridPos, OctTreeCell] = Map()
+
+  def hasPartAt(at: GridPos): Boolean = {
+    if (at == pos) return _part != null
+    else if (!_children.isEmpty && at.isInside(pos)) {false} // TODO: Check children
+    else false
   }
 
 }
+
+
+
 
