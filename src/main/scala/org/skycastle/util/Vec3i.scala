@@ -1,5 +1,7 @@
 package org.skycastle.util
 
+import java.io.Serializable
+
 object Vec3i {
   val ZEROES = Vec3i(0,0,0)
   val ONES = Vec3i(1,1,1)
@@ -22,7 +24,7 @@ object Vec3i {
 /**
  * Vector type for 3D integer vectors.
  */
-case class Vec3i(x: Int, y: Int, z: Int) {
+case class Vec3i(x: Int, y: Int, z: Int) extends Serializable {
 
   def + (other: Vec3i): Vec3i = Vec3i(x + other.x,
                                       y + other.y,

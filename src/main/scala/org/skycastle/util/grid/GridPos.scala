@@ -1,16 +1,19 @@
 package org.skycastle.util.grid
 
 import org.skycastle.util.Vec3i
+import com.jme3.math.Vector3f
 
 /**
  * A 3D position within a grid with some specified gridsize.
  */
-case class GridPos(gridSize: GridSize, pos: Vec3i) {
+case class GridPos(gridSize: GridSize, pos: Vec3i) extends GridBounds(gridSize, pos, pos + Vec3i.ONES) {
 
   /**
-   * Assumes the gridSized cube that the position indicates.
+   * True if this pos is inside the specified cell, or equal to it.
    */
-  def bounds: GridBounds = GridBounds(gridSize, pos, pos + Vec3i.ONES)
+  def isInside(other: GridPos): Boolean = {
+    other.gridSize <= this.gridSize && other.contains(this.center)
+  }
 
   /**
    * Grid in larger grid that contains this grid cell
@@ -27,18 +30,15 @@ case class GridPos(gridSize: GridSize, pos: Vec3i) {
   }
 
   /**
-   * True if this pos is inside the specified cell, or equal to it.
+   * The grid pos that this position is in at the specified grid size.
    */
-  def isInside(other: GridPos): Boolean = {
-    other.gridSize <= this.gridSize &&
-    // TODO: Math
+  def ancestorPos(rootSize: GridSize): GridPos = {
+    if (gridSize == rootSize) this
+    else if (rootSize < gridSize) throw new UnsupportedOperationException("Ancestor pos not supported for smaller sizes than own size.")
+    else parentPos.ancestorPos(rootSize)
   }
 
-  def gridHash(rootSize: GridSize): List[GridPos] = {
-    if (gridSize < rootSize) this :: parentPos.gridHash(rootSize)
-    else if (gridSize == rootSize) this :: Nil
-    else throw new UnsupportedOperationException("Hash pos not supported for greater sizes than root size.")
-  }
+
 
 
 }

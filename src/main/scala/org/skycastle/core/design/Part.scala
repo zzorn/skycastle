@@ -1,6 +1,6 @@
 package org.skycastle.core.design
 
-import grid.GridSize
+import org.skycastle.util.grid.{GridSize, GridBounds, GridPos}
 
 /**
  * A component of a design.
