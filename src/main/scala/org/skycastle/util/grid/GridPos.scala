@@ -21,6 +21,11 @@ case class GridPos(gridSize: GridSize, pos: Vec3i) extends GridBounds(gridSize, 
   def parentPos: GridPos = GridPos(gridSize.largerSize, pos / 2)
 
   /**
+   * Grid in smaller grid that is at bottom left near corner (or whichever corner is closer to origo)
+   */
+  def childPos: GridPos = GridPos(gridSize.smallerSize, pos * 2)
+
+  /**
    * The grids in the next more detailed grid that are contained in this grid cell.
    */
   def childPositions: List[GridPos] = {
@@ -38,7 +43,14 @@ case class GridPos(gridSize: GridSize, pos: Vec3i) extends GridBounds(gridSize, 
     else parentPos.ancestorPos(rootSize)
   }
 
-
+  /**
+   * The base position of this grid pos with the specified grid size.
+   */
+  def toGrid(targetSize: GridSize): GridPos = {
+    if (targetSize < gridSize) childPos.toGrid(targetSize)
+    else if (targetSize > gridSize) parentPos.toGrid(targetSize)
+    else this
+  }
 
 
 }

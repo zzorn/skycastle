@@ -1,6 +1,7 @@
 package org.skycastle.core.design
 
 import org.skycastle.util.grid.{GridSize, GridBounds, GridPos}
+import org.skycastle.util.Vec3i
 
 /**
  * A component of a design.
@@ -8,6 +9,7 @@ import org.skycastle.util.grid.{GridSize, GridBounds, GridPos}
  */
 trait Part {
 
+  def anchorPos: GridPos
   def gridSize: GridSize
   def outerBounds: GridBounds
   def occupiedCells: Iterator[GridPos]

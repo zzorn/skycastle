@@ -5,6 +5,8 @@ package org.skycastle.core.design
  * Allows creating modular designs.
  */
 class AssemblyPart extends Part {
+
+  def anchorPos = null
   def occupiedCells = null
   def outerBounds = null
   def gridSize = null
