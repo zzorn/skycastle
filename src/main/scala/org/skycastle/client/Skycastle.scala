@@ -19,6 +19,8 @@ import com.jme3.math.{Ray, ColorRGBA, Vector3f}
 import com.jme3.scene.shape.Sphere
 import com.jme3.scene.Geometry
 import com.jme3.material.Material
+import com.jme3.niftygui.NiftyJmeDisplay
+import de.lessvoid.nifty.Nifty
 
 /**
  * Main entry point for Skycastle client.
@@ -111,6 +113,27 @@ object Skycastle extends SimpleApplication {
 
     initCrossHairs()
     initKeys()
+    initUi()
+  }
+
+  private var nifty: Nifty = null
+
+  def initUi() {
+    val niftyDisplay = new NiftyJmeDisplay(assetManager,
+                                                      inputManager,
+                                                      audioRenderer,
+                                                      guiViewPort);
+    nifty = niftyDisplay.getNifty();
+
+    nifty.fromXml("ui/edit.xml", "start");
+
+    // attach the nifty display to the gui view port as a processor
+    guiViewPort.addProcessor(niftyDisplay);
+
+    // disable the fly cam
+    flyCam.setEnabled(false);
+//        flyCam.setDragToRotate(true);
+
   }
 
   def addPipe(x: Int, y: Int, z: Int) {
