@@ -9,4 +9,4 @@ project/plugins/project/build.properties
 out/
 liblwjgl.*
 libopenal.*
-
+*.log
