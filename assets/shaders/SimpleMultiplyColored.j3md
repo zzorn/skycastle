@@ -1,8 +1,8 @@
 MaterialDef Plain Texture {
 
     MaterialParameters {
-        Texture2D m_ColorMap
-        Color m_Col
+        Texture2D ColorMap
+        Color Col
     }
 
     Technique {

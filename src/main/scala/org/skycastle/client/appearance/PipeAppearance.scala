@@ -71,17 +71,17 @@ class PipeAppearance extends BasicAppearance {
 
     val tex = assetManager.loadTexture(textureMap)
     tex.setWrap(Texture.WrapMode.Repeat)
-    mat.setTexture("m_DiffuseMap", tex);
+    mat.setTexture("DiffuseMap", tex);
 
     val nor = assetManager.loadTexture(normalMap)
     nor.setWrap(Texture.WrapMode.Repeat)
-    mat.setTexture("m_NormalMap", nor);
+    mat.setTexture("NormalMap", nor);
 
     val spec = assetManager.loadTexture(specularMap)
     spec.setWrap(Texture.WrapMode.Repeat)
-    mat.setTexture("m_SpecularMap", spec);
+    mat.setTexture("SpecularMap", spec);
 
-    mat.setFloat("m_Shininess", 1f)
+    mat.setFloat("Shininess", 1f)
 
 
     // Geometry object

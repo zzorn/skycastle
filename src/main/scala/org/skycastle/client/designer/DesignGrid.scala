@@ -46,8 +46,8 @@ class DesignGrid {
     val mesh: Mesh = new Quad(gridSize, gridSize)
 
     val mat = new Material(assetManager, "shaders/SimpleMultiplyColored.j3md");
-    mat.setColor("m_Col", if (upperSide) aboveColor else underColor);
-    mat.setTexture("m_ColorMap", assetManager.loadTexture("textures/grid_cell.png"))
+    mat.setColor("Col", if (upperSide) aboveColor else underColor);
+    mat.setTexture("ColorMap", assetManager.loadTexture("textures/grid_cell.png"))
     mat.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
 
     val geom = new Geometry("GridCell", mesh);

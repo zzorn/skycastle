@@ -3,7 +3,7 @@ package org.skycastle.client
 import appearance._
 import com.jme3.app.SimpleApplication
 import com.jme3.asset.plugins.FileLocator
-import designer.DesignView
+import designer.{DesignUiController, DesignView}
 import org.skycastle.util.MathUtils._
 import wrappers.{Vec3, ColorBean}
 import com.jme3.light.DirectionalLight
@@ -21,6 +21,12 @@ import com.jme3.scene.Geometry
 import com.jme3.material.Material
 import com.jme3.niftygui.NiftyJmeDisplay
 import de.lessvoid.nifty.Nifty
+import com.jme3.asset.AssetKey
+import de.lessvoid.nifty.builder.{PanelBuilder, LayerBuilder, ScreenBuilder}
+import de.lessvoid.nifty.builder.ElementBuilder.{VAlign, Align}
+import de.lessvoid.nifty.tools.Color
+import de.lessvoid.nifty.controls.textfield.builder.TextFieldBuilder
+import de.lessvoid.nifty.controls.button.builder.ButtonBuilder
 
 /**
  * Main entry point for Skycastle client.
@@ -119,20 +125,41 @@ object Skycastle extends SimpleApplication {
   private var nifty: Nifty = null
 
   def initUi() {
-    val niftyDisplay = new NiftyJmeDisplay(assetManager,
-                                                      inputManager,
-                                                      audioRenderer,
-                                                      guiViewPort);
-    nifty = niftyDisplay.getNifty();
+    val niftyDisplay = new NiftyJmeDisplay(assetManager, inputManager, audioRenderer, guiViewPort);
 
-    nifty.fromXml("ui/edit.xml", "start");
+    nifty = niftyDisplay.getNifty();
+    nifty.loadStyleFile("nifty-default-styles.xml");
+    nifty.loadControlFile("nifty-default-controls.xml");
+
+
+    val toolbar = new LayerBuilder("toolbar")
+    toolbar.childLayoutHorizontal
+    toolbar.x("0")
+    toolbar.y("0")
+    toolbar.width("*")
+    toolbar.height("32")
+
+    val quitButton = new ButtonBuilder("quit", "Quit")
+    quitButton.interactOnRelease("invokeCommand(Quit)")
+    toolbar.control(quitButton)
+
+    val addButton = new ButtonBuilder("add", "Add")
+    addButton.interactOnRelease("invokeCommand(Add)")
+    toolbar.control(addButton)
+
+    val editScreen = new ScreenBuilder("start")
+    editScreen.layer(toolbar)
+    editScreen.controller(new DesignUiController)
+
+    nifty.addScreen("edit", editScreen.build(nifty))
+    nifty.gotoScreen("edit")
 
     // attach the nifty display to the gui view port as a processor
-    guiViewPort.addProcessor(niftyDisplay);
+    guiViewPort.addProcessor(niftyDisplay)
 
     // disable the fly cam
-    flyCam.setEnabled(false);
-//        flyCam.setDragToRotate(true);
+//    flyCam.setEnabled(false)
+    flyCam.setDragToRotate(true);
 
   }
 

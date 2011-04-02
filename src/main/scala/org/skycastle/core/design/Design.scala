@@ -1,10 +1,7 @@
 package org.skycastle.core.design
 
 import com.jme3.scene.Spatial
-import java.util.HashMap
 import org.skycastle.util.grid.{GridSize, GridPos}
-import com.jme3.math.Vector3f
-import org.skycastle.util.Vec3i
 import org.skycastle.util.octree.GridStorage
 
 
@@ -98,7 +95,7 @@ class Design extends HistoryDocument[DesignChange] {
     if (parts.contains(part)) return ChangeNotPossible("Can't add the same part " + part + " twice.")
 
     // Check occupation
-    val occupants: List[Part] = part.occupiedCells.toList flatMap {c => gridStorage.getDataAt(c)}
+    val occupants: List[Part] = part.occupiedCells.toList flatMap {(c: GridPos) => gridStorage.getDataAt(c)}
     if (!occupants.isEmpty) return AlreadyOccupied(occupants)
 
     // Check connections
