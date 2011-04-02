@@ -4,9 +4,23 @@
        xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd
                            http://nifty-gui.sourceforge.net/nifty.xsd">
 
-    <screen id="start" controller="de.lessvoid.nifty.examples.helloworld.HelloWorldStartScreen">
-        <layer >
-        </layer>
-    </screen>
+
+  <useStyles filename="nifty-default-styles.xml" />
+  <useControls filename="nifty-default-controls.xml" />
+
+
+  <screen id="start" controller="org.skycastle.client.designer.DesignUiController">
+    <layer id="layer1" backgroundColor="#003f" childLayout="center">
+      <!-- ... panels go here... -->
+
+      <panel style="nifty-panel" height="25%" width="35%" align="center" valign="center" 
+             childLayout="center" visibleToMouse="true">
+        <text text="Hellows" color="#ffff" font="aurulent-sans-17.fnt" align="center" valign="center">
+          <interact onClick="clickbutton()"/>
+        </text>
+      </panel>
+
+    </layer>
+  </screen>
 
 </nifty>
