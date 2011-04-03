@@ -27,6 +27,13 @@ import de.lessvoid.nifty.builder.ElementBuilder.{VAlign, Align}
 import de.lessvoid.nifty.tools.Color
 import de.lessvoid.nifty.controls.textfield.builder.TextFieldBuilder
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder
+import com.jme3.texture.Texture
+import com.jme3.texture.Texture.WrapMode
+import com.jme3.terrain.heightmap.HillHeightMap
+import com.jme3.renderer.Camera
+import java.util.ArrayList
+import com.jme3.bounding.BoundingBox
+import com.jme3.terrain.geomipmap.{TerrainQuad, TerrainLodControl}
 
 /**
  * Main entry point for Skycastle client.
@@ -120,7 +127,57 @@ object Skycastle extends SimpleApplication {
     initCrossHairs()
     initKeys()
     initUi()
+    initTerrain()
   }
+
+  def initTerrain() {
+
+    def createTerrainMaterial(a: String, b: String, c: String, h: String, alpha: String): Material = {
+      // Create material from Terrain Material Definition
+      val matRock = new Material(assetManager, "Common/MatDefs/Terrain/Terrain.j3md");
+      // Load alpha map (for splat textures)
+      matRock.setTexture("m_Alpha", assetManager.loadTexture(alpha));
+      // load heightmap image (for the terrain heightmap)
+      val heightMapImage = assetManager.loadTexture(h);
+
+      // load grass texture
+      val grass = assetManager.loadTexture(a);
+      grass.setWrap(WrapMode.Repeat);
+      matRock.setTexture("m_Tex1", grass);
+      matRock.setFloat("m_Tex1Scale", 64f);
+
+      // load dirt texture
+      val dirt = assetManager.loadTexture(b);
+      dirt.setWrap(WrapMode.Repeat);
+      matRock.setTexture("m_Tex2", dirt);
+      matRock.setFloat("m_Tex2Scale", 32f);
+
+      // load rock texture
+      val rock = assetManager.loadTexture(c);
+      rock.setWrap(WrapMode.Repeat);
+      matRock.setTexture("m_Tex3", rock);
+      matRock.setFloat("m_Tex3Scale", 128f);
+      matRock
+    }
+
+    val heightmap = new HillHeightMap(1025, 1000, 50, 100, 3);
+    heightmap.load
+
+    val terrain = new TerrainQuad("terrain", 65, 513, heightmap.getHeightMap());
+    terrain.setMaterial(createTerrainMaterial("textures/twisty_grass.png", "textures/parchments.png", "textures/grey_rock.png", "textures/test_crate.png", "textures/test_crate_arrow.png" ));
+    terrain.setModelBound(new BoundingBox());
+    terrain.updateModelBound();
+    terrain.setLocalScale(2f, 1f, 2f); // scale to make it less steep
+
+    val cameras = new ArrayList[Camera]();
+    cameras.add(getCamera());
+    val control = new TerrainLodControl(terrain, cameras);
+    terrain.addControl(control);
+
+    rootNode.attachChild(terrain);
+  }
+
+
 
   private var nifty: Nifty = null
 
