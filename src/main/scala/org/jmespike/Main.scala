@@ -36,6 +36,7 @@ object Main extends SimpleApplication {
 
     flyCam.setEnabled(true)
     flyCam.setDragToRotate(true)
+    flyCam.setMoveSpeed(100)
 
     setPauseOnLostFocus(false)
   }
