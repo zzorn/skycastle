@@ -34,6 +34,10 @@ object Main extends SimpleApplication {
     editor.setSettings(conf)
     editor.setActive(true)
 
+    flyCam.setEnabled(true)
+    flyCam.setDragToRotate(true)
+
+    setPauseOnLostFocus(false)
   }
 
 
