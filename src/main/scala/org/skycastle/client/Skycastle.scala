@@ -72,7 +72,7 @@ object Skycastle extends SimpleApplication {
 
     // Register asset path
     assetManager.registerLocator("assets", classOf[FileLocator])
-    //assetManager.registerLoader(classOf[JsonConfigLoader], "conf")
+//    assetManager.registerLoader(classOf[JsonConfigLoader], "conf")
 
     // Register loadable beans
     EntityTypeLoader.registerBeanType(classOf[ColorBean], 'Color)

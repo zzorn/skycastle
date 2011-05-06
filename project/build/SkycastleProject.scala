@@ -7,7 +7,11 @@ class SkycastleProject(info: ProjectInfo) extends DefaultProject(info) with Akka
 
   // For clarity, store all JME3 jar files in own directory under lib/
   def jme3Jars = descendents("lib" / "jme3", "*.jar")
-  override def unmanagedClasspath = super.unmanagedClasspath +++ jme3Jars
+
+  // Simplex libs
+  def simplex3dJars = descendents("lib" / "simplex3d", "*.jar")
+
+  override def unmanagedClasspath = super.unmanagedClasspath +++ jme3Jars +++ simplex3dJars
 
 /*
   // Akka libraries, uncomment if / as needed. 
