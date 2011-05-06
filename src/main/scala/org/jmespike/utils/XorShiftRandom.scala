@@ -13,6 +13,14 @@ import java.util.Random
  */
 final class XorShiftRandom extends Random  {
 
+  def this(seed1: Int,
+           seed2: Int = XorShiftConstants.DEFAULT_SEED_2,
+           seed3: Int = XorShiftConstants.DEFAULT_SEED_3,
+           seed4: Int = XorShiftConstants.DEFAULT_SEED_4) {
+    this()
+    setSeed(seed1, seed2, seed3, seed4)
+  }
+
   private var s1: Int = XorShiftConstants.DEFAULT_SEED_1
   private var s2: Int = XorShiftConstants.DEFAULT_SEED_2
   private var s3: Int = XorShiftConstants.DEFAULT_SEED_3
