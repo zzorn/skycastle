@@ -14,6 +14,10 @@ class TestSceneConf extends Conf {
 
   val numBalls = p('numBalls, 50)
 
+  val xArea = p('xArea, 100)
+  val yArea = p('yArea, 100)
+  val zArea = p('zArea, 100)
+
   val ballAppearance = p('ballAppearance, new AppearanceConf)
 
 }
