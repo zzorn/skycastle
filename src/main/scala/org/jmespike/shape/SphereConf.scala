@@ -3,6 +3,7 @@ package org.jmespike.shape
 import com.jme3.scene.shape.Sphere
 import com.jme3.scene.Mesh
 import java.util.Random
+import math._
 
 /**
  * 
@@ -16,6 +17,6 @@ class SphereConf extends ShapeConf {
   val interior      = p('interior, false)
 
   def createShape(rng: Random): Mesh = {
-    new Sphere(zSamples, radialSamples, radius, useEvenSlices, interior)
+    new Sphere(max(zSamples, 1), max(radialSamples, 1), radius, useEvenSlices, interior)
   }
 }
