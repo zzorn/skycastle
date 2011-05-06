@@ -19,8 +19,8 @@ class DirectionalLightConf extends Conf {
   val y = p('y, 0.5f).editor(makeSlider(-1, 1))
   val z = p('z, 0.1f).editor(makeSlider(-1, 1))
 
-  def configure(light: DirectionalLight, random: Random) {
-    light.setColor(color().createColor(random) * intensity())
+  def configure(light: DirectionalLight) {
+    light.setColor(color().getColor * intensity())
     light.setDirection(new Vector3f(x(), y(), z()).normalizeLocal())
   }
 }

@@ -9,6 +9,7 @@ import org.scalaprops.{Property, Bean}
 /**
  * Base class for settings that can be loaded and saved to config and edited.
  */
+// TODO: Some kinda primitive value for a random variable, with some given probability field, and editor for it
 trait Conf extends Bean {
 
   implicit def propertyToValue[T](prop: Property[T]): T = prop.value

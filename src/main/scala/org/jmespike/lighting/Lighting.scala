@@ -1,20 +1,55 @@
 package org.jmespike.lighting
 
-import org.jmespike.Conf
-import org.jmespike.conf.ColorConf
+import com.jme3.scene.Spatial
+import com.jme3.light.{DirectionalLight, AmbientLight}
+import org.scalaprops.{Property, Bean, BeanListener}
 
 /**
- * The static lighting of a scene.
+ * Keeps track of the lighting of some scene.
  */
-class Lighting extends Conf {
+class Lighting(node: Spatial, initialLightConf: LightingConf = new LightingConf()) {
+  require(node != null, "can't set up lighting for null node")
 
-  val skyColor = p('skyColor, new ColorConf())
+  private var _lightConf: LightingConf = null
+  private val ambientLight = new AmbientLight()
+  private val directionalLight1 = new DirectionalLight()
+  private val directionalLight2 = new DirectionalLight()
+  private val directionalLight3 = new DirectionalLight()
 
-  val ambient = p('ambient, new AmbientLightConf)
+  private val confListener: BeanListener = new BeanListener {
+    def onPropertyRemoved(bean: Bean, property: Property[ _ ]) {}
+    def onPropertyAdded(bean: Bean, property: Property[ _ ]) {}
+    def onPropertyChanged(bean: Bean, property: Property[ _ ]) {
+      updateLights()
+    }
+  }
 
-  // TODO: Add list support to scalaprops
-  val directional1 = p('directional1, new DirectionalLightConf)
-  val directional2 = p('directional2, new DirectionalLightConf)
-  val directional3 = p('directional3, new DirectionalLightConf)
+  node.addLight(ambientLight)
+  node.addLight(directionalLight1)
+  node.addLight(directionalLight2)
+  node.addLight(directionalLight3)
+
+  lightConf = initialLightConf
+
+  def lightConf = _lightConf
+  def lightConf_=(conf: LightingConf) {
+    if (_lightConf != null) _lightConf.removeDeepListener(confListener)
+    _lightConf = conf
+    if (_lightConf != null) _lightConf.addDeepListener(confListener)
+
+    updateLights()
+  }
+
+
+  def updateLights() {
+    val conf = lightConf
+    if (conf != null) {
+      conf.ambient().configure(ambientLight)
+      conf.directional1().configure(directionalLight1)
+      conf.directional2().configure(directionalLight2)
+      conf.directional3().configure(directionalLight3)
+    }
+  }
+
 
 }

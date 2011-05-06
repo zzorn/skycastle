@@ -2,14 +2,14 @@ package org.jmespike.appearance
 
 
 import org.scalaprops.Bean
-import util.Random
 import simplex3d.math.float.functions._
 import simplex3d.math.float._
 import java.awt.Color
 import com.jme3.material.Material
-import org.jmespike.conf.ColorConf
 import org.jmespike.{Context, Conf}
 import org.jmespike.utils.VectorConversions._
+import org.jmespike.conf.{RandomColorConf, ColorConf}
+import java.util.Random
 
 /**
  * The surface appearance of a material.
@@ -18,13 +18,13 @@ class MaterialConf() extends Conf {
 
 
   // Diffuse color
-  val color = p('color, new ColorConf())
+  val color = p('color, new RandomColorConf())
 
   // Ambient color = self illuminating color
-  val ambientColor = p('ambientColor, new ColorConf())
+  val ambientColor = p('ambientColor, new RandomColorConf())
 
   // Color for calculating specular highlight (colored for metals, otherwise white)
-  val specularColor = p('specularColor, new ColorConf())
+  val specularColor = p('specularColor, new RandomColorConf())
 
   // Size of specular highlight
   val shininess = p('shininess, 5f).editor(makeSlider(0, 20))

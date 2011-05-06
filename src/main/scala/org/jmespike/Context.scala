@@ -15,11 +15,14 @@ object Context {
 
   val beanParser = createBeanParser
 
-  var settings = new GameSettings
+  var settings = new GameConf
 
+  def reloadConf() {
+    Main.reload = true
+  }
  
 
-  def assetManager: AssetManager = JmeSpike.getAssetManager
+  def assetManager: AssetManager = Main.getAssetManager
 
 
 

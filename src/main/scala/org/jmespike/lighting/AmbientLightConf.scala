@@ -15,10 +15,9 @@ import org.jmespike.utils.VectorConversions._
 class AmbientLightConf extends Conf {
 
   val color = p('color, new ColorConf())
-  val intensity = p('intensity, 1f).editor(makeSlider(0, 4))
+  val intensity = p('intensity, 1f).editor(makeSlider(-5, 5))
 
-  def configure(light: AmbientLight, random: Random) {
-    light.setColor(color().createColor(random) * intensity())
-    light.setColor(new ColorRGBA(0.3f, 0.2f, 0.1f, 1f).multLocal(3f))
+  def configure(light: AmbientLight) {
+    light.setColor(color().getColor * intensity())
   }
 }

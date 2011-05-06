@@ -2,12 +2,13 @@ package org.jmespike.shape
 
 import com.jme3.scene.Mesh
 import org.jmespike.Conf
+import java.util.Random
 
 /**
  * 
  */
 trait ShapeConf extends Conf {
 
-  def createShape: Mesh
+  def createShape(rng: Random): Mesh
 
 }

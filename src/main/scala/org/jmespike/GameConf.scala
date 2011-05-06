@@ -4,7 +4,7 @@ package org.jmespike
  * 
  */
 
-class GameSettings extends Conf {
+class GameConf extends Conf {
 
 
 }

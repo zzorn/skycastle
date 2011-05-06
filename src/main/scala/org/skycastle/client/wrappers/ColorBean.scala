@@ -13,7 +13,7 @@ class ColorBean extends Bean {
   val b = p('b, 0f)
   val a = p('a, 1f)
 
-  setBeanName('Color)
+//  setBeanName('Color)
 
   def this(red: Float, green: Float, blue: Float, alpha: Float = 1f) {
     this()

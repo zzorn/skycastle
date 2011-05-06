@@ -12,7 +12,7 @@ class Vec3 extends Bean {
   val y = p('y, 0f)
   val z = p('z, 0f)
 
-  setBeanName('Vec3)
+//  setBeanName('Vec3)
 
   def this(x: Float, y: Float, z: Float) {
     this()
