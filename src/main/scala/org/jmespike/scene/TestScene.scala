@@ -10,6 +10,7 @@ import org.jmespike.utils.VectorConversions._
 /**
  * 
  */
+// TODO: This could be moved to test scene conf, if it wasn't for extending scene and scene keeping track of the node -> make scene general purpose, that just takes a scene factory
 class TestScene(conf: TestSceneConf) extends Scene {
 
   var lighting: Lighting = null
@@ -21,7 +22,7 @@ class TestScene(conf: TestSceneConf) extends Scene {
     lighting = new Lighting(root, conf.lighting())
 
     // Add some content
-    val rng = new XorShiftRandom()
+    val rng = new XorShiftRandom(conf.seed())
     val num = conf.numBalls()
     for (i <- 0 until num) {
       val pos = Vec3((rng.nextGaussian * conf.xArea()).toFloat,
