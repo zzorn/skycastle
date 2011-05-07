@@ -2,7 +2,6 @@ package org.jmespike.conf
 
 import org.scalaprops.parser.{JsonBeanParser}
 import org.scalaprops.Bean
-import org.jmespike.conf.Conf
 import org.jmespike.shape.{SphereConf}
 import org.jmespike.appearance.{MaterialConf, AppearanceConf}
 import org.jmespike.lighting.{LightingConf, AmbientLightConf, DirectionalLightConf}

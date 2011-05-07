@@ -261,9 +261,7 @@ object Skycastle extends SimpleApplication {
           val gridX = collisionResult.getGeometry.getUserData("gridCoordinate.x").asInstanceOf[Int]
           val gridY = collisionResult.getGeometry.getUserData("gridCoordinate.y").asInstanceOf[Int]
           val gridZ = collisionResult.getGeometry.getUserData("gridCoordinate.z").asInstanceOf[Int]
-          if (gridX != null && gridY != null && gridZ != null) {
-            addPipe(gridX, gridY, gridZ)
-          }
+          addPipe(gridX, gridY, gridZ)
 
           //System.out.println("* Collision #" + i);
           //System.out.println("  You shot " + hit + " at " + pt + ", " + dist + " wu away.");

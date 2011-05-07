@@ -9,7 +9,6 @@ import org.scalaprops.exporter.JsonBeanExporter
 import java.io._
 import net.miginfocom.swing.MigLayout
 import org.scalaprops.ui.editors.{NestedBeanEditor}
-import org.jmespike.conf.Conf
 import org.scalaprops.parser.ParseError
 
 /**
@@ -33,19 +32,21 @@ class ConfEditor[T <: Conf](confChangeListener: (T) => Unit, defaultSavePath: Fi
   private var mostRecentSavePath: File = defaultSavePath
 
   def setSettings(_settings: T) {
-    if (settings != null) settings.removeDeepListener(changeListener)
+    if (_settings != settings) {
+      if (settings != null) settings.removeDeepListener(changeListener)
 
-    settings = _settings
+      settings = _settings
 
-    if (levelEditorUi != null) mainPanel.remove(levelEditorUi)
-    levelEditorUi = makeEditorUi
-    if (levelEditorUi != null) mainPanel.add(levelEditorUi, BorderLayout.CENTER)
-    mainPanel.invalidate()
-    mainPanel.validate()
-    mainPanel.repaint()
-    frame.pack()
+      if (levelEditorUi != null) mainPanel.remove(levelEditorUi)
+      levelEditorUi = makeEditorUi
+      if (levelEditorUi != null) mainPanel.add(levelEditorUi, BorderLayout.CENTER)
+      mainPanel.invalidate()
+      mainPanel.validate()
+      mainPanel.repaint()
+      frame.pack()
 
-    if (settings != null) settings.addDeepListener(changeListener)
+      if (settings != null) settings.addDeepListener(changeListener)
+    }
   }
 
   def start() {

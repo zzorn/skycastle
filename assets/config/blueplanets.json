@@ -26,41 +26,41 @@
         "beanType": "ColorConf",
         "hue": 0.0,
         "sat": 0.0,
-        "lum": 0.5,
+        "lum": 0.748184,
         "alpha": 1.0
       },
-      "intensity": 0.9104116,
+      "intensity": 3.196126,
       "x": 0.3,
-      "y": 0.5,
+      "y": -0.5012107,
       "z": 0.1
     },
     "directional2": {
       "beanType": "DirectionalLightConf",
       "color": {
         "beanType": "ColorConf",
-        "hue": 0.02905569,
-        "sat": 0.0,
-        "lum": 0.56658596,
+        "hue": 0.6392252,
+        "sat": 0.17917676,
+        "lum": 0.6585956,
         "alpha": 1.0
       },
-      "intensity": 1.5108958,
-      "x": -0.8159806,
-      "y": -0.5012107,
-      "z": 0.20581114
+      "intensity": 0.88135594,
+      "x": 0.09927356,
+      "y": -0.44309926,
+      "z": 1.0
     },
     "directional3": {
       "beanType": "DirectionalLightConf",
       "color": {
         "beanType": "ColorConf",
-        "hue": 0.0,
-        "sat": 0.0,
-        "lum": 1.0,
+        "hue": 0.053268764,
+        "sat": 0.9564165,
+        "lum": 0.47457626,
         "alpha": 1.0
       },
-      "intensity": 3.031477,
-      "x": 0.3,
-      "y": -0.1041162,
-      "z": 0.1
+      "intensity": 1.0653753,
+      "x": -0.9564165,
+      "y": 0.99515736,
+      "z": -1.0
     }
   },
   "seed": 342,
@@ -105,8 +105,8 @@
     "shape": {
       "beanType": "SphereConf",
       "radius": 14.527845,
-      "radialSamples": 16,
-      "zSamples": 16,
+      "radialSamples": 28,
+      "zSamples": 28,
       "useEvenSlices": false,
       "interior": false
     }

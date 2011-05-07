@@ -6,7 +6,6 @@ import simplex3d.math.float.functions._
 import simplex3d.math.float._
 import org.scalaprops.ui.editors.{ColoredSliderBackgroundPainter, SliderFactory}
 import java.awt.Color
-import org.jmespike.conf.Conf
 import org.jmespike.utils.{ColorUtils, RandomUtils}
 import com.jme3.math.ColorRGBA
 import org.jmespike.utils.VectorConversions._
