@@ -15,10 +15,10 @@
         "beanType": "ColorConf",
         "hue": 0.0,
         "sat": 0.0,
-        "lum": 0.6779661,
+        "lum": 0.0,
         "alpha": 1.0
       },
-      "intensity": 0.9806293
+      "intensity": 7.4505806E-9
     },
     "directional1": {
       "beanType": "DirectionalLightConf",
@@ -65,48 +65,48 @@
   },
   "seed": 342,
   "numBalls": 51,
-  "xArea": 200.0,
-  "yArea": 20.0,
-  "zArea": 200.0,
+  "xArea": 115.0,
+  "yArea": 100.0,
+  "zArea": 100.0,
   "ballAppearance": {
     "beanType": "AppearanceConf",
     "material": {
       "beanType": "MaterialConf",
       "color": {
         "beanType": "RandomColorConf",
-        "hue": 0.7820823,
-        "sat": 0.06779661,
-        "lum": 0.19612591,
-        "hueVariation": 0.124697335,
-        "satVariation": 0.13801453,
-        "lumVariation": 0.124697335
+        "hue": 0.6882494,
+        "sat": 0.27577937,
+        "lum": 0.35731414,
+        "hueVariation": 0.022781774,
+        "satVariation": 0.16666667,
+        "lumVariation": 0.08273381
       },
       "ambientColor": {
         "beanType": "RandomColorConf",
-        "hue": 0.58353513,
-        "sat": 0.19612591,
-        "lum": 0.05811138,
+        "hue": 0.0,
+        "sat": 0.0,
+        "lum": 0.0,
         "hueVariation": 0.0,
-        "satVariation": 0.020581113,
-        "lumVariation": 0.021791767
+        "satVariation": 0.010895884,
+        "lumVariation": 0.0
       },
       "specularColor": {
         "beanType": "RandomColorConf",
-        "hue": 0.08232445,
-        "sat": 0.070217915,
-        "lum": 0.041162226,
-        "hueVariation": 0.030266345,
-        "satVariation": 0.046004843,
-        "lumVariation": 0.08837772
+        "hue": 0.0,
+        "sat": 0.0,
+        "lum": 1.0,
+        "hueVariation": 0.1,
+        "satVariation": 0.1,
+        "lumVariation": 0.1
       },
-      "shininess": 20.0,
+      "shininess": 0.14527845,
       "texture": "placeholder.png"
     },
     "shape": {
       "beanType": "SphereConf",
-      "radius": 7.990315,
-      "radialSamples": 36,
-      "zSamples": 33,
+      "radius": 14.527845,
+      "radialSamples": 16,
+      "zSamples": 16,
       "useEvenSlices": false,
       "interior": false
     }

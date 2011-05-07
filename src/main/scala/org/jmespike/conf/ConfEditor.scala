@@ -10,15 +10,16 @@ import java.io._
 import net.miginfocom.swing.MigLayout
 import org.scalaprops.ui.editors.{NestedBeanEditor, BeanEditor}
 import org.jmespike.{Conf, GameConf}
+import org.scalaprops.parser.ParseError
 
 /**
  *
  */
-class ConfEditor(confChangeListener: () => Unit, defaultSavePath: File) {
+class ConfEditor[T <: Conf](confChangeListener: (T) => Unit, defaultSavePath: File, confType: Class[T]) {
 
 
   private val frame = new JFrame()
-  private var settings: Conf = null
+  private var settings: T = null.asInstanceOf[T]
   private val mainPanel = new JPanel(new BorderLayout())
   private var levelEditorUi: NestedBeanEditor[_] = null
   private val changeListener= new BeanListener {
@@ -31,7 +32,7 @@ class ConfEditor(confChangeListener: () => Unit, defaultSavePath: File) {
 
   private var mostRecentSavePath: File = defaultSavePath
 
-  def setSettings(_settings: Conf) {
+  def setSettings(_settings: T) {
     if (settings != null) settings.removeDeepListener(changeListener)
 
     settings = _settings
@@ -58,6 +59,7 @@ class ConfEditor(confChangeListener: () => Unit, defaultSavePath: File) {
     buttonPanel.add(makeReloadButton)
 //    buttonPanel.add(makeLoadLevelButton)
     buttonPanel.add(makeSaveButton)
+    buttonPanel.add(makeLoadButton)
 
     setupFrame(mainPanel)
   }
@@ -112,8 +114,20 @@ class ConfEditor(confChangeListener: () => Unit, defaultSavePath: File) {
     button
   }
 
+  private def makeLoadButton: JComponent = {
+    val button = new JButton("Load")
+
+    button.addActionListener(new ActionListener{
+      def actionPerformed(e: ActionEvent) {
+        load()
+      }
+    })
+
+    button
+  }
+
   private def reLoadSettings() {
-    if (settings != null) confChangeListener()
+    if (settings != null) confChangeListener(settings)
   }
 
   /*
@@ -135,7 +149,7 @@ class ConfEditor(confChangeListener: () => Unit, defaultSavePath: File) {
     else null
   }
 
-  private def save(settings: Bean) {
+  private def save(settings: T) {
     val exporter = new JsonBeanExporter()
 
     val fc = new JFileChooser(mostRecentSavePath)
@@ -170,6 +184,41 @@ class ConfEditor(confChangeListener: () => Unit, defaultSavePath: File) {
       }
     }
     */
+
+  }
+
+  private def load() {
+    val parser: ConfParser = new ConfParser()
+
+    val fc = new JFileChooser(mostRecentSavePath)
+    val result = fc.showOpenDialog(frame)
+    if (result == JFileChooser.APPROVE_OPTION) {
+      val file: File = fc.getSelectedFile
+      try {
+        val bean: Bean = parser.parse(new FileReader(file), file.getPath)
+
+        if (confType.isInstance(bean)) {
+          val conf: T = bean.asInstanceOf[T]
+          setSettings(conf)
+          confChangeListener(conf)
+        }
+        else {
+          JOptionPane.showMessageDialog(frame,
+                                        "The selected file doesn't contain a configuration file of type " + confType.getName +
+                                        ".\nDid not load the config file.",
+                                        "Wrong configuration type",
+                                        JOptionPane.WARNING_MESSAGE)
+        }
+      } catch {
+        case p: ParseError =>
+          JOptionPane.showMessageDialog(frame,
+                                        "The selected file contains syntax errors:\n" + p.getMessage +
+                                        "\nDid not load the config file.",
+                                        "Parse error",
+                                        JOptionPane.ERROR_MESSAGE)
+      }
+    }
+    mostRecentSavePath = fc.getCurrentDirectory
 
   }
 }

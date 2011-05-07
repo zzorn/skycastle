@@ -15,7 +15,7 @@ object Main extends SimpleApplication {
 
   val log = Logger.getLogger(Main.getClass.getName)
 
-  var editor: ConfEditor = null
+  var editor: ConfEditor[TestScene] = null
 
   var reload = true
 
@@ -48,7 +48,7 @@ object Main extends SimpleApplication {
 
     // Setup editor
     val absoluteSettingsPath = (new File("./assets/config" )).getAbsoluteFile
-    editor = new ConfEditor(reloadScene _,  absoluteSettingsPath)
+    editor = new ConfEditor[TestScene](reloadConf _,  absoluteSettingsPath, classOf[TestScene])
     editor.start()
     editor.setSettings(conf)
     editor.setActive(true)
@@ -63,6 +63,11 @@ object Main extends SimpleApplication {
   }
 
 
+  def reloadConf(sceneConf: TestScene) {
+    conf = sceneConf
+    reload = true
+  }
+
   override def simpleUpdate(tpf: Float) {
 
     if (reload) {
@@ -70,10 +75,6 @@ object Main extends SimpleApplication {
       load()
     }
 
-  }
-
-  def reloadScene() {
-    reload = true
   }
 
   def load() {
