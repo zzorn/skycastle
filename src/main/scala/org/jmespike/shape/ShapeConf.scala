@@ -1,7 +1,7 @@
 package org.jmespike.shape
 
 import com.jme3.scene.Mesh
-import org.jmespike.Conf
+import org.jmespike.conf.Conf
 import java.util.Random
 
 /**

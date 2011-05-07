@@ -6,7 +6,8 @@ import simplex3d.math.float.functions._
 import simplex3d.math.float._
 import java.awt.Color
 import com.jme3.material.Material
-import org.jmespike.{Context, Conf}
+import org.jmespike.conf.Conf
+import org.jmespike.{Context}
 import org.jmespike.utils.VectorConversions._
 import org.jmespike.conf.{RandomColorConf, ColorConf}
 import java.util.Random

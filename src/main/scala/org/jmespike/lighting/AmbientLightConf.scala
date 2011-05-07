@@ -4,7 +4,7 @@ import com.jme3.math.{Vector3f, ColorRGBA}
 import com.jme3.light.{AmbientLight, DirectionalLight}
 
 import util.Random
-import org.jmespike.Conf
+import org.jmespike.conf.Conf
 import org.jmespike.conf.ColorConf
 
 import org.jmespike.utils.VectorConversions._

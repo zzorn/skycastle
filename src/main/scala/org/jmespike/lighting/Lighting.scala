@@ -1,5 +1,6 @@
 package org.jmespike.lighting
 
+import org.jmespike.conf.Conf
 import com.jme3.scene.Spatial
 import com.jme3.light.{DirectionalLight, AmbientLight}
 import org.scalaprops.{Property, Bean, BeanListener}

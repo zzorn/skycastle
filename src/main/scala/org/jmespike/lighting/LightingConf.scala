@@ -1,6 +1,6 @@
 package org.jmespike.lighting
 
-import org.jmespike.Conf
+import org.jmespike.conf.Conf
 import org.jmespike.conf.ColorConf
 import com.jme3.light.{DirectionalLight, AmbientLight}
 import com.jme3.app.SimpleApplication._

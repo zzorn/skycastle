@@ -1,10 +1,10 @@
-package org.jmespike
+package org.jmespike.conf
 
 import java.awt.Color
 import org.scalaprops.ui.editors.{SliderFactory, ColoredSliderBackgroundPainter}
 import org.scalaprops.ui.editors.SliderFactory._
-import utils.ColorUtils
 import org.scalaprops.{Property, Bean}
+import org.jmespike.utils.ColorUtils
 
 /**
  * Base class for settings that can be loaded and saved to config and edited.

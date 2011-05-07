@@ -8,8 +8,8 @@ import org.scalaprops.{Property, Bean, BeanListener}
 import org.scalaprops.exporter.JsonBeanExporter
 import java.io._
 import net.miginfocom.swing.MigLayout
-import org.scalaprops.ui.editors.{NestedBeanEditor, BeanEditor}
-import org.jmespike.{Conf, GameConf}
+import org.scalaprops.ui.editors.{NestedBeanEditor}
+import org.jmespike.conf.Conf
 import org.scalaprops.parser.ParseError
 
 /**

@@ -3,7 +3,7 @@ package org.jmespike.lighting
 import com.jme3.light.DirectionalLight
 import com.jme3.math.{Vector3f, ColorRGBA}
 import util.Random
-import org.jmespike.Conf
+import org.jmespike.conf.Conf
 import org.jmespike.conf.ColorConf
 import org.jmespike.utils.VectorConversions._
 

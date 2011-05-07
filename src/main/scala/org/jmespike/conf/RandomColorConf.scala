@@ -1,9 +1,7 @@
 package org.jmespike.conf
 
 import org.jmespike.utils.RandomUtils
-import org.jmespike.Conf
 import java.awt.Color
-import org.jmespike.Conf
 import org.jmespike.utils.RandomUtils
 import simplex3d.math.float.functions._
 import simplex3d.math.float._

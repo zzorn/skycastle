@@ -1,6 +1,6 @@
 package org.jmespike.appearance
 
-import org.jmespike.Conf
+import org.jmespike.conf.Conf
 import com.bulletphysics.collision.shapes.SphereShape
 import org.jmespike.shape.{SphereConf, ShapeConf}
 import com.jme3.scene.{Geometry, Spatial}

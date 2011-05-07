@@ -1,12 +1,11 @@
 package org.jmespike.conf
 
-import org.scalaprops.parser.{JsonBeanParser, BeanParser}
+import org.scalaprops.parser.{JsonBeanParser}
 import org.scalaprops.Bean
-import org.jmespike.GameConf
-import org.jmespike.shape.{ShapeConf, SphereConf}
+import org.jmespike.conf.Conf
+import org.jmespike.shape.{SphereConf}
 import org.jmespike.appearance.{MaterialConf, AppearanceConf}
 import org.jmespike.lighting.{LightingConf, AmbientLightConf, DirectionalLightConf}
-import java.io.Reader
 import org.jmespike.scene.TestScene
 
 /**
@@ -20,7 +19,6 @@ class ConfParser extends JsonBeanParser {
   }
 
   registerBeanType(classOf[TestScene])
-  registerBeanType(classOf[GameConf])
   registerBeanType(classOf[SphereConf])
   registerBeanType(classOf[ColorConf])
   registerBeanType(classOf[RandomColorConf])
