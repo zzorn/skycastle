@@ -1,35 +1,44 @@
 package org.jmespike.scene
 
 import com.jme3.scene.{Spatial, Node}
-import org.jmespike.lighting.Lighting
 import org.jmespike.utils.XorShiftRandom
 import simplex3d.math.float.functions._
 import simplex3d.math.float._
 import org.jmespike.utils.VectorConversions._
+import org.jmespike.lighting.{LightingConf, Lighting}
+import org.jmespike.appearance.AppearanceConf
 
 /**
  * 
  */
-// TODO: This could be moved to test scene conf, if it wasn't for extending scene and scene keeping track of the node -> make scene general purpose, that just takes a scene factory
-class TestScene(conf: TestSceneConf) extends Scene {
+class TestScene() extends SceneFactory {
 
-  var lighting: Lighting = null
+  val lighting = p('lighting, new LightingConf)
 
-  def createRoot: Spatial = {
+  val seed = p('seed, 342)
+  val numBalls = p('numBalls, 50)
+
+  val xArea = p('xArea, 100f)
+  val yArea = p('yArea, 100f)
+  val zArea = p('zArea, 100f)
+
+  val ballAppearance = p('ballAppearance, new AppearanceConf)
+
+  def createScene: Spatial = {
     val root = new Node
 
     // Add lights
-    lighting = new Lighting(root, conf.lighting())
+    val lights: Lighting = new Lighting(root, lighting())
 
     // Add some content
-    val rng = new XorShiftRandom(conf.seed())
-    val num = conf.numBalls()
+    val rng = new XorShiftRandom(seed())
+    val num = numBalls()
     for (i <- 0 until num) {
-      val pos = Vec3((rng.nextGaussian * conf.xArea()).toFloat,
-                     (rng.nextGaussian * conf.yArea()).toFloat,
-                     (rng.nextGaussian * conf.zArea()).toFloat)
+      val pos = Vec3((rng.nextGaussian * xArea()).toFloat,
+                     (rng.nextGaussian * yArea()).toFloat,
+                     (rng.nextGaussian * zArea()).toFloat)
 
-      val ball = conf.ballAppearance().createSpatial(rng)
+      val ball = ballAppearance().createSpatial(rng)
       ball.setLocalTranslation(pos)
       root.attachChild(ball)
     }

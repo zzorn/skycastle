@@ -9,12 +9,12 @@ import org.scalaprops.exporter.JsonBeanExporter
 import java.io._
 import net.miginfocom.swing.MigLayout
 import org.scalaprops.ui.editors.{NestedBeanEditor, BeanEditor}
-import org.jmespike.{Conf, GameConf, Context}
+import org.jmespike.{Conf, GameConf}
 
 /**
  *
  */
-class ConfEditor() {
+class ConfEditor(confChangeListener: () => Unit, defaultSavePath: File) {
 
 
   private val frame = new JFrame()
@@ -29,7 +29,7 @@ class ConfEditor() {
     }
   }
 
-  private var mostRecentSavePath: File = new File("/home/zzorn/projects/ludumdare20/assets/config/")
+  private var mostRecentSavePath: File = defaultSavePath
 
   def setSettings(_settings: Conf) {
     if (settings != null) settings.removeDeepListener(changeListener)
@@ -113,7 +113,7 @@ class ConfEditor() {
   }
 
   private def reLoadSettings() {
-    if (settings != null) Context.reloadConf()
+    if (settings != null) confChangeListener()
   }
 
   /*

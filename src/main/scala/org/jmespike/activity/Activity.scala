@@ -1,4 +1,4 @@
-package org.jmespike.game
+package org.jmespike.activity
 
 /**
  * Something that provides an user with some outputs and inputs.  Somewhat similar to a scene.

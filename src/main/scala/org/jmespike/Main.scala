@@ -1,43 +1,64 @@
 package org.jmespike
 
 import com.jme3.app.SimpleApplication
-import conf.ConfEditor
-import scene.{TestSceneConf, TestScene, Scene}
+import conf.{ConfLoader, ConfEditor}
+import scene.{TestScene}
+import com.jme3.scene.Spatial
+import com.jme3.asset.plugins.FileLocator
+import java.util.logging.Logger
+import java.io.File
 
 /**
  * Attempt at using JME classes for storing most stuff.
  */
 object Main extends SimpleApplication {
 
+  val log = Logger.getLogger(Main.getClass.getName)
+
   var editor: ConfEditor = null
 
   var reload = true
 
-  var scene: Scene = null
+  var currentScene: Spatial = null
 
-  var conf: TestSceneConf = new TestSceneConf
+  var conf: TestScene = new TestScene
 
-  def main(args: Array[ String ])
-  {
+  def main(args: Array[ String ]) {
     start()
   }
 
   def simpleInitApp() {
 
+    // Config ways to get assets
+    assetManager.registerLocator("assets", classOf[FileLocator])
+    assetManager.registerLoader(classOf[ConfLoader], "json")
+
     // Load game settings
+    val settingsPath = "config/jmespike.json"
+    log.info("Loading settings from " + settingsPath)
+    conf = assetManager.loadAsset(settingsPath).asInstanceOf[TestScene]
+    if (conf == null) {
+      log.warning("  Failed to load settings, using defaults")
+      conf = new TestScene
+    }
 
 
     // Setup initial activity in the game
 
-    editor = new ConfEditor()
+
+    // Setup editor
+    val absoluteSettingsPath = (new File("./assets/config" )).getAbsoluteFile
+    editor = new ConfEditor(reloadScene _,  absoluteSettingsPath)
     editor.start()
     editor.setSettings(conf)
     editor.setActive(true)
 
+    // Configure camera for editing
     flyCam.setEnabled(true)
     flyCam.setDragToRotate(true)
     flyCam.setMoveSpeed(100)
 
+    // Keep running even if focus is lost
     setPauseOnLostFocus(false)
   }
 
@@ -51,12 +72,16 @@ object Main extends SimpleApplication {
 
   }
 
+  def reloadScene() {
+    reload = true
+  }
+
   def load() {
-    if (scene != null) rootNode.detachChild(scene.root)
+    if (currentScene != null) rootNode.detachChild(currentScene)
 
-    scene = new TestScene(conf)
+    currentScene = conf.createScene
 
-    rootNode.attachChild(scene.root)
+    rootNode.attachChild(currentScene)
   }
 
 }
