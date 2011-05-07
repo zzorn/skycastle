@@ -17,9 +17,9 @@ class ShipControl(steeringConf: SteeringConf) extends BaseControl with Steerable
 
   var orientation: Quaternion = new Quaternion()
 
-  val velocity: Vec3= new Vec3()
+  val velocity: Vec3= Vec3(0,0,0)
 
-  def controlUpdate(timeDelta: Float) {
+  override def controlUpdate(timeDelta: Float) {
 
     // Update orientation
     val currentOrientation: Quaternion = new Quaternion(spatial.getLocalRotation)
