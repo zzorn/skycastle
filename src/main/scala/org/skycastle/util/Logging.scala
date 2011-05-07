@@ -29,7 +29,7 @@ trait Logging {
   def log: Logger = Logger.getLogger(loggingPath)
 
   def log(level: Level, message: => String, exception: => Throwable)  {
-    log.log(level, message, exception)
+    if (log.isLoggable(level)) log.log(level, message, exception)
   }
 
   final def log( level : Level, message : => String ): Unit = { log( level, message, null ) }

@@ -9,6 +9,7 @@ import java.lang.String
 import org.jmespike.{SceneLoader}
 import org.jmespike.scene.SceneFactory
 import java.util.logging.Logger
+import org.skycastle.util.Logging
 
 /**
  * Something that provides an user with some outputs and inputs.  Somewhat similar to a scene.
@@ -20,7 +21,7 @@ import java.util.logging.Logger
  * opening overview map in window on top of regular game?
  */
 // TODO: Each activity could provide some spatial?
-abstract class Activity extends AbstractAppState {
+abstract class Activity extends AbstractAppState with Logging {
 
   private var application: Application = null
   private var sceneLoader: SceneLoader = null
@@ -32,13 +33,12 @@ abstract class Activity extends AbstractAppState {
   private var activitiesToStart: List[Activity] = Nil
   private var loadScene = true
 
-  protected val log: Logger = Logger.getLogger(getClass.getName)
 
   def name: String = getClass.getSimpleName
 
   private val delegatingActionListener: ActionListener = new ActionListener{
     def onAction(name: String, isPressed: Boolean, tpf: Float) {
-      log.info("Key pressed " + name)
+      logDebug("Key pressed " + name + " " + isPressed)
 
       actionListeners.get(name) match {
         case Some(action) => action(name, isPressed, tpf)
@@ -48,7 +48,7 @@ abstract class Activity extends AbstractAppState {
   }
 
   protected def addActionListener(actionName: String, action: (String, Boolean, Float) => Unit) {
-    log.info("Registered action "+actionName)
+    logDebug("Registered action "+actionName)
     actionListeners += (actionName -> action)
   }
 
@@ -57,9 +57,9 @@ abstract class Activity extends AbstractAppState {
   }
 
   override def initialize(stateManager: AppStateManager, app: Application) {
-    super.initialize(stateManager, app)
+    logDebug("Initializing activity "+name)
 
-    log.info("Activity "+name+" initialized")
+    super.initialize(stateManager, app)
 
     application = app
     sceneLoader = app.asInstanceOf[SceneLoader]
@@ -67,6 +67,8 @@ abstract class Activity extends AbstractAppState {
     inputManager = app.getInputManager
 
     handleActivation()
+
+    logDebug("Activity "+name+" initialized")
   }
 
   /*
@@ -80,7 +82,7 @@ abstract class Activity extends AbstractAppState {
   protected def sceneFactory: SceneFactory
 
   private def handleActivation() {
-    log.info("Activity "+name+" activated")
+    logDebug("Activity "+name+" activated")
     actionListeners.keys foreach {actionName => inputManager.addListener(delegatingActionListener, actionName)}
     loadScene = true
     onActivated()
@@ -94,7 +96,7 @@ abstract class Activity extends AbstractAppState {
         handleActivation()
       }
       else {
-        log.info("Activity "+name+" deactivated")
+        logDebug("Activity "+name+" deactivated")
         inputManager.removeListener(delegatingActionListener)
         onDeActivated()
       }
