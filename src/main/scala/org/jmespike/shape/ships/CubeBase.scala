@@ -2,27 +2,27 @@ package org.jmespike.shape.ships
 
 import simplex3d.math.float.functions._
 import simplex3d.math.float._
+import org.jmespike.utils.MeshBuilder
 
 /**
  * Utility class for creating bases
  */
-class CubeBase(frontDir: Quat4,
-               frontTopLeft: Vec3,    frontTopRight: Vec3,
-               frontBottomLeft: Vec3, frontBottomRight: Vec3,
-               backTopLeft: Vec3,     backTopRight: Vec3,
-               backBottomLeft: Vec3,  backBottomRight: Vec3) {
+class CubeBase(meshBuilder: MeshBuilder,
+               frontDir: inQuat4,
+               ftl: Int, ftr: Int, fbl: Int, fbr: Int,
+               btl: Int, btr: Int, bbl: Int, bbr: Int) {
 
   def makeBase(side: CubeSide): ComponentBase = {
 
     val d = side.dir.rotate(frontDir)
 
     side match {
-      case FrontSide  => new ComponentBase(frontTopRight, frontTopLeft, frontBottomLeft, frontBottomRight, d)
-      case BackSide   => new ComponentBase(backTopLeft, backTopRight, backBottomRight, backBottomLeft, d)
-      case TopSide    => new ComponentBase(backTopRight, backTopLeft, frontTopLeft, frontTopRight, d)
-      case BottomSide => new ComponentBase(frontBottomRight, frontBottomLeft, backBottomLeft, backBottomRight, d)
-      case LeftSide   => new ComponentBase(frontTopLeft, backTopLeft, backBottomLeft, frontBottomLeft, d)
-      case RightSide  => new ComponentBase(backTopRight, frontTopRight, frontBottomRight, backBottomRight, d)
+      case FrontSide  => new ComponentBase(meshBuilder, d, ftr, ftl, fbl, fbr)
+      case BackSide   => new ComponentBase(meshBuilder, d, btl, btr, bbr, bbl)
+      case TopSide    => new ComponentBase(meshBuilder, d, btr, btl, ftl, ftr)
+      case BottomSide => new ComponentBase(meshBuilder, d, fbr, fbl, bbl, bbr)
+      case LeftSide   => new ComponentBase(meshBuilder, d, ftl, btl, bbl, fbl)
+      case RightSide  => new ComponentBase(meshBuilder, d, btr, ftr, fbr, bbr)
     }
   }
 }

@@ -19,5 +19,10 @@ class Shell extends ShipComponent {
 
   // TODO: Also specify any ship components connected to panels on the shell.
   
-  def createModel(style: ShipConf, base: ComponentBase) = null
+  def buildMesh(style: ShipConf, base: ComponentBase) {
+
+    // Simple solid hull
+    base.meshBuilder.addQuad(base.topRight, base.topLeft, base.bottomLeft, base.bottomRight)
+
+  }
 }

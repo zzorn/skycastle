@@ -1,12 +1,19 @@
 package org.jmespike.shape.ships
 
 import org.jmespike.conf.Conf
-import com.jme3.scene.Spatial
+import org.jmespike.appearance.MaterialConf
+import java.util.Random
+import com.jme3.scene.{Geometry, Spatial}
+import org.jmespike.utils.{XorShiftRandom, MeshBuilder}
 
 /**
  * Generates ship shapes.
  */
 class ShipConf extends Conf {
+
+  val seed = p('seed, 42)
+
+  val material = p('material, new MaterialConf)
 
   val core = p('core, new Core())
 
@@ -15,8 +22,18 @@ class ShipConf extends Conf {
 
   def createModel(): Spatial = {
 
+
+    val rng =  new XorShiftRandom(seed())
+
     // Create the model, starting by the core and adding connected parts, passing in this ShipConf to provide style information to all parts.
-    core().createModel(this)
+    val meshBuilder = new MeshBuilder()
+    core().buildMesh(this, meshBuilder)
+
+    val mesh = meshBuilder.createMesh()
+
+    val geom = new Geometry("geometry", mesh)
+    geom.setMaterial(material().createMaterial(rng))
+    geom
 
   }
 
