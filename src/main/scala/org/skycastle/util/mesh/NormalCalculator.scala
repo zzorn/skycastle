@@ -37,6 +37,7 @@ object NormalCalculator {
       b.subtract(a, sideAB)
       c.subtract(a, sideAC)
 
+      // Triangles with no surface area do not affect the normals of nearby sides
       val normal = sideAB.cross(sideAC)
       if (normal.lengthSquared > 0) {
         setNormal(ai, normal)
