@@ -5,6 +5,7 @@ import org.jmespike.appearance.MaterialConf
 import java.util.Random
 import com.jme3.scene.{Geometry, Spatial}
 import org.jmespike.utils.{XorShiftRandom, MeshBuilder}
+import com.jme3.bounding.BoundingBox
 
 /**
  * Generates ship shapes.
@@ -12,9 +13,7 @@ import org.jmespike.utils.{XorShiftRandom, MeshBuilder}
 class ShipConf extends Conf {
 
   val seed = p('seed, 42)
-
   val material = p('material, new MaterialConf)
-
   val core = p('core, new Core())
 
   // TODO Graphical style etc?
@@ -33,6 +32,10 @@ class ShipConf extends Conf {
 
     val geom = new Geometry("geometry", mesh)
     geom.setMaterial(material().createMaterial(rng))
+
+    // Setup bounding volume
+    geom.setModelBound(new BoundingBox())
+
     geom
 
   }

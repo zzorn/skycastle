@@ -21,8 +21,20 @@ class Shell extends ShipComponent {
   
   def buildMesh(style: ShipConf, base: ComponentBase) {
 
-    // Simple solid hull
-    base.meshBuilder.addQuad(base.topRight, base.topLeft, base.bottomLeft, base.bottomRight)
+    val meshBuilder = base.meshBuilder
+
+    // Simple solid hull with sharp corners
+
+    val tr = meshBuilder.addVertex(base.topRightVertex)
+    val tl = meshBuilder.addVertex(base.topLeftVertex)
+    val bl = meshBuilder.addVertex(base.bottomLeftVertex)
+    val br = meshBuilder.addVertex(base.bottomRightVertex)
+
+    meshBuilder.addQuad(tl, tr, br, bl)
+    meshBuilder.addQuad(base.topLeft, base.topRight, tr, tl)
+    meshBuilder.addQuad(base.bottomRight, base.topRight, tr, br)
+    meshBuilder.addQuad(base.bottomLeft, base.topLeft, tl, bl)
+    meshBuilder.addQuad(base.bottomRight, base.bottomLeft, bl, br)
 
   }
 }

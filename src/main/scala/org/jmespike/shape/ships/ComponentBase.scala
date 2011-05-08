@@ -17,10 +17,10 @@ case class ComponentBase(meshBuilder: MeshBuilder,
                          bottomLeft: Int,
                          bottomRight: Int) {
 
-  private val topRightVertex    = meshBuilder.vertex(topRight)
-  private val topLeftVertex     = meshBuilder.vertex(topLeft)
-  private val bottomLeftVertex  = meshBuilder.vertex(bottomLeft)
-  private val bottomRightVertex = meshBuilder.vertex(bottomRight)
+  val topRightVertex    : ConstVec3 = meshBuilder.vertex(topRight)
+  val topLeftVertex     : ConstVec3 = meshBuilder.vertex(topLeft)
+  val bottomLeftVertex  : ConstVec3 = meshBuilder.vertex(bottomLeft)
+  val bottomRightVertex : ConstVec3 = meshBuilder.vertex(bottomRight)
 
   val baseCenter : ConstVec3 = 0.25f * (topRightVertex + topLeftVertex + bottomLeftVertex + bottomRightVertex)
 

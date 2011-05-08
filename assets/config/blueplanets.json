@@ -13,12 +13,12 @@
       "beanType": "AmbientLightConf",
       "color": {
         "beanType": "ColorConf",
-        "hue": 0.0,
-        "sat": 0.0,
-        "lum": 0.0,
+        "hue": 0.6878049,
+        "sat": 0.124390244,
+        "lum": 0.25609756,
         "alpha": 1.0
       },
-      "intensity": 7.4505806E-9
+      "intensity": 0.63414633
     },
     "directional1": {
       "beanType": "DirectionalLightConf",
@@ -44,9 +44,9 @@
         "alpha": 1.0
       },
       "intensity": 0.88135594,
-      "x": 0.09927356,
-      "y": -0.44309926,
-      "z": 1.0
+      "x": -0.559322,
+      "y": -0.64648914,
+      "z": 0.9467312
     },
     "directional3": {
       "beanType": "DirectionalLightConf",
@@ -65,9 +65,92 @@
   },
   "seed": 342,
   "numBalls": 51,
+  "numShips": 20,
   "xArea": 115.0,
   "yArea": 100.0,
   "zArea": 100.0,
+  "ship": {
+    "beanType": "ShipConf",
+    "seed": 40,
+    "material": {
+      "beanType": "MaterialConf",
+      "color": {
+        "beanType": "RandomColorConf",
+        "hue": 0.0,
+        "sat": 0.0,
+        "lum": 0.3874092,
+        "hueVariation": 0.1,
+        "satVariation": 0.1,
+        "lumVariation": 0.1
+      },
+      "ambientColor": {
+        "beanType": "RandomColorConf",
+        "hue": 0.0,
+        "sat": 0.0,
+        "lum": 0.37804878,
+        "hueVariation": 0.026634382,
+        "satVariation": 0.0036319613,
+        "lumVariation": 0.020581113
+      },
+      "specularColor": {
+        "beanType": "RandomColorConf",
+        "hue": 0.0,
+        "sat": 0.0,
+        "lum": 0.10653753,
+        "hueVariation": 0.1,
+        "satVariation": 0.1,
+        "lumVariation": 0.1
+      },
+      "shininess": 0.43583536,
+      "texture": "placeholder.png"
+    },
+    "core": {
+      "beanType": "Core",
+      "front": {
+        "beanType": "Shell",
+        "horizontalProfile": FlatProfile,
+        "verticalProfile": FlatProfile,
+        "detailAmount": 0.5
+      },
+      "back": {
+        "beanType": "Shell",
+        "horizontalProfile": FlatProfile,
+        "verticalProfile": FlatProfile,
+        "detailAmount": 0.5
+      },
+      "top": {
+        "beanType": "Shell",
+        "horizontalProfile": FlatProfile,
+        "verticalProfile": FlatProfile,
+        "detailAmount": 0.5
+      },
+      "bottom": {
+        "beanType": "Shell",
+        "horizontalProfile": FlatProfile,
+        "verticalProfile": FlatProfile,
+        "detailAmount": 0.5
+      },
+      "left": {
+        "beanType": "Shell",
+        "horizontalProfile": FlatProfile,
+        "verticalProfile": FlatProfile,
+        "detailAmount": 0.5
+      },
+      "right": {
+        "beanType": "Shell",
+        "horizontalProfile": FlatProfile,
+        "verticalProfile": FlatProfile,
+        "detailAmount": 0.5
+      },
+      "length": 53.0,
+      "width": 32.0,
+      "height": 12.0,
+      "widthScale": 0.70000005,
+      "heightScale": 0.5,
+      "verticalSlant": 1.0,
+      "horizontalSlant": 0.0
+    }
+  },
   "ballAppearance": {
     "beanType": "AppearanceConf",
     "material": {
@@ -85,7 +168,7 @@
         "beanType": "RandomColorConf",
         "hue": 0.0,
         "sat": 0.0,
-        "lum": 0.0,
+        "lum": 0.090243906,
         "hueVariation": 0.0,
         "satVariation": 0.010895884,
         "lumVariation": 0.0

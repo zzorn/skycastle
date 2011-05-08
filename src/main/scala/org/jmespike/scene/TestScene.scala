@@ -7,6 +7,7 @@ import simplex3d.math.float._
 import org.jmespike.utils.VectorConversions._
 import org.jmespike.lighting.{LightingConf, Lighting}
 import org.jmespike.appearance.AppearanceConf
+import org.jmespike.shape.ships.ShipConf
 
 /**
  * 
@@ -17,10 +18,13 @@ class TestScene() extends SceneFactory {
 
   val seed = p('seed, 342)
   val numBalls = p('numBalls, 50)
+  val numShips = p('numShips, 20)
 
   val xArea = p('xArea, 100f)
   val yArea = p('yArea, 100f)
   val zArea = p('zArea, 100f)
+
+  val ship = p('ship, new ShipConf())
 
   val ballAppearance = p('ballAppearance, new AppearanceConf)
 
@@ -42,6 +46,19 @@ class TestScene() extends SceneFactory {
       ball.setLocalTranslation(pos)
       root.attachChild(ball)
     }
+
+    // Add some test ships
+    val ships = numShips()
+    for (i <- 0 until ships) {
+      val pos = Vec3((rng.nextGaussian * xArea()).toFloat,
+                     (rng.nextGaussian * yArea()).toFloat,
+                     (rng.nextGaussian * zArea()).toFloat)
+
+      val s = ship().createModel()
+      s.setLocalTranslation(pos)
+      root.attachChild(s)
+    }
+
 
     root
   }
