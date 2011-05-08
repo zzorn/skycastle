@@ -2,7 +2,6 @@ package org.jmespike.shape.ships
 
 import simplex3d.math.float.functions._
 import simplex3d.math.float._
-import org.jmespike.shape.ships.ComponentBase
 
 /**
  * Utility class for creating bases
