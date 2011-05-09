@@ -12,9 +12,17 @@ import com.jme3.bounding.BoundingBox
  */
 class ShipConf extends Conf {
 
+  private def makeDefaultCore: Core = {
+    val core = new Core()
+    core.front := new Chassis()
+    core.right := new Chassis()
+    core.left := new Chassis()
+    core
+  }
+
   val seed = p('seed, 42)
   val material = p('material, new MaterialConf)
-  val core = p('core, new Core())
+  val core = p('core, makeDefaultCore)
 
   // TODO Graphical style etc?
 

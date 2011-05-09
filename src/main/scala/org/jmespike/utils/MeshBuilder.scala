@@ -202,9 +202,7 @@ class MeshBuilder(inverted: Boolean = false, twoSided: Boolean = false) {
       sideAC := c
       sideAC -= a
 
-      // Triangles affect the normals proportionally to the surface areas of the triangles?
-      // TODO: Should we normalize this?
-      val normal = cross(sideAB, sideAC)
+      val normal = normalize(cross(sideAB, sideAC))
 
       // Triangles with no surface area do not affect the normals of nearby sides
       if (lengthSquared(normal) > 0) {

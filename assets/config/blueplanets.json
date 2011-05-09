@@ -65,7 +65,7 @@
   },
   "seed": 342,
   "numBalls": 51,
-  "numShips": 20,
+  "numShips": 3,
   "xArea": 115.0,
   "yArea": 100.0,
   "zArea": 100.0,
@@ -107,45 +107,123 @@
     "core": {
       "beanType": "Core",
       "front": {
-        "beanType": "Shell",
-        "horizontalProfile": FlatProfile,
-        "verticalProfile": FlatProfile,
-        "detailAmount": 0.5
+        "beanType": "Chassis",
+        "front": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "top": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "bottom": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "left": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "right": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "length": 26,
+        "widthScale": 0.7,
+        "heightScale": 0.5,
+        "verticalSlant": -1.0,
+        "horizontalSlant": 0.0
       },
       "back": {
         "beanType": "Shell",
-        "horizontalProfile": FlatProfile,
-        "verticalProfile": FlatProfile,
-        "detailAmount": 0.5
+        "detailAmount": 0.5,
+        "bevelSize": 0.0
       },
       "top": {
         "beanType": "Shell",
-        "horizontalProfile": FlatProfile,
-        "verticalProfile": FlatProfile,
-        "detailAmount": 0.5
+        "detailAmount": 0.5,
+        "bevelSize": 0.0
       },
       "bottom": {
         "beanType": "Shell",
-        "horizontalProfile": FlatProfile,
-        "verticalProfile": FlatProfile,
-        "detailAmount": 0.5
+        "detailAmount": 0.5,
+        "bevelSize": 0.0
       },
       "left": {
-        "beanType": "Shell",
-        "horizontalProfile": FlatProfile,
-        "verticalProfile": FlatProfile,
-        "detailAmount": 0.5
+        "beanType": "Chassis",
+        "front": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "top": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "bottom": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "left": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "right": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "length": -50,
+        "widthScale": 0.0,
+        "heightScale": 0.0,
+        "verticalSlant": -2.0,
+        "horizontalSlant": -1.0
       },
       "right": {
-        "beanType": "Shell",
-        "horizontalProfile": FlatProfile,
-        "verticalProfile": FlatProfile,
-        "detailAmount": 0.5
+        "beanType": "Chassis",
+        "front": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "top": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "bottom": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "left": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "right": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "length": -50,
+        "widthScale": 0.0,
+        "heightScale": 0.0,
+        "verticalSlant": -2.0,
+        "horizontalSlant": 1.0
       },
-      "length": 53.0,
-      "width": 32.0,
+      "length": 50.0,
+      "width": 50.0,
       "height": 12.0,
-      "widthScale": 0.70000005,
+      "widthScale": 0.5,
       "heightScale": 0.5,
       "verticalSlant": 1.0,
       "horizontalSlant": 0.0
