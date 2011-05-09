@@ -22,11 +22,11 @@ class Core extends Conf {
   val length = p('length, 50f)
   val width = p('width, 30f)
   val height = p('height, 10f)
-  val widthScale = p('widthScale, 0.7f)
-  val heightScale = p('heightScale, 0.5f)
+  val widthScale = p('widthScale, 0f).editor(makeSlider(-1, 1))
+  val heightScale = p('heightScale, 0f).editor(makeSlider(-1, 1))
 
-  val verticalSlant  = p('verticalSlant, 1f)
-  val horizontalSlant  = p('horizontalSlant, 0f)
+  val verticalSlant  = p('verticalSlant, 0f).editor(makeSlider(-3, 3))
+  val horizontalSlant  = p('horizontalSlant, 0f).editor(makeSlider(-3, 3))
 
 
   def buildMesh(style: ShipConf, meshBuilder: MeshBuilder) {

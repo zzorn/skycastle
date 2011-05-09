@@ -19,7 +19,7 @@ class Shell extends ShipComponent {
   // TODO: go fancy with detail generation
   val detailAmount = p('detailAmount, 0.5f)
 
-  val bevelSize = p('bevelSize, 0.1f).editor(makeSlider(0f, 1f))
+  val bevelSize = p('bevelSize, 0f).editor(makeSlider(0f, 1f))
 
   // TODO: Also specify any ship components connected to panels on the shell.
   
@@ -34,11 +34,11 @@ class Shell extends ShipComponent {
     val bl = meshBuilder.addVertex(mix(base.bottomLeftVertex, base.baseCenter, bevelSize()))
     val br = meshBuilder.addVertex(mix(base.bottomRightVertex, base.baseCenter, bevelSize()))
 
-    meshBuilder.addQuad(tl, tr, br, bl)
-    meshBuilder.addQuad(base.topLeft, base.topRight, tr, tl)
-    meshBuilder.addQuad(base.topRight, base.bottomRight, br, tr)
-    meshBuilder.addQuad(base.bottomLeft, base.topLeft, tl, bl)
-    meshBuilder.addQuad(base.bottomRight, base.bottomLeft, bl, br)
+    meshBuilder.addQuad(bl, br, tr, tl)
+    meshBuilder.addQuad(tl, tr, base.topRight, base.topLeft)
+    meshBuilder.addQuad(tr, br, base.bottomRight, base.topRight)
+    meshBuilder.addQuad(bl, tl, base.topLeft, base.bottomLeft)
+    meshBuilder.addQuad(br, bl, base.bottomLeft, base.bottomRight)
 
   }
 }

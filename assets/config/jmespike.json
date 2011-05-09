@@ -65,21 +65,182 @@
   },
   "seed": 342,
   "numBalls": 51,
+  "numShips": 20,
   "xArea": 200.0,
   "yArea": 20.0,
   "zArea": 200.0,
+  "ship": {
+    "beanType": "ShipConf",
+    "seed": 42,
+    "material": {
+      "beanType": "MaterialConf",
+      "color": {
+        "beanType": "RandomColorConf",
+        "hue": 0.0,
+        "sat": 0.0,
+        "lum": 0.5,
+        "hueVariation": 0.1,
+        "satVariation": 0.1,
+        "lumVariation": 0.1
+      },
+      "ambientColor": {
+        "beanType": "RandomColorConf",
+        "hue": 0.0,
+        "sat": 0.0,
+        "lum": 0.0,
+        "hueVariation": 0.1,
+        "satVariation": 0.1,
+        "lumVariation": 0.1
+      },
+      "specularColor": {
+        "beanType": "RandomColorConf",
+        "hue": 0.0,
+        "sat": 0.0,
+        "lum": 1.0,
+        "hueVariation": 0.1,
+        "satVariation": 0.1,
+        "lumVariation": 0.1
+      },
+      "shininess": 5.0,
+      "texture": "placeholder.png"
+    },
+    "core": {
+      "beanType": "Core",
+      "front": {
+        "beanType": "Chassis",
+        "front": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "top": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "bottom": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "left": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "right": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "length": 37,
+        "widthScale": -0.5999999,
+        "heightScale": -0.40000007,
+        "verticalSlant": -0.3,
+        "horizontalSlant": 0.0
+      },
+      "back": {
+        "beanType": "Shell",
+        "detailAmount": 0.5,
+        "bevelSize": 0.0
+      },
+      "top": {
+        "beanType": "Shell",
+        "detailAmount": 0.5,
+        "bevelSize": 0.0
+      },
+      "bottom": {
+        "beanType": "Shell",
+        "detailAmount": 0.5,
+        "bevelSize": 0.0
+      },
+      "left": {
+        "beanType": "Chassis",
+        "front": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "top": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "bottom": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "left": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "right": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "length": 50,
+        "widthScale": -0.5,
+        "heightScale": -0.8000001,
+        "verticalSlant": -1.2,
+        "horizontalSlant": -0.90000004
+      },
+      "right": {
+        "beanType": "Chassis",
+        "front": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "top": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "bottom": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "left": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "right": {
+          "beanType": "Shell",
+          "detailAmount": 0.5,
+          "bevelSize": 0.0
+        },
+        "length": 50,
+        "widthScale": -0.51089585,
+        "heightScale": -0.78692496,
+        "verticalSlant": -1.2130749,
+        "horizontalSlant": 0.90799034
+      },
+      "length": 48.0,
+      "width": 22.0,
+      "height": 10.0,
+      "widthScale": 1.0,
+      "heightScale": 0.29999992,
+      "verticalSlant": 0.5999998,
+      "horizontalSlant": 0.0
+    }
+  },
   "ballAppearance": {
     "beanType": "AppearanceConf",
     "material": {
       "beanType": "MaterialConf",
       "color": {
         "beanType": "RandomColorConf",
-        "hue": 0.7820823,
-        "sat": 0.06779661,
-        "lum": 0.19612591,
-        "hueVariation": 0.124697335,
-        "satVariation": 0.13801453,
-        "lumVariation": 0.124697335
+        "hue": 0.06053269,
+        "sat": 0.17433414,
+        "lum": 0.19854721,
+        "hueVariation": 0.04842615,
+        "satVariation": 0.31598064,
+        "lumVariation": 0.07263923
       },
       "ambientColor": {
         "beanType": "RandomColorConf",
@@ -99,7 +260,7 @@
         "satVariation": 0.046004843,
         "lumVariation": 0.08837772
       },
-      "shininess": 20.0,
+      "shininess": 0.53268766,
       "texture": "placeholder.png"
     },
     "shape": {

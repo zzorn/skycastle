@@ -37,14 +37,14 @@ class MeshBuilder(inverted: Boolean = false, twoSided: Boolean = false) {
    * Specify vertexes in counter clockwise order relative to desired surface direction.
    */
   def addTriangle(a: Int, b: Int, c: Int) {
-    if (!inverted || twoSided) {
+    if (inverted || twoSided) {
       indexes.add(c)
       indexes.add(b)
       indexes.add(a)
       index += 3
     }
 
-    if (inverted || twoSided) {
+    if (!inverted || twoSided) {
       indexes.add(a)
       indexes.add(b)
       indexes.add(c)
@@ -187,8 +187,6 @@ class MeshBuilder(inverted: Boolean = false, twoSided: Boolean = false) {
 
     // Calculate normal for each triangle
     var i = 0
-    val sideAB = Vec3(0,0,0)
-    val sideAC = Vec3(0,0,0)
     while (i < indexes.size) {
       val ai = indexes.get(i)
       val bi = indexes.get(i + 1)
@@ -197,12 +195,7 @@ class MeshBuilder(inverted: Boolean = false, twoSided: Boolean = false) {
       val b = vertex(bi)
       val c = vertex(ci)
 
-      sideAB := b
-      sideAB -= a
-      sideAC := c
-      sideAC -= a
-
-      val normal = normalize(cross(sideAB, sideAC))
+      val normal = MeshUtils.triangleNormal(a, b, c)
 
       // Triangles with no surface area do not affect the normals of nearby sides
       if (lengthSquared(normal) > 0) {
