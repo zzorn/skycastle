@@ -61,6 +61,17 @@ class MeshBuilder(inverted: Boolean = false, twoSided: Boolean = false) {
   }
 
   /**
+   * Creates a copy of the given vertex, with the same position, texel, color, and normal, but with a new vertex index.
+   * Useful e.g. when one wants to create a shape with discontinuous texture or normals.
+   */
+  def copyVertex(index: Int): Int = {
+    addVertex(vertex(index),
+              texel(index),
+              color(index),
+              normal(index))
+  }
+
+  /**
    * Adds a new vertex and returns its vertex number, for use when adding triangles.
    */
   def addVertex(pos:    inVec3,

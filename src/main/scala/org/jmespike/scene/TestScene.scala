@@ -54,7 +54,9 @@ class TestScene() extends SceneFactory {
                      (rng.nextGaussian * yArea()).toFloat,
                      (rng.nextGaussian * zArea()).toFloat)
 
-      val s = ship().createModel()
+      val currentShip = ship()
+      currentShip.seed := rng.nextInt()
+      val s = currentShip.createModel()
       s.setLocalTranslation(pos)
       root.attachChild(s)
     }

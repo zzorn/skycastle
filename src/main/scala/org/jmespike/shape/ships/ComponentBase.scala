@@ -4,6 +4,7 @@ import com.jme3.scene.{Node, Spatial}
 import simplex3d.math.float.functions._
 import simplex3d.math.float._
 import org.jmespike.utils.{MeshUtils, MeshBuilder}
+import simplex3d.math.floatx.functions._
 
 /**
  * The base for a ship component, that it is built on.
@@ -36,8 +37,14 @@ case class ComponentBase(meshBuilder: MeshBuilder,
   def baseWidth  = length(rightVector)
   def baseHeight = length(upVector)
 
-  
-  def extractCube(length: Float, scaleWidth: Float, scaleHeight: Float, skewVertically: Float, skewHorizontally: Float): CubeBase = {
+  def averageSize = (baseWidth + baseHeight) / 2f
+
+
+  def extractCube(length: Float = averageSize,
+                  scaleWidth: Float = 0,
+                  scaleHeight: Float = 0,
+                  skewVertically: Float = 0,
+                  skewHorizontally: Float = 0): CubeBase = {
     val forward = forwardNormal * length
     val up      = upVector
     val right   = rightVector
@@ -70,6 +77,137 @@ case class ComponentBase(meshBuilder: MeshBuilder,
                  ftl, ftr, fbl, fbr,
                  topLeft, topRight, bottomLeft, bottomRight)
   }
+
+
+  /**
+   * Create a rectangular border with a rectangular hole
+   */
+  def extractBorder(marginFraction: Float = 0.1f): ComponentBase = {
+    val size = clamp(marginFraction, 0f, 1f)
+
+    // TODO: Mixin texel, color, and normal too
+    val tr = meshBuilder.addVertex(mix(topRightVertex, baseCenter, size))
+    val tl = meshBuilder.addVertex(mix(topLeftVertex, baseCenter, size))
+    val bl = meshBuilder.addVertex(mix(bottomLeftVertex, baseCenter, size))
+    val br = meshBuilder.addVertex(mix(bottomRightVertex, baseCenter, size))
+
+    meshBuilder.addQuad(tl, tr, topRight, topLeft)
+    meshBuilder.addQuad(tr, br, bottomRight, topRight)
+    meshBuilder.addQuad(bl, tl, topLeft, bottomLeft)
+    meshBuilder.addQuad(br, bl, bottomLeft, bottomRight)
+
+    new ComponentBase(meshBuilder, tr, tl, bl, br)
+  }
+
+  /**
+   * Extract several new component bases by dividing this component base in a regular grid.
+   */
+  def extractGrid(sizeLeftRight: Int = 2,
+                  sizeTopBottom: Int = 2): List[ComponentBase] = {
+
+    if (sizeLeftRight <= 0 || sizeTopBottom <= 0) Nil
+    else {
+
+      // Generate vertex grid
+      val vertexesWide = sizeLeftRight + 1
+      val vertexesHigh = sizeTopBottom + 1
+
+      val bottomLeftTexel   = meshBuilder.texel(bottomLeft)
+      val topLeftTexel      = meshBuilder.texel(topLeft)
+      val bottomRightTexel  = meshBuilder.texel(bottomRight)
+      val topRightTexel     = meshBuilder.texel(topRight)
+
+      val bottomLeftColor   = meshBuilder.color(bottomLeft)
+      val topLeftColor      = meshBuilder.color(topLeft)
+      val bottomRightColor  = meshBuilder.color(bottomRight)
+      val topRightColor     = meshBuilder.color(topRight)
+
+      val bottomLeftNormal  = meshBuilder.normal(bottomLeft)
+      val topLeftNormal     = meshBuilder.normal(topLeft)
+      val bottomRightNormal = meshBuilder.normal(bottomRight)
+      val topRightNormal    = meshBuilder.normal(topRight)
+
+      val indexes = new Array[Int](vertexesWide * vertexesHigh)
+
+      var i = 0
+      var v = 0
+      while(v <= sizeTopBottom) {
+
+        val rv = v * 1f / (sizeTopBottom)
+
+        val leftPos  = mix(topLeftVertex,  bottomLeftVertex,  rv)
+        val rightPos = mix(topRightVertex, bottomRightVertex, rv)
+
+        val leftTex  = mix(topLeftTexel,   bottomLeftTexel,   rv)
+        val rightTex = mix(topRightTexel,  bottomRightTexel,  rv)
+
+        val leftCol  = mix(topLeftColor,   bottomLeftColor,   rv)
+        val rightCol = mix(topRightColor,  bottomRightColor,  rv)
+
+        val leftNor  = mix(topLeftNormal,  bottomLeftNormal,  rv)
+        val rightNor = mix(topRightNormal, bottomRightNormal, rv)
+
+        var u = 0
+        while(u <= sizeLeftRight) {
+
+          // Use existing corner vertexes for the corners
+          indexes(i) =
+            if (v == 0 && u == 0) topLeft
+            else if (v == 0 && u == sizeLeftRight) topRight
+            else if (v == sizeTopBottom && u == 0) bottomLeft
+            else if (v == sizeTopBottom && u == sizeLeftRight) bottomRight
+            else {
+              // Create new vertexes for inner corners
+              val ru = u * 1f / (sizeLeftRight)
+              val pos = mix(leftPos, rightPos, ru)
+              val tex = mix(leftTex, rightTex, ru)
+              val col = mix(leftCol, rightCol, ru)
+              val nor = mix(leftNor, rightNor, ru)
+
+              meshBuilder.addVertex(pos, tex, col, nor)
+            }
+
+          i += 1
+          u += 1
+        }
+
+        v += 1
+      }
+
+      // Generate component bases using the vertex grid
+      // Generate them in inverse order as ::= adds to front and not end
+      var gridBases: List[ComponentBase] = Nil
+      var cv = sizeTopBottom - 1
+      while(cv >= 0) {
+
+        var cu = sizeLeftRight - 1
+        while(cu >= 0) {
+
+          val lookupIndex = cu + cv * vertexesWide
+          val gridTopLeft     = indexes(lookupIndex)
+          val gridTopRight    = indexes(lookupIndex + 1)
+          val gridBottomLeft  = indexes(lookupIndex + vertexesWide)
+          val gridBottomRight = indexes(lookupIndex + vertexesWide + 1)
+
+          gridBases ::= new ComponentBase(meshBuilder, gridTopRight, gridTopLeft, gridBottomLeft, gridBottomRight)
+
+          cu -= 1
+        }
+
+        cv -= 1
+      }
+
+      gridBases
+    }
+  }
+
+  /**
+   * Make this base solid by adding a quad across it
+   */
+  def makeSolid() {
+    meshBuilder.addQuad(bottomLeft, bottomRight, topRight, topLeft)
+  }
+
 }
 
 object ComponentBase {

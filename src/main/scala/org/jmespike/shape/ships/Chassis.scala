@@ -1,5 +1,6 @@
 package org.jmespike.shape.ships
 
+import decorations.BoxDeco
 import simplex3d.math.floatx.Quat4f._
 
 import org.jmespike.conf.Conf
@@ -7,6 +8,7 @@ import org.scalaprops.ui.editors.SelectionEditorFactory
 import com.jme3.scene.{Node, Spatial}
 import simplex3d.math.float.functions._
 import simplex3d.math.float._
+import org.jmespike.utils.XorShiftRandom
 
 /**
  * Structural part of a ship, e.g. containing cargo holds, internal systems, or just structural support.
@@ -16,7 +18,7 @@ import simplex3d.math.float._
  */
 class Chassis extends ShipComponent {
 
-  val front  = p[ShipComponent]('front,  new Shell)
+  val front  = p[ShipComponent]('front,  new GridShell)
   val top    = p[ShipComponent]('top,    new Shell)
   val bottom = p[ShipComponent]('bottom, new Shell)
   val left   = p[ShipComponent]('left,   new Shell)
@@ -32,16 +34,18 @@ class Chassis extends ShipComponent {
 
 
 
-  override def buildMesh(style: ShipConf, base: ComponentBase) {
+  override def buildMesh(style: ShipConf, base: ComponentBase, seed: Int) {
 
     val cube = base.extractCube(length(), widthScale(), heightScale(), verticalSlant(), horizontalSlant())
 
+    val r = new XorShiftRandom(seed)
+
     // Create mesh for each side except the back side
-    front()  .buildMesh(style, cube.makeBase(FrontSide))
-    top()    .buildMesh(style, cube.makeBase(TopSide))
-    bottom() .buildMesh(style, cube.makeBase(BottomSide))
-    left()   .buildMesh(style, cube.makeBase(LeftSide))
-    right()  .buildMesh(style, cube.makeBase(RightSide))
+    front()  .buildMesh(style, cube.makeBase(FrontSide), r.nextInt)
+    top()    .buildMesh(style, cube.makeBase(TopSide), r.nextInt)
+    bottom() .buildMesh(style, cube.makeBase(BottomSide), r.nextInt)
+    left()   .buildMesh(style, cube.makeBase(LeftSide), r.nextInt)
+    right()  .buildMesh(style, cube.makeBase(RightSide), r.nextInt)
   }
 
 }

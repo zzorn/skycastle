@@ -3,6 +3,8 @@ package org.jmespike.utils
 import simplex3d.math.float.functions._
 import simplex3d.math.float._
 import simplex3d.math.floatx.Vec3f._
+import simplex3d.math.floatx.functions._
+import org.jmespike.shape.ships.ComponentBase
 
 /**
  * 
@@ -19,5 +21,7 @@ object MeshUtils {
    * Quaternion representing the specified looking direction with given up direction.
    */
   def lookAtQuat(direction: inVec3, up: inVec3): Quat4 = quaternion(lookAt(direction, up))
+
+
 
 }

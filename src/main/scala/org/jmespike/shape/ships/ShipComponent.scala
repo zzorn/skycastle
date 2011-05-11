@@ -13,7 +13,7 @@ trait ShipComponent extends Conf {
 
   // TODO: Provide the vertexes for the corners, so we can create one continuous mesh,
   // that uses one texture
-  def buildMesh(style: ShipConf, base: ComponentBase)
+  def buildMesh(style: ShipConf, base: ComponentBase, seed: Int)
 
   // TODO: Some mirroring utilities?
 //  def copyVerticalMirror(): Hull = null

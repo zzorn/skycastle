@@ -23,22 +23,13 @@ class Shell extends ShipComponent {
 
   // TODO: Also specify any ship components connected to panels on the shell.
   
-  def buildMesh(style: ShipConf, base: ComponentBase) {
+  def buildMesh(style: ShipConf, base: ComponentBase, seed: Int) {
 
-    val meshBuilder = base.meshBuilder
+    // Simple solid hull with sharp or rounded corners
+    val innerBase = base.extractBorder(bevelSize())
 
-    // Simple solid hull with sharp corners
-
-    val tr = meshBuilder.addVertex(mix(base.topRightVertex, base.baseCenter, bevelSize()))
-    val tl = meshBuilder.addVertex(mix(base.topLeftVertex, base.baseCenter, bevelSize()))
-    val bl = meshBuilder.addVertex(mix(base.bottomLeftVertex, base.baseCenter, bevelSize()))
-    val br = meshBuilder.addVertex(mix(base.bottomRightVertex, base.baseCenter, bevelSize()))
-
-    meshBuilder.addQuad(bl, br, tr, tl)
-    meshBuilder.addQuad(tl, tr, base.topRight, base.topLeft)
-    meshBuilder.addQuad(tr, br, base.bottomRight, base.topRight)
-    meshBuilder.addQuad(bl, tl, base.topLeft, base.bottomLeft)
-    meshBuilder.addQuad(br, bl, base.bottomLeft, base.bottomRight)
+    // Fill inner area
+    innerBase.makeSolid()
 
   }
 }

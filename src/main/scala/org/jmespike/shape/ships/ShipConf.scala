@@ -10,6 +10,7 @@ import com.jme3.bounding.BoundingBox
 /**
  * Generates ship shapes.
  */
+// TODO: Specify scale and recursion level at which to just terminate and replace with solid surface.
 class ShipConf extends Conf {
 
   private def makeDefaultCore: Core = {
@@ -34,7 +35,7 @@ class ShipConf extends Conf {
 
     // Create the model, starting by the core and adding connected parts, passing in this ShipConf to provide style information to all parts.
     val meshBuilder = new MeshBuilder()
-    core().buildMesh(this, meshBuilder)
+    core().buildMesh(this, meshBuilder, seed())
 
     val mesh = meshBuilder.createMesh()
 

@@ -3,6 +3,7 @@ package org.jmespike.shape.ships
 import simplex3d.math.float.functions._
 import simplex3d.math.float._
 import org.jmespike.utils.MeshBuilder
+import simplex3d.math.floatx.functions._
 
 /**
  * Utility class for creating bases
@@ -22,6 +23,36 @@ class CubeBase(meshBuilder: MeshBuilder,
       case RightSide  => new ComponentBase(meshBuilder, btr, ftr, fbr, bbr)
     }
   }
+
+  /**
+   * Make this cube solid by adding a quad across each side (except the base by default)
+   */
+  def makeSolid(includeBase: Boolean = false) {
+    makeSolidSide(ftr, ftl, fbl, fbr)
+    if (includeBase) makeSolidSide(btl, btr, bbr, bbl)
+    makeSolidSide(btr, btl, ftl, ftr)
+    makeSolidSide(fbr, fbl, bbl, bbr)
+    makeSolidSide(ftl, btl, bbl, fbl)
+    makeSolidSide(btr, ftr, fbr, bbr)
+  }
+
+  private def makeSolidSide(topRight: Int, topLeft: Int, bottomLeft: Int, bottomRight: Int) {
+    val tr = meshBuilder.copyVertex(topRight)
+    val tl = meshBuilder.copyVertex(topLeft)
+    val bl = meshBuilder.copyVertex(bottomLeft)
+    val br = meshBuilder.copyVertex(bottomRight)
+
+    meshBuilder.addQuad(tr, tl, bl, br)
+
+    // Add zero sized edges to avoid cracks in the model
+    meshBuilder.addQuad(tl, tr, topRight, topLeft)
+    meshBuilder.addQuad(tr, br, bottomRight, topRight)
+    meshBuilder.addQuad(bl, tl, topLeft, bottomLeft)
+    meshBuilder.addQuad(br, bl, bottomLeft, bottomRight)
+  }
+
+
+
 }
 
 

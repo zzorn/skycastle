@@ -5,6 +5,6 @@ package org.jmespike.shape.ships
  */
 class Engine extends ShipComponent {
 
-  def buildMesh(style: ShipConf, base: ComponentBase) {}
+  def buildMesh(style: ShipConf, base: ComponentBase, seed: Int) {}
 
 }
