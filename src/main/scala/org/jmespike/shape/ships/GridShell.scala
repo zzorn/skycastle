@@ -11,10 +11,10 @@ import org.jmespike.utils.XorShiftRandom
 // TODO: Pass in a random seed and some surface purpose / coordinate parameters to each ship component?  Or just a different / modified style?
 class GridShell extends ShipComponent {
 
-  val gridContent = p[ShipComponent]('gridContent, new BoxDeco)
+  val gridContent = p[ShipComponent]('gridContent, new AlternativePart)
   val marginSize = p('marginSize, 0.05f).editor(makeSlider(0f, 1f))
-  val sizeU= p('sizeU, 4)
-  val sizeV= p('sizeV, 4)
+  val sizeU= p('sizeU, 8)
+  val sizeV= p('sizeV, 8)
 
 
   def buildMesh(style: ShipConf, base: ComponentBase, seed: Int) {

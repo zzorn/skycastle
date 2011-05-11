@@ -36,8 +36,8 @@ class AlternativePart extends ShipComponent {
   override def buildMesh(style: ShipConf, base: ComponentBase, seed: Int) {
 
     // TODO: Add better editing tools so ship components can be selected.  For now, working around recursive constructor call:
-    //if (d() == null) d:= makeRecursiveComponent
-    //if (e() == null) e:= makeRecursiveComponent
+//    if (d() == null) d:= makeRecursiveComponent
+//    if (e() == null) e:= makeRecursiveComponent
 
     val r = new XorShiftRandom(seed)
 

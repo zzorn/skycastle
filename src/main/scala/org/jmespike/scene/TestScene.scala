@@ -55,7 +55,7 @@ class TestScene() extends SceneFactory {
                      (rng.nextGaussian * zArea()).toFloat)
 
       val currentShip = ship()
-      currentShip.seed := rng.nextInt()
+     // currentShip.seed := rng.nextInt() // NOTE: This caused huge performance regression for some reason - why?
       val s = currentShip.createModel()
       s.setLocalTranslation(pos)
       root.attachChild(s)
