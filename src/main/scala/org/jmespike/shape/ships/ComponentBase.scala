@@ -42,15 +42,22 @@ case class ComponentBase(meshBuilder: MeshBuilder,
     val up      = upVector
     val right   = rightVector
 
-    val widthAdjust  = right * (max(scaleWidth, -1) * 0.5f)
-    val heightAdjust = up    * (max(scaleHeight, -1) * 0.5f)
+    val upLeftVector      = topLeftVertex - bottomLeftVertex
+    val upRightVector     = topRightVertex - bottomRightVertex
+    val rightTopVector    = topRightVertex - topLeftVertex
+    val rightBottomVector = bottomRightVertex - bottomLeftVertex
+
+    val heightLeftAdjust   = upLeftVector      * (max(scaleHeight, -1) * 0.5f)
+    val heightRightAdjust  = upRightVector     * (max(scaleHeight, -1) * 0.5f)
+    val widthTopAdjust     = rightTopVector    * (max(scaleWidth, -1) * 0.5f)
+    val widthBottomAdjust  = rightBottomVector * (max(scaleWidth, -1) * 0.5f)
     val skewAdjust   = up    * skewVertically +
                        right * skewHorizontally
 
-    val frontTopLeft     = topLeftVertex     + forward - widthAdjust + heightAdjust + skewAdjust
-    val frontTopRight    = topRightVertex    + forward + widthAdjust + heightAdjust + skewAdjust
-    val frontBottomLeft  = bottomLeftVertex  + forward - widthAdjust - heightAdjust + skewAdjust
-    val frontBottomRight = bottomRightVertex + forward + widthAdjust - heightAdjust + skewAdjust
+    val frontTopLeft     = topLeftVertex     + forward - widthTopAdjust    + heightLeftAdjust  + skewAdjust
+    val frontTopRight    = topRightVertex    + forward + widthTopAdjust    + heightRightAdjust + skewAdjust
+    val frontBottomLeft  = bottomLeftVertex  + forward - widthBottomAdjust - heightLeftAdjust  + skewAdjust
+    val frontBottomRight = bottomRightVertex + forward + widthBottomAdjust - heightRightAdjust + skewAdjust
 
     // Generate vertexes for the new corners
     val ftl = meshBuilder.addVertex(frontTopLeft)
