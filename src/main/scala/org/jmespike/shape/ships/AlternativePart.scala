@@ -14,9 +14,9 @@ class AlternativePart extends ShipComponent {
   val c = p[ShipComponent]('c, new BoxDeco)
   val d = p[ShipComponent]('d, new Shell)
   val e = p[ShipComponent]('e, new Shell)
-  val aProb = p('aProb, 50f).editor(makeSlider(0, 200))
-  val bProb = p('bProb, 40f).editor(makeSlider(0, 200))
-  val cProb = p('cProb, 30f).editor(makeSlider(0, 200))
+  val aProb = p('aProb, 80f).editor(makeSlider(0, 200))
+  val bProb = p('bProb, 30f).editor(makeSlider(0, 200))
+  val cProb = p('cProb, 10f).editor(makeSlider(0, 200))
   val dProb = p('dProb, 10f).editor(makeSlider(0, 200))
   val eProb = p('eProb, 5f).editor(makeSlider(0, 200))
 

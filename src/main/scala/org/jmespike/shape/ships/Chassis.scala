@@ -19,10 +19,10 @@ import org.jmespike.utils.XorShiftRandom
 class Chassis extends ShipComponent {
 
   val front  = p[ShipComponent]('front,  new GridShell)
-  val top    = p[ShipComponent]('top,    new Shell)
-  val bottom = p[ShipComponent]('bottom, new Shell)
-  val left   = p[ShipComponent]('left,   new Shell)
-  val right  = p[ShipComponent]('right,  new Shell)
+  val top    = p[ShipComponent]('top,    new GridShell)
+  val bottom = p[ShipComponent]('bottom, new GridShell)
+  val left   = p[ShipComponent]('left,   new GridShell)
+  val right  = p[ShipComponent]('right,  new GridShell)
 
   val length = p('length, 50)
 

@@ -28,14 +28,14 @@ class ShipConf extends Conf {
   // TODO Graphical style etc?
 
 
-  def createModel(): Spatial = {
+  def createModel(s: Int): Spatial = {
 
 
-    val rng =  new XorShiftRandom(seed())
+    val rng =  new XorShiftRandom(seed() + s)
 
     // Create the model, starting by the core and adding connected parts, passing in this ShipConf to provide style information to all parts.
     val meshBuilder = new MeshBuilder()
-    core().buildMesh(this, meshBuilder, seed())
+    core().buildMesh(this, meshBuilder, rng.nextInt())
 
     val mesh = meshBuilder.createMesh()
 

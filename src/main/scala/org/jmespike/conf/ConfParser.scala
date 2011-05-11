@@ -7,6 +7,7 @@ import org.jmespike.appearance.{MaterialConf, AppearanceConf}
 import org.jmespike.lighting.{LightingConf, AmbientLightConf, DirectionalLightConf}
 import org.jmespike.scene.TestScene
 import org.jmespike.shape.ships._
+import decorations.BoxDeco
 
 /**
  * Something that can parse configuration files.
@@ -32,5 +33,8 @@ class ConfParser extends JsonBeanParser {
   registerBeanType(classOf[Chassis])
   registerBeanType(classOf[Shell])
   registerBeanType(classOf[Engine])
+  registerBeanType(classOf[AlternativePart])
+  registerBeanType(classOf[BoxDeco])
+  registerBeanType(classOf[GridShell])
 
 }

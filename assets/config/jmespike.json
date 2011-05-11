@@ -13,12 +13,12 @@
       "beanType": "AmbientLightConf",
       "color": {
         "beanType": "ColorConf",
-        "hue": 0.0,
-        "sat": 0.0,
-        "lum": 0.6779661,
+        "hue": 0.6878049,
+        "sat": 0.124390244,
+        "lum": 0.25609756,
         "alpha": 1.0
       },
-      "intensity": 0.9806293
+      "intensity": 0.63414633
     },
     "directional1": {
       "beanType": "DirectionalLightConf",
@@ -26,82 +26,82 @@
         "beanType": "ColorConf",
         "hue": 0.0,
         "sat": 0.0,
-        "lum": 0.5,
+        "lum": 0.748184,
         "alpha": 1.0
       },
-      "intensity": 0.9104116,
+      "intensity": 3.196126,
       "x": 0.3,
-      "y": 0.5,
+      "y": -0.5012107,
       "z": 0.1
     },
     "directional2": {
       "beanType": "DirectionalLightConf",
       "color": {
         "beanType": "ColorConf",
-        "hue": 0.02905569,
-        "sat": 0.0,
-        "lum": 0.56658596,
+        "hue": 0.6392252,
+        "sat": 0.17917676,
+        "lum": 0.6585956,
         "alpha": 1.0
       },
-      "intensity": 1.5108958,
-      "x": -0.8159806,
-      "y": -0.5012107,
-      "z": 0.20581114
+      "intensity": 0.88135594,
+      "x": -0.559322,
+      "y": -0.64648914,
+      "z": 0.9467312
     },
     "directional3": {
       "beanType": "DirectionalLightConf",
       "color": {
         "beanType": "ColorConf",
-        "hue": 0.0,
-        "sat": 0.0,
-        "lum": 1.0,
+        "hue": 0.053268764,
+        "sat": 0.9564165,
+        "lum": 0.47457626,
         "alpha": 1.0
       },
-      "intensity": 3.031477,
-      "x": 0.3,
-      "y": -0.1041162,
-      "z": 0.1
+      "intensity": 1.0653753,
+      "x": -0.9564165,
+      "y": 0.99515736,
+      "z": -1.0
     }
   },
   "seed": 342,
-  "numBalls": 51,
-  "numShips": 20,
-  "xArea": 200.0,
-  "yArea": 20.0,
-  "zArea": 200.0,
+  "numBalls": 13,
+  "numShips": 3,
+  "xArea": 135.0,
+  "yArea": 69.0,
+  "zArea": 168.0,
   "ship": {
     "beanType": "ShipConf",
-    "seed": 42,
+    "seed": 38,
     "material": {
       "beanType": "MaterialConf",
       "color": {
         "beanType": "RandomColorConf",
-        "hue": 0.0,
-        "sat": 0.0,
-        "lum": 0.5,
-        "hueVariation": 0.1,
-        "satVariation": 0.1,
-        "lumVariation": 0.1
+        "hue": 0.68765134,
+        "sat": 0.07506053,
+        "lum": 0.27602905,
+        "hueVariation": 0.05811138,
+        "satVariation": 0.013317191,
+        "lumVariation": 0.07263923
       },
       "ambientColor": {
         "beanType": "RandomColorConf",
         "hue": 0.0,
         "sat": 0.0,
         "lum": 0.0,
-        "hueVariation": 0.1,
-        "satVariation": 0.1,
-        "lumVariation": 0.1
+        "hueVariation": 0.026634382,
+        "satVariation": 0.01937046,
+        "lumVariation": 0.01937046
       },
       "specularColor": {
         "beanType": "RandomColorConf",
         "hue": 0.0,
         "sat": 0.0,
-        "lum": 1.0,
-        "hueVariation": 0.1,
-        "satVariation": 0.1,
-        "lumVariation": 0.1
+        "lum": 0.7384988,
+        "hueVariation": 0.031476997,
+        "satVariation": 0.023002421,
+        "lumVariation": 0.023002421
       },
-      "shininess": 5.0,
+      "shininess": 0.43583536,
       "texture": "placeholder.png"
     },
     "core": {
@@ -109,123 +109,879 @@
       "front": {
         "beanType": "Chassis",
         "front": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 7,
+          "sizeV": 7
         },
         "top": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 10,
+          "sizeV": 10
         },
         "bottom": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
         "left": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
         "right": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
-        "length": 37,
-        "widthScale": -0.5999999,
-        "heightScale": -0.40000007,
-        "verticalSlant": -0.3,
+        "length": 39,
+        "widthScale": -0.7530266,
+        "heightScale": -0.6416465,
+        "verticalSlant": -0.6464891,
         "horizontalSlant": 0.0
       },
       "back": {
-        "beanType": "Shell",
-        "detailAmount": 0.5,
-        "bevelSize": 0.0
+        "beanType": "GridShell",
+        "gridContent": {
+          "beanType": "AlternativePart",
+          "a": {
+            "beanType": "Shell",
+            "detailAmount": 0.5,
+            "bevelSize": 0.0
+          },
+          "b": {
+            "beanType": "BoxDeco",
+            "border": 0.1,
+            "borderVar": 0.1,
+            "height": 0.1,
+            "heightVar": 0.2,
+            "taper": 0.0,
+            "taperVar": 0.1
+          },
+          "c": {
+            "beanType": "BoxDeco",
+            "border": 0.1,
+            "borderVar": 0.1,
+            "height": 0.1,
+            "heightVar": 0.2,
+            "taper": 0.0,
+            "taperVar": 0.1
+          },
+          "d": {
+            "beanType": "Shell",
+            "detailAmount": 0.5,
+            "bevelSize": 0.0
+          },
+          "e": {
+            "beanType": "Shell",
+            "detailAmount": 0.5,
+            "bevelSize": 0.0
+          },
+          "aProb": 80.0,
+          "bProb": 30.0,
+          "cProb": 10.0,
+          "dProb": 10.0,
+          "eProb": 5.0
+        },
+        "marginSize": 0.05,
+        "sizeU": 8,
+        "sizeV": 8
       },
       "top": {
-        "beanType": "Shell",
-        "detailAmount": 0.5,
-        "bevelSize": 0.0
+        "beanType": "GridShell",
+        "gridContent": {
+          "beanType": "AlternativePart",
+          "a": {
+            "beanType": "Shell",
+            "detailAmount": 0.5,
+            "bevelSize": 0.0
+          },
+          "b": {
+            "beanType": "BoxDeco",
+            "border": 0.092009686,
+            "borderVar": 0.1,
+            "height": 0.22542378,
+            "heightVar": 0.17675543,
+            "taper": -0.12832928,
+            "taperVar": 0.3
+          },
+          "c": {
+            "beanType": "BoxDeco",
+            "border": 0.3849879,
+            "borderVar": 0.1,
+            "height": -0.7530266,
+            "heightVar": -0.85472155,
+            "taper": -0.69007266,
+            "taperVar": -1.0
+          },
+          "d": {
+            "beanType": "Shell",
+            "detailAmount": 0.5,
+            "bevelSize": 0.0
+          },
+          "e": {
+            "beanType": "Shell",
+            "detailAmount": 0.5,
+            "bevelSize": 0.0
+          },
+          "aProb": 80.0,
+          "bProb": 70.0,
+          "cProb": 20.338982,
+          "dProb": 20.0,
+          "eProb": 5.0
+        },
+        "marginSize": 0.05,
+        "sizeU": 8,
+        "sizeV": 8
       },
       "bottom": {
-        "beanType": "Shell",
-        "detailAmount": 0.5,
-        "bevelSize": 0.0
+        "beanType": "GridShell",
+        "gridContent": {
+          "beanType": "AlternativePart",
+          "a": {
+            "beanType": "Shell",
+            "detailAmount": 0.5,
+            "bevelSize": 0.0
+          },
+          "b": {
+            "beanType": "BoxDeco",
+            "border": 0.1,
+            "borderVar": 0.1,
+            "height": 0.1,
+            "heightVar": 0.2,
+            "taper": 0.0,
+            "taperVar": 0.1
+          },
+          "c": {
+            "beanType": "BoxDeco",
+            "border": 0.1,
+            "borderVar": 0.1,
+            "height": 0.1,
+            "heightVar": 0.2,
+            "taper": 0.0,
+            "taperVar": 0.1
+          },
+          "d": {
+            "beanType": "Shell",
+            "detailAmount": 0.5,
+            "bevelSize": 0.0
+          },
+          "e": {
+            "beanType": "Shell",
+            "detailAmount": 0.5,
+            "bevelSize": 0.0
+          },
+          "aProb": 80.0,
+          "bProb": 30.0,
+          "cProb": 10.0,
+          "dProb": 10.0,
+          "eProb": 5.0
+        },
+        "marginSize": 0.05,
+        "sizeU": 8,
+        "sizeV": 8
       },
       "left": {
         "beanType": "Chassis",
         "front": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
         "top": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 200.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
         "bottom": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
         "left": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
         "right": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
         "length": 50,
-        "widthScale": -0.5,
-        "heightScale": -0.8000001,
-        "verticalSlant": -1.2,
-        "horizontalSlant": -0.90000004
+        "widthScale": -0.6029056,
+        "heightScale": -0.598063,
+        "verticalSlant": -0.63196135,
+        "horizontalSlant": -0.57384986
       },
       "right": {
         "beanType": "Chassis",
         "front": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
         "top": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.036319613,
+              "heightVar": -0.031476974,
+              "taper": -0.2978208,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.6150121,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.05084741,
+              "taper": -0.6561743,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.87167,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 5,
+          "sizeV": 6
         },
         "bottom": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
         "left": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
         "right": {
-          "beanType": "Shell",
-          "detailAmount": 0.5,
-          "bevelSize": 0.0
+          "beanType": "GridShell",
+          "gridContent": {
+            "beanType": "AlternativePart",
+            "a": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "b": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "c": {
+              "beanType": "BoxDeco",
+              "border": 0.1,
+              "borderVar": 0.1,
+              "height": 0.1,
+              "heightVar": 0.2,
+              "taper": 0.0,
+              "taperVar": 0.1
+            },
+            "d": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "e": {
+              "beanType": "Shell",
+              "detailAmount": 0.5,
+              "bevelSize": 0.0
+            },
+            "aProb": 80.0,
+            "bProb": 30.0,
+            "cProb": 10.0,
+            "dProb": 10.0,
+            "eProb": 5.0
+          },
+          "marginSize": 0.05,
+          "sizeU": 8,
+          "sizeV": 8
         },
         "length": 50,
-        "widthScale": -0.51089585,
-        "heightScale": -0.78692496,
-        "verticalSlant": -1.2130749,
-        "horizontalSlant": 0.90799034
+        "widthScale": -0.6174334,
+        "heightScale": -0.5883777,
+        "verticalSlant": -0.7627119,
+        "horizontalSlant": 0.7772398
       },
-      "length": 48.0,
-      "width": 22.0,
-      "height": 10.0,
-      "widthScale": 1.0,
-      "heightScale": 0.29999992,
-      "verticalSlant": 0.5999998,
+      "length": 55.0,
+      "width": 42.0,
+      "height": 14.0,
+      "widthScale": -0.25907987,
+      "heightScale": 0.0,
+      "verticalSlant": 0.0,
       "horizontalSlant": 0.0
     }
   },
@@ -235,39 +991,39 @@
       "beanType": "MaterialConf",
       "color": {
         "beanType": "RandomColorConf",
-        "hue": 0.06053269,
-        "sat": 0.17433414,
-        "lum": 0.19854721,
-        "hueVariation": 0.04842615,
-        "satVariation": 0.31598064,
-        "lumVariation": 0.07263923
+        "hue": 0.036319613,
+        "sat": 0.20823245,
+        "lum": 0.4116223,
+        "hueVariation": 0.022781774,
+        "satVariation": 0.1622276,
+        "lumVariation": 0.13317192
       },
       "ambientColor": {
         "beanType": "RandomColorConf",
-        "hue": 0.58353513,
-        "sat": 0.19612591,
-        "lum": 0.05811138,
+        "hue": 0.0,
+        "sat": 0.0,
+        "lum": 0.090243906,
         "hueVariation": 0.0,
-        "satVariation": 0.020581113,
-        "lumVariation": 0.021791767
+        "satVariation": 0.010895884,
+        "lumVariation": 0.0
       },
       "specularColor": {
         "beanType": "RandomColorConf",
-        "hue": 0.08232445,
-        "sat": 0.070217915,
-        "lum": 0.041162226,
-        "hueVariation": 0.030266345,
-        "satVariation": 0.046004843,
-        "lumVariation": 0.08837772
+        "hue": 0.0,
+        "sat": 0.0,
+        "lum": 1.0,
+        "hueVariation": 0.1,
+        "satVariation": 0.1,
+        "lumVariation": 0.1
       },
-      "shininess": 0.53268766,
+      "shininess": 0.14527845,
       "texture": "placeholder.png"
     },
     "shape": {
       "beanType": "SphereConf",
-      "radius": 7.990315,
-      "radialSamples": 36,
-      "zSamples": 33,
+      "radius": 24.527847,
+      "radialSamples": 28,
+      "zSamples": 28,
       "useEvenSlices": false,
       "interior": false
     }

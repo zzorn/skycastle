@@ -56,7 +56,7 @@ class TestScene() extends SceneFactory {
 
       val currentShip = ship()
      // currentShip.seed := rng.nextInt() // NOTE: This caused huge performance regression for some reason - why?
-      val s = currentShip.createModel()
+      val s = currentShip.createModel(rng.nextInt())
       s.setLocalTranslation(pos)
       root.attachChild(s)
     }
