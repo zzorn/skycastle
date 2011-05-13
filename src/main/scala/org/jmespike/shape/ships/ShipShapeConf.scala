@@ -6,12 +6,13 @@ import java.util.Random
 import com.jme3.scene.{Geometry, Spatial}
 import org.jmespike.utils.{XorShiftRandom, MeshBuilder}
 import com.jme3.bounding.BoundingBox
+import org.jmespike.shape.ShapeConf
 
 /**
  * Generates ship shapes.
  */
 // TODO: Specify scale and recursion level at which to just terminate and replace with solid surface.
-class ShipConf extends Conf {
+class ShipShapeConf extends ShapeConf {
 
   private def makeDefaultCore: Core = {
     val core = new Core()
@@ -28,25 +29,12 @@ class ShipConf extends Conf {
   // TODO Graphical style etc?
 
 
-  def createModel(s: Int): Spatial = {
-
-
-    val rng =  new XorShiftRandom(seed() + s)
-
-    // Create the model, starting by the core and adding connected parts, passing in this ShipConf to provide style information to all parts.
+  def createShape(seed: Int) = {
     val meshBuilder = new MeshBuilder()
-    core().buildMesh(this, meshBuilder, rng.nextInt())
 
-    val mesh = meshBuilder.createMesh()
+    core().buildMesh(this, meshBuilder, seed)
 
-    val geom = new Geometry("geometry", mesh)
-    geom.setMaterial(material().createMaterial(rng))
-
-    // Setup bounding volume
-    geom.setModelBound(new BoundingBox())
-
-    geom
-
+    meshBuilder.createMesh()
   }
 
 }

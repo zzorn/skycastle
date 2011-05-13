@@ -11,9 +11,7 @@ import com.jme3.math.{Vector3f, Quaternion}
 /**
  * Handles ship physics.
  */
-class ShipControl(steeringConf: SteeringConf) extends BaseControl with Steerable {
-
-  def createCopy = new ShipControl(steeringConf)
+class ShipControl(steeringConf: SteeringConf) extends EntityControl(steeringConf) with Steerable {
 
   var orientation: Quaternion = new Quaternion()
 

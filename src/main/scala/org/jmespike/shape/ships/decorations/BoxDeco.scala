@@ -4,7 +4,7 @@ import simplex3d.math.floatx.functions._
 import org.jmespike.utils.XorShiftRandom
 import org.jmespike.shape.ships.ShipComponent
 import org.jmespike.shape.ships.Shell
-import org.jmespike.shape.ships.ShipConf
+import org.jmespike.shape.ships.ShipShapeConf
 import org.jmespike.shape.ships.ComponentBase
 
 /**
@@ -21,7 +21,7 @@ class BoxDeco extends ShipComponent {
   val taperVar = p('taperVar, 0.1f).editor(makeSlider(-1f, 1f))
 
 
-  def buildMesh(style: ShipConf, base: ComponentBase, seed: Int) {
+  def buildMesh(style: ShipShapeConf, base: ComponentBase, seed: Int) {
     val meshBuilder = base.meshBuilder
 
     val r = new XorShiftRandom(seed)

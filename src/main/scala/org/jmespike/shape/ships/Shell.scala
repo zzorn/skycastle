@@ -23,7 +23,7 @@ class Shell extends ShipComponent {
 
   // TODO: Also specify any ship components connected to panels on the shell.
   
-  def buildMesh(style: ShipConf, base: ComponentBase, seed: Int) {
+  def buildMesh(style: ShipShapeConf, base: ComponentBase, seed: Int) {
 
     // Simple solid hull with sharp or rounded corners
     val innerBase = base.extractBorder(bevelSize())

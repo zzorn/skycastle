@@ -8,6 +8,8 @@ import org.jmespike.lighting.{LightingConf, AmbientLightConf, DirectionalLightCo
 import org.jmespike.scene.TestScene
 import org.jmespike.shape.ships._
 import decorations.BoxDeco
+import org.jmespike.entity.{SpaceEntity, ShipConf}
+import org.jmespike.movement.PropulsionConf
 
 /**
  * Something that can parse configuration files.
@@ -28,7 +30,7 @@ class ConfParser extends JsonBeanParser {
   registerBeanType(classOf[DirectionalLightConf])
   registerBeanType(classOf[AmbientLightConf])
   registerBeanType(classOf[LightingConf])
-  registerBeanType(classOf[ShipConf])
+  registerBeanType(classOf[ShipShapeConf])
   registerBeanType(classOf[Core])
   registerBeanType(classOf[Chassis])
   registerBeanType(classOf[Shell])
@@ -36,5 +38,9 @@ class ConfParser extends JsonBeanParser {
   registerBeanType(classOf[AlternativePart])
   registerBeanType(classOf[BoxDeco])
   registerBeanType(classOf[GridShell])
+
+  registerBeanType(classOf[ShipConf])
+  registerBeanType(classOf[SpaceEntity])
+  registerBeanType(classOf[PropulsionConf])
 
 }

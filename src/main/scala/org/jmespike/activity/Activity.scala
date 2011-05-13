@@ -6,8 +6,7 @@ import com.jme3.app.state.{AppStateManager, AbstractAppState, AppState}
 import com.jme3.app.Application
 import com.jme3.input.InputManager
 import java.lang.String
-import org.jmespike.{SceneLoader}
-import org.jmespike.scene.SceneFactory
+import org.jmespike.{SceneDisplay}
 import java.util.logging.Logger
 import org.skycastle.util.Logging
 
@@ -20,21 +19,21 @@ import org.skycastle.util.Logging
  * entering vehicle and having some controls remapped but still seeing same healthbar,
  * opening overview map in window on top of regular game?
  */
-// TODO: Each activity could provide some spatial?
 abstract class Activity extends AbstractAppState with Logging {
 
   private var application: Application = null
-  private var sceneLoader: SceneLoader = null
+  private var sceneDisplay: SceneDisplay = null
   private var appStateManager: AppStateManager = null
-//  private var _scene: Spatial = null
   private var inputManager: InputManager = null
   private var actionListeners: Map[String, (String, Boolean, Float) => Unit] = Map()
+
   private var activitiesToStop: List[Activity] = Nil
   private var activitiesToStart: List[Activity] = Nil
-  private var loadScene = true
+  
+  private var scene: Spatial = null
+  private var sceneCreated = false
 
-
-  def name: String = getClass.getSimpleName
+  private var activationChanged = true
 
   private val delegatingActionListener: ActionListener = new ActionListener{
     def onAction(name: String, isPressed: Boolean, tpf: Float) {
@@ -42,69 +41,87 @@ abstract class Activity extends AbstractAppState with Logging {
 
       actionListeners.get(name) match {
         case Some(action) => action(name, isPressed, tpf)
-        case None =>
+        case None => 
       }
     }
   }
 
+  /**
+   * The name of this activity
+   */
+  def name: String = getClass.getSimpleName
+
+  /**
+   * Should create the visual scene presented by this activity.  If it has no visible scene, just return null.
+   */
+  protected def createScene: Spatial
+
+
+  /**
+   * Called during the update phase before onUpdate if this activity was activated
+   */
+  protected def onActivated() {}
+
+  /**
+   * Called if this activity was deactivated
+   */
+  protected def onDeactivated() {}
+
+
+  /**
+   * Called each update round while the activity is active.
+   */
+  protected def onUpdate(timePerFrame: Float) {}
+
+
+
+  /**
+   * Adds a listener to the specific action.
+   * It will be invoked when the specified action are activated.
+   */
+  protected def when(actionName: String)(action:  => Unit) {
+    addActionListener(actionName, {(name, pressed, tpf) => if (pressed) (action) })
+  }
+
+  /**
+   * Adds a listener to the specific actions.
+   * It will be invoked when the specified actions are activated.
+   */
+  protected def whenAction(actionNames: String * )(action:  => Unit) {
+    addActionListeners(actionNames.toList, {(name, pressed, tpf) => if (pressed) (action) } )
+  }
+
+  /**
+   * Adds a listener to the specific action.
+   * It will be invoked with the parameters action id, key pressed, and timePerFrame.
+   */
   protected def addActionListener(actionName: String, action: (String, Boolean, Float) => Unit) {
     logDebug("Registered action "+actionName)
     actionListeners += (actionName -> action)
   }
 
+  /**
+   * Adds a listener to several actions.
+   * It will be invoked with the parameters action id, key pressed, and timePerFrame.
+   */
   protected def addActionListeners(actionNames: List[String], action: (String, Boolean, Float) => Unit) {
     actionNames foreach {actionName => addActionListener(actionName, action)}
   }
 
-  override def initialize(stateManager: AppStateManager, app: Application) {
-    logDebug("Initializing activity "+name)
-
-    super.initialize(stateManager, app)
-
-    application = app
-    sceneLoader = app.asInstanceOf[SceneLoader]
-    appStateManager = stateManager
-    inputManager = app.getInputManager
-
-    handleActivation()
-
-    logDebug("Activity "+name+" initialized")
+  /**
+   * Stops this activity and starts the specified one.
+   */
+  protected final def changeActivityTo(activity: Activity) {
+    activitiesToStop ::= this
+    activitiesToStart ::= activity
   }
 
-  /*
-  // Provide scene to show in 3D view
-  final def scene: Spatial = {
-    if (_scene == null) _scene = sceneFactory.createScene
-    _scene
+  /**
+   * Stops and exits the game immediately.
+   */
+  protected def stopGame() {
+    application.stop()
   }
-  */
-
-  protected def sceneFactory: SceneFactory
-
-  private def handleActivation() {
-    logDebug("Activity "+name+" activated")
-    actionListeners.keys foreach {actionName => inputManager.addListener(delegatingActionListener, actionName)}
-    loadScene = true
-    onActivated()
-  }
-
-  final override def setActive(active: Boolean) {
-    if (active != isActive) {
-      super.setActive(active)
-
-      if (active) {
-        handleActivation()
-      }
-      else {
-        logDebug("Activity "+name+" deactivated")
-        inputManager.removeListener(delegatingActionListener)
-        onDeActivated()
-      }
-    }
-  }
-
-  protected def onActivated() {}
-  protected def onDeActivated() {}
 
   // Specify what kind of mouse handling should be used (look, drag, none)
   
@@ -118,42 +135,100 @@ abstract class Activity extends AbstractAppState with Logging {
   // Indicate when this activity ends, and to which activity to move, if any
 
 
-  override final def update(tpf: Float) {
-    // If we are not about to close down, do normal update
-    if (!activitiesToStop.contains(this)) {
+  final override def setActive(active: Boolean) {
+    if (active != isActive) {
+      super.setActive(active)
 
-      // Setup scene if requested
-      if (loadScene) {
-        loadScene = false
-        sceneLoader.loadScene(sceneFactory)
-      }
+      if (active) activationChanged = true
+      else handleDeactivation()
+    }
+  }
 
-      onUpdate(tpf)
+  final override def update(tpf: Float) {
+
+    // Check if we just got activated
+    if (activationChanged) {
+      activationChanged = false
+      handleActivation()
     }
 
-    // Do any activity changes
+    // Do normal update
+    onUpdate(tpf)
+
+    // Stop activities queued to stop
     activitiesToStop foreach {stoppedActivity =>
       stoppedActivity.setActive(false)
       appStateManager.detach(stoppedActivity)
     }
     activitiesToStop = Nil
 
+    // Start activities queued to start
     activitiesToStart foreach {startedActivity =>
       appStateManager.attach(startedActivity)
     }
     activitiesToStart = Nil
   }
 
-  protected def onUpdate(timePerFrame: Float) {}
+  override def initialize(stateManager: AppStateManager, app: Application) {
+    logInfo("Initializing activity "+name)
 
-  protected def changeActivityTo(activity: Activity) {
-    activitiesToStop ::= this
-    activitiesToStart ::= activity
+    super.initialize(stateManager, app)
+
+    application = app
+    sceneDisplay = app.asInstanceOf[SceneDisplay]
+    appStateManager = stateManager
+    inputManager = app.getInputManager
+
+    sceneCreated = false
+    scene = null
+    activationChanged = true
+
+    logInfo("Activity "+name+" initialized")
   }
 
-  protected def stopGame() {
-    application.stop()
+
+
+  private def handleActivation() {
+    logInfo("Activity " + name + " activated")
+
+    // Start listening to input
+    actionListeners.keys foreach
+    {
+      actionName => inputManager.addListener(delegatingActionListener, actionName)
+    }
+
+    // Create scene
+    if (!sceneCreated) {
+      scene = createScene
+      sceneCreated = true
+    }
+
+    // Show scene
+    if (scene != null) sceneDisplay.addScene(scene)
+
+    // Notify descendant class
+    onActivated()
   }
+
+  private def handleDeactivation() {
+    logDebug("Activity " + name + " deactivated")
+
+    // Stop listening to input
+    inputManager.removeListener(delegatingActionListener)
+
+    // Remove scene from display
+    if (scene != null) sceneDisplay.removeScene(scene)
+
+    // TODO: Should we also destroy the scene?  In that case, we'd need to de-activate each entity,
+    // as they might be listening to things and thus not get garbage collected
+    // TODO: We should probably separate simulations from activities, where simulations can be more persistent,
+    // and could also be supplied wih data and updates e.g. over a network, or loaded / saved to disk
+    // This would imply that Activities are some kind of Views or sessions
+
+    // Notify descendant class
+    onDeactivated()
+  }
+
 
 }
 

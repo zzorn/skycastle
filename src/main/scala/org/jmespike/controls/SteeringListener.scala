@@ -22,12 +22,12 @@ class SteeringListener(steerable: Steerable) extends ActionListener {
     steerable.steering := Vec3.Zero
     activeInputs foreach { input =>
       input match {
-        case InputNames.forward => steerable.steering.x += 1f
-        case InputNames.back => steerable.steering.x -= 1f
-        case InputNames.left => steerable.steering.z += 1f
-        case InputNames.right => steerable.steering.z -= 1f
-        case InputNames.up => steerable.steering.y += 1f
-        case InputNames.down => steerable.steering.y -= 1f
+        case InputNames.Forward => steerable.steering.x += 1f
+        case InputNames.Back => steerable.steering.x -= 1f
+        case InputNames.Left => steerable.steering.z += 1f
+        case InputNames.Right => steerable.steering.z -= 1f
+        case InputNames.Up => steerable.steering.y += 1f
+        case InputNames.Down => steerable.steering.y -= 1f
       }
     }
 

@@ -17,7 +17,7 @@ class GridShell extends ShipComponent {
   val sizeV= p('sizeV, 8)
 
 
-  def buildMesh(style: ShipConf, base: ComponentBase, seed: Int) {
+  def buildMesh(style: ShipShapeConf, base: ComponentBase, seed: Int) {
     val meshBuilder = base.meshBuilder
 
     val r = new XorShiftRandom(seed)

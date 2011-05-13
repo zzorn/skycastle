@@ -7,7 +7,7 @@ import simplex3d.math.float._
 /**
  * Configuration for ship etc steering.
  */
-class SteeringConf extends Conf {
+class SteeringConf extends ControlConf {
 
   val forward = p('forward, 10f)
   val back    = p('back, 4f)
@@ -35,5 +35,8 @@ class SteeringConf extends Conf {
 
     force
   }
+
+  
+  def createControl(seed: Int) = new ShipControl(this)
 
 }

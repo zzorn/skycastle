@@ -30,7 +30,7 @@ class Core extends Conf {
   val horizontalSlant  = p('horizontalSlant, 0f).editor(makeSlider(-3, 3))
 
 
-  def buildMesh(style: ShipConf, meshBuilder: MeshBuilder, seed: Int) {
+  def buildMesh(style: ShipShapeConf, meshBuilder: MeshBuilder, seed: Int) {
 
     // Ship is aligned in the direction of positive x axis, with positive y up and positive z to left.
 

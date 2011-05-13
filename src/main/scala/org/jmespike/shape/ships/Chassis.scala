@@ -34,7 +34,7 @@ class Chassis extends ShipComponent {
 
 
 
-  override def buildMesh(style: ShipConf, base: ComponentBase, seed: Int) {
+  override def buildMesh(style: ShipShapeConf, base: ComponentBase, seed: Int) {
 
     val cube = base.extractCube(length(), widthScale(), heightScale(), verticalSlant(), horizontalSlant())
 

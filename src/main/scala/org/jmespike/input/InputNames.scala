@@ -6,25 +6,25 @@ package org.jmespike.input
  */
 object InputNames {
 
-  val forward = "forward"
-  val back    = "back"
-  val left    = "left"
-  val right   = "right"
-  val up      = "up"
-  val down    = "down"
+  val Forward = "forward"
+  val Back    = "back"
+  val Left    = "left"
+  val Right   = "right"
+  val Up      = "up"
+  val Down    = "down"
 
-  val next    = "next"
-  val previous= "previous"
+  val Next    = "next"
+  val Previous= "previous"
 
-  val action1 = "action1"
-  val action2 = "action2"
-  val secondary1 = "secondary1"
-  val secondary2 = "secondary2"
+  val Action1 = "action1"
+  val Action2 = "action2"
+  val Secondary1 = "secondary1"
+  val Secondary2 = "secondary2"
 
-  val escape  = "escape"
-  val ok      = "ok"
+  val Escape  = "escape"
+  val Ok      = "ok"
 
-  val editor  = "editor"
+  val Editor  = "editor"
 
 
 }

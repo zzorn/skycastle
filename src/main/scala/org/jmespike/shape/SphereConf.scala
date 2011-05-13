@@ -16,7 +16,7 @@ class SphereConf extends ShapeConf {
   val useEvenSlices = p('useEvenSlices, false)
   val interior      = p('interior, false)
 
-  def createShape(rng: Random): Mesh = {
+  def createShape(seed: Int): Mesh = {
     new Sphere(max(zSamples, 3), max(radialSamples, 3), radius, useEvenSlices, interior)
   }
 }

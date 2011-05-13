@@ -1,16 +1,23 @@
 package org.skycastle.util
 
 import java.util.Date
-import java.util.logging._
 import java.io.{File, StringWriter, PrintWriter}
 import collection.JavaConversions._
+import org.slf4j.{Logger, LoggerFactory}
+
 /**
- * A mixin that provides various logging methods that use the standard java logger to log the message.
+ * A mixin that provides various logging methods that delegate to the SLF4J framework.
  */
 trait Logging {
-
+/*
   def setupConsoleLogging(path: String = Logger.GLOBAL_LOGGER_NAME) {
-    Logger.getLogger(path).addHandler(new ConsoleHandler())
+    val consoleHandler = new ConsoleHandler()
+
+    // Override idiotic Java default of not logging any level smaller than info to the console, even if it is specified in a logger.
+    // see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4462908
+    consoleHandler.setLevel(Level.ALL)
+
+    Logger.getLogger(path).addHandler(consoleHandler)
     setupFormatter(path)
   }
 
@@ -23,31 +30,34 @@ trait Logging {
     val logger = Logger.getLogger(path)
     logger.getHandlers foreach {h => h.setFormatter(new SingleLineFormatter)}
   }
+*/
+  def loggingPath = getClass
 
-  def loggingPath = getClass.getName
+  val log: Logger = LoggerFactory.getLogger(loggingPath)
 
-  def log: Logger = Logger.getLogger(loggingPath)
-
+  /*
   def log(level: Level, message: => String, exception: => Throwable)  {
     if (log.isLoggable(level)) log.log(level, message, exception)
   }
-
+  */
+/*
   final def log( level : Level, message : => String ): Unit = { log( level, message, null ) }
+  */
 
-  final def logError( message : => String ) { log( Level.SEVERE, message ) }
-  final def logWarning( message : => String ) { log( Level.WARNING, message ) }
-  final def logInfo( message : => String ) { log( Level.INFO, message ) }
-  final def logDebug( message : => String ) { log( Level.FINE, message ) }
-  final def logTrace( message : => String ) { log( Level.FINER, message ) }
+  final def logError( message : => String ) { log.error(message) }
+  final def logWarn(  message : => String ) { log.warn(message)  }
+  final def logInfo(  message : => String ) { log.info(message)  }
+  final def logDebug( message : => String ) { log.debug(message) }
+  final def logTrace( message : => String ) { log.trace(message) }
 
-  final def logError( message : => String, exception : => Throwable ) { log( Level.SEVERE, message, exception ) }
-  final def logWarning( message : => String, exception : => Throwable ) { log( Level.WARNING, message, exception ) }
-  final def logInfo( message : => String, exception : => Throwable ) { log( Level.INFO, message, exception ) }
-  final def logDebug( message : => String, exception : => Throwable ) { log( Level.FINE, message, exception ) }
-  final def logTrace( message : => String , exception : => Throwable ) { log( Level.FINER, message, exception ) }
+  final def logError( message : => String, exception : => Throwable ) { log.error(message, exception) }
+  final def logWarn(  message : => String, exception : => Throwable ) { log.warn(message, exception)  }
+  final def logInfo(  message : => String, exception : => Throwable ) { log.info(message, exception)  }
+  final def logDebug( message : => String, exception : => Throwable ) { log.debug(message, exception) }
+  final def logTrace( message : => String, exception : => Throwable ) { log.trace(message, exception) }
 
 }
-
+/*
 final class SingleLineFormatter extends Formatter {
 
   private val LINE_SEPARATOR = System.getProperty("line.separator")
@@ -88,3 +98,4 @@ final class SingleLineFormatter extends Formatter {
     sb.toString()
   }
 }
+*/

@@ -1,6 +1,6 @@
 import sbt._
 
-class SkycastleProject(info: ProjectInfo) extends DefaultProject(info) with AkkaProject with IdeaProject
+class SkycastleProject(info: ProjectInfo) extends DefaultProject(info) with IdeaProject
 {
   // Scala unit testing
   val scalatest = "org.scalatest" % "scalatest" % "1.3"
@@ -11,10 +11,12 @@ class SkycastleProject(info: ProjectInfo) extends DefaultProject(info) with Akka
   // Simplex libs
   def simplex3dJars = descendents("lib" / "simplex3d", "*.jar")
 
-  override def unmanagedClasspath = super.unmanagedClasspath +++ jme3Jars +++ simplex3dJars
+  def loggingJars = descendents("lib" / "logging", "*.jar")
+
+  override def unmanagedClasspath = super.unmanagedClasspath +++ jme3Jars +++ simplex3dJars +++ loggingJars
 
 /*
-  // Akka libraries, uncomment if / as needed. 
+  // Akka libraries, uncomment if / as needed, and extend AkkaProject
   val akkaStm = akkaModule("stm")
   val akkaTypedActor = akkaModule("typed-actor")
   val akkaRemote = akkaModule("remote")

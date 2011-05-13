@@ -21,25 +21,25 @@ class KeyBindings extends Conf {
     prop
   }
 
-  val forward = input(InputNames.forward, KeyInput.KEY_W)
-  val back    = input(InputNames.back, KeyInput.KEY_S)
-  val left    = input(InputNames.left, KeyInput.KEY_A)
-  val right   = input(InputNames.right, KeyInput.KEY_D)
-  val up      = input(InputNames.up, KeyInput.KEY_SPACE)
-  val down    = input(InputNames.down, KeyInput.KEY_LWIN)
+  val forward = input(InputNames.Forward, KeyInput.KEY_W)
+  val back    = input(InputNames.Back, KeyInput.KEY_S)
+  val left    = input(InputNames.Left, KeyInput.KEY_A)
+  val right   = input(InputNames.Right, KeyInput.KEY_D)
+  val up      = input(InputNames.Up, KeyInput.KEY_SPACE)
+  val down    = input(InputNames.Down, KeyInput.KEY_LWIN)
 
-  val next    = input(InputNames.next, KeyInput.KEY_PGDN)
-  val previous= input(InputNames.previous, KeyInput.KEY_PGUP)
+  val next    = input(InputNames.Next, KeyInput.KEY_PGDN)
+  val previous= input(InputNames.Previous, KeyInput.KEY_PGUP)
 
-  val action1 = input(InputNames.action1, KeyInput.KEY_RCONTROL)
-  val action2 = input(InputNames.action2, KeyInput.KEY_RSHIFT)
-  val secondary1 = input(InputNames.secondary1, KeyInput.KEY_E)
-  val secondary2 = input(InputNames.secondary2, KeyInput.KEY_Q)
+  val action1 = input(InputNames.Action1, KeyInput.KEY_RCONTROL)
+  val action2 = input(InputNames.Action2, KeyInput.KEY_RSHIFT)
+  val secondary1 = input(InputNames.Secondary1, KeyInput.KEY_E)
+  val secondary2 = input(InputNames.Secondary2, KeyInput.KEY_Q)
 
-  val escape  = input(InputNames.escape, KeyInput.KEY_ESCAPE)
-  val ok      = input(InputNames.ok, KeyInput.KEY_RETURN)
+  val escape  = input(InputNames.Escape, KeyInput.KEY_ESCAPE)
+  val ok      = input(InputNames.Ok, KeyInput.KEY_RETURN)
 
-  val editor  = input(InputNames.editor, KeyInput.KEY_F1)
+  val editor  = input(InputNames.Editor, KeyInput.KEY_F1)
 
 
   def setupInput(inputManager: InputManager) {

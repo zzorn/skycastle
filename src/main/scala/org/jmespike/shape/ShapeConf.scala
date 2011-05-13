@@ -9,6 +9,6 @@ import java.util.Random
  */
 trait ShapeConf extends Conf {
 
-  def createShape(rng: Random): Mesh
+  def createShape(seed: Int): Mesh
 
 }

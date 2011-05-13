@@ -7,7 +7,8 @@ import simplex3d.math.float._
 import org.jmespike.utils.VectorConversions._
 import org.jmespike.lighting.{LightingConf, Lighting}
 import org.jmespike.appearance.AppearanceConf
-import org.jmespike.shape.ships.ShipConf
+import org.jmespike.shape.ships.ShipShapeConf
+import org.jmespike.entity.ShipConf
 
 /**
  * 
@@ -42,21 +43,22 @@ class TestScene() extends SceneFactory {
                      (rng.nextGaussian * yArea()).toFloat,
                      (rng.nextGaussian * zArea()).toFloat)
 
-      val ball = ballAppearance().createSpatial(rng)
+      val ball = ballAppearance().createSpatial(rng.nextInt())
       ball.setLocalTranslation(pos)
       root.attachChild(ball)
     }
 
     // Add some test ships
     val ships = numShips()
+    rng.setSeed(seed() + 1)
     for (i <- 0 until ships) {
       val pos = Vec3((rng.nextGaussian * xArea()).toFloat,
                      (rng.nextGaussian * yArea()).toFloat,
                      (rng.nextGaussian * zArea()).toFloat)
 
-      val currentShip = ship()
+      val currentShip: ShipConf = ship()
      // currentShip.seed := rng.nextInt() // NOTE: This caused huge performance regression for some reason - why?
-      val s = currentShip.createModel(rng.nextInt())
+      val s = currentShip.appearance.createSpatial(rng.nextInt())
       s.setLocalTranslation(pos)
       root.attachChild(s)
     }
