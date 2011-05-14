@@ -14,6 +14,7 @@ import com.jme3.scene.{Node, Spatial}
  * If a conf is supplied, will listen to changes to it and call confUpdated during an update after it is changed.
  * NOTE: Should only be used on spatials of type Node.
  */
+// TODO: Should this class handle input actions also?
 abstract class EntityControl[T <: ControlConf](conf: T) extends AbstractControl {
 
   private var enabledChanged = true // Call onEnabled during first update.
