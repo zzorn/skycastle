@@ -14,19 +14,18 @@ import InputNames._
 // Keyboard -> JME Input handling -> game Activity -> player entity -> steering control -> propulsion control -> physics control
 // Instead, make EntityControl support registering listeners, and do
 // Keyboard -> JME Input handling -> input distributor app state -> entity control -> player steering control -> propulsion control -> physics control
+
+// TODO: Should the entity control also inherit Conf?  Might make learning AI:s easier, but until then we can use var:s
 class SteeringControl extends EntityControl(null) with ActionListener {
+
+  // TODO: Different steering for walker, roll-pitch-yaw spaceship, road-vehicle, etc?
 
   // Desired target orientation
 
   // Desired speed, 
 
-
-  def onAction(name: String, isPressed: Boolean, tpf: Float) {
-    name match {
-      case Up =>
-      case Down =>
-      case _ => // Ignore
-    }
-  }
+  var forward = 0f
+  var right = 0f
+  var up = 0f
 
 }
