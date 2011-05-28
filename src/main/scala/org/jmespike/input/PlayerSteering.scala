@@ -46,7 +46,7 @@ class PlayerSteering extends EntityControl(null) with ActionListener with Loggin
   }
 }
 
-private class SteeringAxis(min: Float = -1f, max: Float = 1f) {
+class SteeringAxis(min: Float = -1f, max: Float = 1f) {
   var value: Float = 0f
   var increaseHeld = false
   var decreaseHeld = false

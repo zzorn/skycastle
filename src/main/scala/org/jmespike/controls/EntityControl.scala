@@ -67,8 +67,8 @@ abstract class EntityControl[T <: ControlConf](conf: T) extends AbstractControl 
    * Returns the first entity control of the specified type for the entity that the current control is attached to,
    * if it was available, otherwise None.
    */
-  def entityControl[T <: EntityControl](implicit m: Manifest[T]): Option[T] = {
-    val control = spatial.getControl(m.erasure.asInstanceOf[Class[T]])
+  def entityControl[E <: EntityControl[_]](implicit m: Manifest[E]): Option[E] = {
+    val control = spatial.getControl(m.erasure.asInstanceOf[Class[E]])
 
     if (control == null) None
     else Some(control)
@@ -77,7 +77,7 @@ abstract class EntityControl[T <: ControlConf](conf: T) extends AbstractControl 
   /**
    * Applies the specified code on the first entity control of the specified type, if found in this entity.
    */
-  def withEntityControl[T <: EntityControl](block: T => Unit)(implicit m: Manifest[T]) {
+  def withEntityControl[T <: EntityControl[_]](block: T => Unit)(implicit m: Manifest[T]) {
     entityControl[T](m) foreach {ec => block(ec)}
   }
 

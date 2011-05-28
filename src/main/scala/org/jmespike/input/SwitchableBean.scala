@@ -41,7 +41,7 @@ trait SwitchableBean extends Bean with Switchable {
     val prop = addProperty(id, initialValue).onValueChange( (o, n) => changeListeners foreach (l => l(id, n)))
     // TODO: Invoke the describe of the new scalaprops on the property
 
-    addListeners foreach (id)
+    addListeners foreach ( _(id))
 
     prop
   }
@@ -55,10 +55,10 @@ trait SwitchableBean extends Bean with Switchable {
     removeProperty(id)
     _switches -= id
 
-    removeListeners foreach (id)
+    removeListeners foreach ( _(id))
   }
 
-  def switches = _switches.keys
+  def switches = _switches.keys.toList
 
   override def description(switch: Symbol) = if (_switches.contains(switch)) _switches(switch) else Desc(switch.name)
   override def descriptions = _switches

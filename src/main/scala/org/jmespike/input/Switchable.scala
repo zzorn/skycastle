@@ -12,7 +12,7 @@ trait Switchable {
   /**
    * The switches provided by this controllable.
    */
-  def switches: Seq[Symbol]
+  def switches: List[Symbol]
 
   /**
    * A description of the specified switch for a user.
@@ -22,7 +22,7 @@ trait Switchable {
   /**
    * A mapping from each available switch to its description.
    */
-  def descriptions: Map[Symbol, Desc] = switches map (s => (s -> description(s)))
+  def descriptions: Map[Symbol, Desc] = (switches map (s => (s, description(s)))).toMap
 
   /**
    * Set the switch to a value.

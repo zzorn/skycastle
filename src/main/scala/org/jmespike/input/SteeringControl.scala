@@ -28,4 +28,6 @@ class SteeringControl extends EntityControl(null) with ActionListener {
   var right = 0f
   var up = 0f
 
+  def onAction(name: String, isPressed: Boolean, tpf: Float)
+  {}
 }
