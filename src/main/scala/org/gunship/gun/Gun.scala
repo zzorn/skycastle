@@ -37,6 +37,8 @@ class Gun extends Conf {
   val relativeX = p('relativeX, 0.5f)
   val relativeY = p('relativeY, 1f)
 
+  private var powerups: List[PowerUp] = Nil
+
   private var boostChargeStartedAt: Long = -1
   private var lastSmallShotFiredAt: Long = -1
   private var autoFireActive = false
@@ -70,12 +72,25 @@ class Gun extends Conf {
   }
 
   def update() {
+    // Auto fire if button pressed
     if (autoFireActive) {
       fireSmallShot()
     }
+    
+    // Remove expired powerups
+    // TODO
   }
 
-  def fireBigShot() {
+  def addPowerup(powerup: PowerUp) {
+    powerups ::= powerup
+  }
+
+  /** Removes powerups */
+  def resetPowerups() {
+    powerups = Nil
+  }
+
+  private def fireBigShot() {
     val chargeTime: Float = (System.currentTimeMillis() - boostChargeStartedAt) / 1000f
     if (chargeTime > minBoostTime()) {
       val relativePower = min(1f, (chargeTime - minBoostTime()) / (maxBoostTime() - minBoostTime()))
@@ -83,7 +98,7 @@ class Gun extends Conf {
     }
   }
 
-  def fireSmallShot() {
+  private def fireSmallShot() {
     val d = System.currentTimeMillis() - lastSmallShotFiredAt
 
     if (d >= shotDelay() && !bigShotLoading) {
@@ -92,12 +107,14 @@ class Gun extends Conf {
     }
   }
 
-  def fireShot(relativePower: Float) {
+  private def fireShot(relativePower: Float) {
     // TODO: Fire at last aimed coordinates
+    // TODO: Calculate damage from relative power and active powerups
   }
 }
 
 
+/** The order in which barrels are fired if there are more than one. */
 trait BarrelSequence {
   def shootingBarrel(shotNumber: Int, barrelCount: Int): Set[Int]
 }
