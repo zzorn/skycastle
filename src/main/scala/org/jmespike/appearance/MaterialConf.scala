@@ -12,6 +12,7 @@ import org.jmespike.utils.VectorConversions._
 import org.jmespike.conf.{RandomColorConf, ColorConf}
 import java.util.Random
 import org.jmespike.utils.XorShiftRandom
+import com.jme3.asset.AssetManager
 
 /**
  * The surface appearance of a material.
@@ -42,12 +43,12 @@ class MaterialConf() extends Conf {
   color().lum := 0.5f
 
 
-  def createMaterial(seed: Int): Material =  {
+  def createMaterial(seed: Int, assetManager: AssetManager): Material =  {
     val random: Random = new XorShiftRandom(seed)
 
     val shader = "Common/MatDefs/Light/Lighting.j3md"
-    val mat = new Material(Context.assetManager, shader)
-    val loadedTexture = Context.assetManager.loadTexture("textures/" + texture)
+    val mat = new Material(assetManager, shader)
+    val loadedTexture = assetManager.loadTexture("textures/" + texture)
     if (loadedTexture != null) mat.setTexture("DiffuseMap", loadedTexture);
     mat.setBoolean("UseMaterialColors", true)
     mat.setColor("Ambient", ambientColor().createColor(random))

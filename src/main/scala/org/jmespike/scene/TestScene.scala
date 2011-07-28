@@ -9,6 +9,7 @@ import org.jmespike.lighting.{LightingConf, Lighting}
 import org.jmespike.appearance.AppearanceConf
 import org.jmespike.shape.ships.ShipShapeConf
 import org.jmespike.entity.ShipConf
+import com.jme3.asset.AssetManager
 
 /**
  * 
@@ -29,7 +30,7 @@ class TestScene() extends Scene {
 
   val ballAppearance = p('ballAppearance, new AppearanceConf)
 
-  def createScene: Spatial = {
+  def createScene(assetManager: AssetManager): Spatial = {
     val root = new Node
 
     // Add lights
@@ -43,7 +44,7 @@ class TestScene() extends Scene {
                      (rng.nextGaussian * yArea()).toFloat,
                      (rng.nextGaussian * zArea()).toFloat)
 
-      val ball = ballAppearance().createSpatial(rng.nextInt())
+      val ball = ballAppearance().createSpatial(rng.nextInt(), assetManager)
       ball.setLocalTranslation(pos)
       root.attachChild(ball)
     }
@@ -58,7 +59,7 @@ class TestScene() extends Scene {
 
       val currentShip: ShipConf = ship()
      // currentShip.seed := rng.nextInt() // NOTE: This caused huge performance regression for some reason - why?
-      val s = currentShip.appearance.createSpatial(rng.nextInt())
+      val s = currentShip.appearance.createSpatial(rng.nextInt(), assetManager)
       s.setLocalTranslation(pos)
       root.attachChild(s)
     }

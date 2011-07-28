@@ -5,6 +5,7 @@ import com.jme3.renderer.{ViewPort, RenderManager}
 import org.jmespike.controls.EntityControl
 import org.scalaprops.{Property, Bean, BeanListener}
 import com.jme3.scene.{Node, Spatial}
+import org.jmespike.Context
 
 /**
  * Attaches the specified appearance to a Node, and re-creates it if the appearance conf changes.
@@ -16,7 +17,7 @@ class AppearanceControl(appearance: AppearanceConf) extends EntityControl(appear
 
   private def reloadAppearance() {
     if (appearanceSpatial != null) entity.detachChild(appearanceSpatial)
-    appearanceSpatial = appearance.createSpatial(randomSeed)
+    appearanceSpatial = appearance.createSpatial(randomSeed, Context.assetManager)
     if (appearanceSpatial != null) entity.attachChild(appearanceSpatial)
   }
 

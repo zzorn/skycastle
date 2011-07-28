@@ -7,6 +7,8 @@ import com.jme3.asset.AssetManager
  */
 object Context {
 
-  def assetManager: AssetManager = BaseGame.getAssetManager
+  var game: BaseGame = null
+
+  def assetManager: AssetManager = game.getAssetManager
 
 }

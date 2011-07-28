@@ -8,6 +8,7 @@ import java.util.Random
 import org.jmespike.utils.XorShiftRandom
 import org.jmespike.controls.ControlConf
 import com.jme3.bounding.BoundingBox
+import com.jme3.asset.AssetManager
 
 /**
  * 
@@ -20,10 +21,10 @@ class AppearanceConf extends ControlConf {
   // TODO: Editor that allows selecting a base from a library / basic set of shapes.
   val shape = p[ShapeConf]('shape, new SphereConf())
 
-  def createSpatial(seed: Int): Spatial = {
+  def createSpatial(seed: Int, assetManager: AssetManager): Spatial = {
     val mesh = shape().createShape(seed + 1)
     val geom = new Geometry("geometry", mesh)
-    geom.setMaterial(material().createMaterial(seed + 2))
+    geom.setMaterial(material().createMaterial(seed + 2, assetManager))
     geom.setModelBound(new BoundingBox())
     geom
   }

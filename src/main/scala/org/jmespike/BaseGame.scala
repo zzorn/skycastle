@@ -1,6 +1,6 @@
 package org.jmespike
 
-import activity.{SpaceGameActivity, MainMenuActivity}
+import activity.{Activity, SpaceGameActivity, MainMenuActivity}
 import com.jme3.app.SimpleApplication
 import conf.{ConfLoader, ConfEditor}
 import com.jme3.asset.plugins.FileLocator
@@ -10,11 +10,12 @@ import scene.{Scene, TestScene}
 import org.skycastle.util.Logging
 import java.util.logging.{ConsoleHandler, Level, Logger}
 import com.jme3.scene.{Node, Spatial}
+import com.jme3.asset.AssetManager
 
 /**
  * Attempt at using JME classes for storing most stuff.
  */
-object BaseGame extends SimpleApplication with SceneDisplay with Logging {
+abstract class BaseGame extends SimpleApplication with SceneDisplay with Logging {
 
 
   var editor: ConfEditor[Scene] = null
@@ -38,18 +39,16 @@ object BaseGame extends SimpleApplication with SceneDisplay with Logging {
     setupConsoleLogging("org.scalaprops")
     */
 
+    Context.game = this
+
     start()
   }
 
-  private def loadSceneSettings(path: String): Scene = {
-    log.info("Loading settings from " + path)
-    var conf = assetManager.loadAsset(path).asInstanceOf[TestScene]
-    if (conf == null) {
-      log.warn("  Failed to load settings from "+path+", using defaults")
-      conf = new TestScene
-    }
-    conf
-  }
+  def createInitialActivity(): Activity
+
+  def assetPath: String = "assets"
+
+  def settingsPath: File = (new File("./assets/config")).getAbsoluteFile
 
   def simpleInitApp() {
 
@@ -59,7 +58,7 @@ object BaseGame extends SimpleApplication with SceneDisplay with Logging {
 //    setupConsoleLogging("com.jme3")
 
     // Config ways to get assets
-    assetManager.registerLocator("assets", classOf[FileLocator])
+    assetManager.registerLocator(assetPath, classOf[FileLocator])
     assetManager.registerLoader(classOf[ConfLoader], "json")
 
     rootNode.attachChild(scenes)
@@ -72,14 +71,11 @@ object BaseGame extends SimpleApplication with SceneDisplay with Logging {
 
     // Setup initial activity in the game
     // TODO: Load these from config or such?  Or create in subclass?
-    val gameActivity = new SpaceGameActivity(loadSceneSettings("config/jmespike.json"))
-    val initialActivity = new MainMenuActivity(gameActivity, loadSceneSettings("config/blueplanets.json"))
-    stateManager.attach(initialActivity)
+    stateManager.attach(createInitialActivity())
 
     // Setup editor
     // TODO: Change editor?  - edit one entity archetype at a time, and recreate all appearance instances of it as it changes..
-    val absoluteSettingsPath = (new File("./assets/config" )).getAbsoluteFile
-    editor = new ConfEditor[Scene]({sf => },  absoluteSettingsPath, classOf[Scene])
+    editor = new ConfEditor[Scene]({sf => }, settingsPath, classOf[Scene])
     editor.start()
     editor.setActive(true)
     

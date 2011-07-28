@@ -4,8 +4,7 @@ import org.jmespike.conf.Conf
 
 import simplex3d.math.float.functions._
 import simplex3d.math.float._
-import java.util.Random
-import org.scalaprops.ui.editors.{SelectionEditorFactory, SelectionEditor}
+import org.scalaprops.ui.editors.{SelectionEditorFactory}
 
 /**
  * A gun controlled by a player.
@@ -112,36 +111,4 @@ class Gun extends Conf {
     // TODO: Calculate damage from relative power and active powerups
   }
 }
-
-
-/** The order in which barrels are fired if there are more than one. */
-trait BarrelSequence {
-  def shootingBarrel(shotNumber: Int, barrelCount: Int): Set[Int]
-}
-
-object BarrelSequence {
-  val values = List[BarrelSequence](
-    AlternatingBarrelSequence,
-    SimultaneousBarrelSequence,
-    RandomBarrelSequence)
-}
-
-case object AlternatingBarrelSequence extends BarrelSequence {
-  def shootingBarrel(shotNumber: Int, barrelCount: Int) = Set(shotNumber % barrelCount)
-}
-
-case object SimultaneousBarrelSequence extends BarrelSequence {
-  def shootingBarrel(shotNumber: Int, barrelCount: Int) = {
-    var allBarrels = Set[Int]()
-    0 to barrelCount foreach {b => allBarrels += b}
-    allBarrels
-  }
-}
-
-case object RandomBarrelSequence extends BarrelSequence {
-  private val r = new Random()
-
-  def shootingBarrel(shotNumber: Int, barrelCount: Int) = Set(r.nextInt(barrelCount))
-}
-
 
