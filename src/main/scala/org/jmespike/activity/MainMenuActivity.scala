@@ -3,13 +3,13 @@ package org.jmespike.activity
 import com.jme3.input.controls.ActionListener
 import java.lang.String
 import com.jme3.scene.Spatial
-import org.jmespike.scene.{SceneFactory, TestScene}
+import org.jmespike.scene.{Scene, TestScene}
 import org.jmespike.input.InputNames._
 
 /**
  * 
  */
-class MainMenuActivity(gameActivity: Activity, scene: SceneFactory = new TestScene) extends Activity {
+class MainMenuActivity(gameActivity: Activity, scene: Scene = new TestScene) extends Activity {
 
   whenAction(Ok, Action1, Action2) {
     // Activate menu option

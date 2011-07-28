@@ -13,7 +13,7 @@ import org.jmespike.entity.ShipConf
 /**
  * 
  */
-class TestScene() extends SceneFactory {
+class TestScene() extends Scene {
 
   val lighting = p('lighting, new LightingConf)
 

@@ -6,7 +6,7 @@ import conf.{ConfLoader, ConfEditor}
 import com.jme3.asset.plugins.FileLocator
 import input.KeyBindings
 import java.io.File
-import scene.{SceneFactory, TestScene}
+import scene.{Scene, TestScene}
 import org.skycastle.util.Logging
 import java.util.logging.{ConsoleHandler, Level, Logger}
 import com.jme3.scene.{Node, Spatial}
@@ -17,13 +17,13 @@ import com.jme3.scene.{Node, Spatial}
 object BaseGame extends SimpleApplication with SceneDisplay with Logging {
 
 
-  var editor: ConfEditor[SceneFactory] = null
+  var editor: ConfEditor[Scene] = null
 
   var reload = false
 
   val scenes: Node = new Node()
 
-  var conf: SceneFactory = null
+  var conf: Scene = null
 
   var keyBindings: KeyBindings = new KeyBindings()
 
@@ -41,7 +41,7 @@ object BaseGame extends SimpleApplication with SceneDisplay with Logging {
     start()
   }
 
-  private def loadSceneSettings(path: String): SceneFactory = {
+  private def loadSceneSettings(path: String): Scene = {
     log.info("Loading settings from " + path)
     var conf = assetManager.loadAsset(path).asInstanceOf[TestScene]
     if (conf == null) {
@@ -79,7 +79,7 @@ object BaseGame extends SimpleApplication with SceneDisplay with Logging {
     // Setup editor
     // TODO: Change editor?  - edit one entity archetype at a time, and recreate all appearance instances of it as it changes..
     val absoluteSettingsPath = (new File("./assets/config" )).getAbsoluteFile
-    editor = new ConfEditor[SceneFactory]({sf => },  absoluteSettingsPath, classOf[SceneFactory])
+    editor = new ConfEditor[Scene]({sf => },  absoluteSettingsPath, classOf[Scene])
     editor.start()
     editor.setActive(true)
     

@@ -5,6 +5,6 @@ import com.jme3.scene.Node
 /**
  * 
  */
-class TerrainScene extends SceneFactory {
+class TerrainScene extends Scene {
   def createScene = new Node()
 }

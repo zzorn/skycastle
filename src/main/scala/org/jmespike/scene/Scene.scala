@@ -6,7 +6,7 @@ import org.jmespike.conf.Conf
 /**
  * Creates a scene
  */
-trait SceneFactory extends Conf {
+trait Scene extends Conf {
 
   def createScene: Spatial
 

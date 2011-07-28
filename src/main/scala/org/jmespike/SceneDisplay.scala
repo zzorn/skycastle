@@ -1,6 +1,6 @@
 package org.jmespike
 
-import scene.SceneFactory
+import scene.Scene
 import com.jme3.scene.Spatial
 
 /**

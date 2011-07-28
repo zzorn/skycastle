@@ -1,6 +1,6 @@
 package org.jmespike.activity
 
-import org.jmespike.scene.{SceneFactory, TestScene}
+import org.jmespike.scene.{Scene, TestScene}
 import org.jmespike.input.InputNames._
 import org.jmespike.entity.ShipConf
 import com.jme3.scene.{Node, Spatial}
@@ -9,7 +9,7 @@ import com.jme3.scene.{Node, Spatial}
  * Provides player with a ship to control, and some space to fly in.
  */
 // TODO: Do the action input handling in an EntityControl?
-class SpaceGameActivity(testScene: SceneFactory = new TestScene) extends Activity {
+class SpaceGameActivity(testScene: Scene = new TestScene) extends Activity {
 
   val playerShipConf = new ShipConf()
 
